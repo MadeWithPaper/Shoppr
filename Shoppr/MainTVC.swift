@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainTVC: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var listOfItems  = [Item]()
     
@@ -41,7 +41,7 @@ class MainTVC: UITableViewController, UIImagePickerControllerDelegate, UINavigat
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60;
     }
     
@@ -80,17 +80,17 @@ class MainTVC: UITableViewController, UIImagePickerControllerDelegate, UINavigat
     
     // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return listOfItems.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mainItemCell", for: indexPath) as! ItemCell
         
         let object = listOfItems[(indexPath as NSIndexPath).row]
@@ -98,8 +98,6 @@ class MainTVC: UITableViewController, UIImagePickerControllerDelegate, UINavigat
         cell.itemCountLabel.text = String(object.count)
         cell.itemPriceCount.text = String(object.price)
         cell.lastLocAndPriceLabel.text = "Last purchased at \(object.lastPurchaseLocation) at \(object.lastPurchasePrice)"
-        
-        
         
         return cell
     }
