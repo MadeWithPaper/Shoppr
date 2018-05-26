@@ -35,7 +35,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BEK-5C-IBh">
                                             <rect key="frame" x="295" y="0.0" width="64" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="64" id="FaI-ry-5S1"/>
+                                                <constraint firstAttribute="width" constant="64" id="Vhx-bE-hhr"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -50,7 +50,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="count" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppS-i8-0tU">
                                             <rect key="frame" x="234" y="0.0" width="53" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="53" id="qxO-nf-rdU"/>
+                                                <constraint firstAttribute="width" constant="53" id="xJo-gP-CeZ"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -58,16 +58,16 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="lYt-v4-fvc" firstAttribute="top" secondItem="OSC-K6-owE" secondAttribute="top" id="1Co-Ye-o1f"/>
-                                        <constraint firstItem="ezb-pi-qBs" firstAttribute="top" secondItem="lYt-v4-fvc" secondAttribute="bottom" constant="17" id="E2C-Pg-IWG"/>
-                                        <constraint firstItem="ppS-i8-0tU" firstAttribute="baseline" secondItem="BEK-5C-IBh" secondAttribute="baseline" id="OHx-fy-m74"/>
-                                        <constraint firstItem="lYt-v4-fvc" firstAttribute="leading" secondItem="ezb-pi-qBs" secondAttribute="leading" id="P0K-1g-IeV"/>
-                                        <constraint firstItem="BEK-5C-IBh" firstAttribute="leading" secondItem="ppS-i8-0tU" secondAttribute="trailing" constant="8" symbolic="YES" id="cHT-fP-mKc"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="ezb-pi-qBs" secondAttribute="trailing" constant="18" id="fBk-lv-bpw"/>
-                                        <constraint firstItem="BEK-5C-IBh" firstAttribute="trailing" secondItem="lYt-v4-fvc" secondAttribute="trailing" id="fIx-e8-gnC"/>
-                                        <constraint firstItem="lYt-v4-fvc" firstAttribute="leading" secondItem="OSC-K6-owE" secondAttribute="leadingMargin" id="ogS-fc-2WL"/>
-                                        <constraint firstItem="lYt-v4-fvc" firstAttribute="trailing" secondItem="OSC-K6-owE" secondAttribute="trailingMargin" id="t75-cd-UNn"/>
-                                        <constraint firstItem="lYt-v4-fvc" firstAttribute="baseline" secondItem="ppS-i8-0tU" secondAttribute="baseline" id="we6-Bh-qQv"/>
+                                        <constraint firstItem="lYt-v4-fvc" firstAttribute="trailing" secondItem="OSC-K6-owE" secondAttribute="trailingMargin" id="O5m-Ox-7nr"/>
+                                        <constraint firstItem="lYt-v4-fvc" firstAttribute="leading" secondItem="OSC-K6-owE" secondAttribute="leadingMargin" id="X7x-hK-zDQ"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="ezb-pi-qBs" secondAttribute="trailing" constant="18" id="ZfV-wg-DfJ"/>
+                                        <constraint firstItem="ppS-i8-0tU" firstAttribute="baseline" secondItem="BEK-5C-IBh" secondAttribute="baseline" id="bjB-vS-RdF"/>
+                                        <constraint firstItem="BEK-5C-IBh" firstAttribute="trailing" secondItem="lYt-v4-fvc" secondAttribute="trailing" id="eAn-Ad-vn9"/>
+                                        <constraint firstItem="ezb-pi-qBs" firstAttribute="top" secondItem="lYt-v4-fvc" secondAttribute="bottom" constant="17" id="gvz-7t-Gmh"/>
+                                        <constraint firstItem="lYt-v4-fvc" firstAttribute="top" secondItem="OSC-K6-owE" secondAttribute="top" id="h9C-un-Ywy"/>
+                                        <constraint firstItem="BEK-5C-IBh" firstAttribute="leading" secondItem="ppS-i8-0tU" secondAttribute="trailing" constant="8" symbolic="YES" id="hfy-7X-X0P"/>
+                                        <constraint firstItem="lYt-v4-fvc" firstAttribute="baseline" secondItem="BEK-5C-IBh" secondAttribute="baseline" id="udp-KX-Wae"/>
+                                        <constraint firstItem="lYt-v4-fvc" firstAttribute="leading" secondItem="ezb-pi-qBs" secondAttribute="leading" id="vMv-4G-79w"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

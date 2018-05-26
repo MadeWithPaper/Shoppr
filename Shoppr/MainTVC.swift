@@ -41,6 +41,10 @@ class MainTVC: UITableViewController, UIImagePickerControllerDelegate, UINavigat
         }
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60;
+    }
+    
     override func unwind(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
         // Unwinding here
     }
