@@ -12,18 +12,20 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     var listOfItems  = [Item]()
     
+    @IBOutlet weak var masterListTV: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Test item
         listOfItems.append(Item(name: "apples", count: 1, price: 1.00, LPL: "target", LPP: 0.98, category: "furit", key: "testing"))
         
-        print("Testing")
-        
+        // Defining a SwipeUp Gesture
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler(_:)))
         swipeUp.direction = UISwipeGestureRecognizerDirection.up
         self.view.addGestureRecognizer(swipeUp)
         
+        // Defining a SwipeLeft Gesture
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler(_:)))
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeLeft)
@@ -37,9 +39,10 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "DetailViewSegue") {
-            // TODO
+            // TODO:: Pass Data to DetailView
         }
     }
+
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60;
@@ -57,7 +60,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
             takePhoto()
         case UISwipeGestureRecognizerDirection.left:
             print("Swipped Left")
-            performSegue(withIdentifier: "DetailViewSegue", sender: self)
+            performSegue(withIdentifier: "PersonalListSegue", sender: self)
         default:
             print("Default")
         }
@@ -96,10 +99,14 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         let object = listOfItems[(indexPath as NSIndexPath).row]
         cell.itemNameLabel.text = object.name
         cell.itemCountLabel.text = String(object.count)
-        cell.itemPriceCount.text = String(object.price)
+        cell.itemPriceLabel.text = String(object.price)
         cell.lastLocAndPriceLabel.text = "Last purchased at \(object.lastPurchaseLocation) at \(object.lastPurchasePrice)"
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Place Holder
     }
     
     /*

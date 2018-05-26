@@ -50,12 +50,12 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "personalItemCell", for: indexPath) as! ItemCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "mainItemCell", for: indexPath) as! ItemCell
         
         let object = listOfItems[(indexPath as NSIndexPath).row]
         cell.itemNameLabel.text = object.name
         cell.itemCountLabel.text = String(object.count)
-        cell.itemPriceCount.text = String(object.price)
+        cell.itemPriceLabel.text = String(object.price)
         cell.lastLocAndPriceLabel.text = "Last purchased at \(object.lastPurchaseLocation) at \(object.lastPurchasePrice)"
         
         return cell

@@ -11,9 +11,10 @@ import UIKit
 class ItemCell: UITableViewCell {
 
     @IBOutlet weak var itemNameLabel: UILabel!
-    @IBOutlet weak var lastLocAndPriceLabel: UILabel!
     @IBOutlet weak var itemCountLabel: UILabel!
-    @IBOutlet weak var itemPriceCount: UILabel!
+    @IBOutlet weak var itemPriceLabel: UILabel!
+    @IBOutlet weak var lastLocAndPriceLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
