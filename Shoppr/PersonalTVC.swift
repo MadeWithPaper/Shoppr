@@ -13,6 +13,9 @@ class PersonalTVC: UITableViewController, UINavigationControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       //let backButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(back))
+       // self.navigationItem.leftBarButtonItem = backButton
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -23,6 +26,10 @@ class PersonalTVC: UITableViewController, UINavigationControllerDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @objc func back() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Table view data source

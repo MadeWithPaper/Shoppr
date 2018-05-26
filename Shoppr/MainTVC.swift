@@ -145,5 +145,9 @@ class MainTVC: UITableViewController, UIImagePickerControllerDelegate, UINavigat
      }
      */
     
+    @IBAction func unwindFromDetail(segue:UIStoryboardSegue) {
+        
+    }
+    
 }
 
