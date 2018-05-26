@@ -10,8 +10,13 @@ import UIKit
 
 class MainTVC: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    var listOfItems  = [Item]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        listOfItems.append(Item(name: "apples", count: 1, price: 1.00, LPL: "target", LPP: 0.98, category: "furit", key: "testing"))
         
         print("Testing")
         
@@ -73,23 +78,27 @@ class MainTVC: UITableViewController, UIImagePickerControllerDelegate, UINavigat
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return listOfItems.count
     }
     
-    /*
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-     
-     // Configure the cell...
-     
-     return cell
-     }
-     */
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "mainItemCell", for: indexPath) as! ItemCell
+        
+        let object = listOfItems[(indexPath as NSIndexPath).row]
+        cell.itemNameLabel.text = object.name
+        cell.itemCountLabel.text = String(object.count)
+        cell.itemPriceCount.text = String(object.price)
+        cell.lastLocAndPriceLabel.text = "Last purchased at \(object.lastPurchaseLocation) at \(object.lastPurchasePrice)"
+        
+        
+        
+        return cell
+    }
     
     /*
      // Override to support conditional editing of the table view.

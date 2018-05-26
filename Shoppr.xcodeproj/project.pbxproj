@@ -14,6 +14,9 @@
 		FA5CF35F20B9F286009880A7 /* PersonalTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF35B20B9F286009880A7 /* PersonalTVC.swift */; };
 		FA5CF36420B9F2D4009880A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5CF36020B9F2D4009880A7 /* LaunchScreen.storyboard */; };
 		FA5CF36520B9F2D4009880A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5CF36220B9F2D4009880A7 /* Main.storyboard */; };
+		FA5CF36720B9FA32009880A7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA5CF36620B9FA32009880A7 /* GoogleService-Info.plist */; };
+		FA5CF36920B9FACE009880A7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF36820B9FACE009880A7 /* Item.swift */; };
+		FA5CF36B20B9FC30009880A7 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF36A20B9FC30009880A7 /* ItemCell.swift */; };
 		FADBAAC920B9E99D007181C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FADBAAC820B9E99D007181C2 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +31,9 @@
 		FA5CF35B20B9F286009880A7 /* PersonalTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalTVC.swift; sourceTree = "<group>"; };
 		FA5CF36120B9F2D4009880A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA5CF36320B9F2D4009880A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FA5CF36620B9FA32009880A7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FA5CF36820B9FACE009880A7 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		FA5CF36A20B9FC30009880A7 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		FADBAABE20B9E99D007181C2 /* Shoppr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoppr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FADBAAC820B9E99D007181C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,7 +91,10 @@
 				FA5CF36020B9F2D4009880A7 /* LaunchScreen.storyboard */,
 				FA5CF36220B9F2D4009880A7 /* Main.storyboard */,
 				FA5CF35820B9F286009880A7 /* AppDelegate.swift */,
+				FA5CF36820B9FACE009880A7 /* Item.swift */,
+				FA5CF36A20B9FC30009880A7 /* ItemCell.swift */,
 				FA5CF35920B9F286009880A7 /* Info.plist */,
+				FA5CF36620B9FA32009880A7 /* GoogleService-Info.plist */,
 				FA5CF35A20B9F286009880A7 /* MainTVC.swift */,
 				FA5CF35B20B9F286009880A7 /* PersonalTVC.swift */,
 				FADBAAC820B9E99D007181C2 /* Assets.xcassets */,
@@ -158,6 +167,7 @@
 			files = (
 				FA5CF36420B9F2D4009880A7 /* LaunchScreen.storyboard in Resources */,
 				FA5CF35D20B9F286009880A7 /* Info.plist in Resources */,
+				FA5CF36720B9FA32009880A7 /* GoogleService-Info.plist in Resources */,
 				FADBAAC920B9E99D007181C2 /* Assets.xcassets in Resources */,
 				FA5CF36520B9F2D4009880A7 /* Main.storyboard in Resources */,
 			);
@@ -215,9 +225,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA5CF36920B9FACE009880A7 /* Item.swift in Sources */,
 				FA5CF35E20B9F286009880A7 /* MainTVC.swift in Sources */,
 				FA5CF35F20B9F286009880A7 /* PersonalTVC.swift in Sources */,
 				FA5CF35C20B9F286009880A7 /* AppDelegate.swift in Sources */,
+				FA5CF36B20B9FC30009880A7 /* ItemCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

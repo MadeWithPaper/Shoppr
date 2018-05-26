@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,14 +19,62 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="K8x-OT-DU9">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="mainItemCell" rowHeight="50" id="K8x-OT-DU9" customClass="ItemCell" customModule="Shoppr">
+                                <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="K8x-OT-DU9" id="OSC-K6-owE">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYt-v4-fvc">
+                                            <rect key="frame" x="16" y="0.0" width="343" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BEK-5C-IBh">
+                                            <rect key="frame" x="295" y="29" width="64" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="64" id="1K3-lr-Weq"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ezb-pi-qBs">
+                                            <rect key="frame" x="16" y="28" width="187" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="count" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppS-i8-0tU">
+                                            <rect key="frame" x="234" y="29" width="53" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="53" id="Xnr-o7-awd"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ppS-i8-0tU" firstAttribute="leading" secondItem="ezb-pi-qBs" secondAttribute="trailing" constant="31" id="6oF-eX-554"/>
+                                        <constraint firstItem="ezb-pi-qBs" firstAttribute="top" secondItem="lYt-v4-fvc" secondAttribute="bottom" constant="7" id="If8-4f-MYH"/>
+                                        <constraint firstItem="lYt-v4-fvc" firstAttribute="trailing" secondItem="OSC-K6-owE" secondAttribute="trailingMargin" id="MG9-0L-wG7"/>
+                                        <constraint firstItem="ppS-i8-0tU" firstAttribute="top" secondItem="lYt-v4-fvc" secondAttribute="bottom" constant="8" symbolic="YES" id="P5G-we-oZ4"/>
+                                        <constraint firstItem="lYt-v4-fvc" firstAttribute="leading" secondItem="OSC-K6-owE" secondAttribute="leadingMargin" id="UzV-6B-efq"/>
+                                        <constraint firstItem="lYt-v4-fvc" firstAttribute="leading" secondItem="ezb-pi-qBs" secondAttribute="leading" id="V05-OO-H6k"/>
+                                        <constraint firstItem="ppS-i8-0tU" firstAttribute="baseline" secondItem="BEK-5C-IBh" secondAttribute="baseline" id="e7p-SG-vO1"/>
+                                        <constraint firstItem="lYt-v4-fvc" firstAttribute="trailing" secondItem="BEK-5C-IBh" secondAttribute="trailing" id="tIh-Yo-Ep5"/>
+                                        <constraint firstItem="lYt-v4-fvc" firstAttribute="top" secondItem="OSC-K6-owE" secondAttribute="top" id="yC9-4J-8qI"/>
+                                        <constraint firstItem="BEK-5C-IBh" firstAttribute="leading" secondItem="ppS-i8-0tU" secondAttribute="trailing" constant="8" symbolic="YES" id="zw3-Uh-0as"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="itemCountLabel" destination="ppS-i8-0tU" id="Z1D-oF-pNp"/>
+                                    <outlet property="itemNameLabel" destination="lYt-v4-fvc" id="taC-P4-fkQ"/>
+                                    <outlet property="itemPriceCount" destination="BEK-5C-IBh" id="Lfm-Rd-I7G"/>
+                                    <outlet property="lastLocAndPriceLabel" destination="ezb-pi-qBs" id="2D8-ih-cAA"/>
                                     <segue destination="hhO-Uk-pCW" kind="showDetail" identifier="DetailViewSegue" action="showViewController:sender:" id="Ovo-AQ-XkO"/>
                                 </connections>
                             </tableViewCell>
@@ -38,7 +87,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="McF-s4-4ur" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-271" y="7"/>
+            <point key="canvasLocation" x="-271.19999999999999" y="6.746626686656672"/>
         </scene>
         <!--Personal View-->
         <scene sceneID="wp0-aW-Yvn">
