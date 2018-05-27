@@ -9,10 +9,13 @@
 /* Begin PBXBuildFile section */
 		75BB527BCC5153105D2EE965 /* Pods_Shoppr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D13881110DD0803DDC5CFDC /* Pods_Shoppr.framework */; };
 		FA00755720BB44EC0086857C /* itemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00755620BB44EC0086857C /* itemDetailView.swift */; };
+		FA00755920BB49E30086857C /* ManualAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00755820BB49E30086857C /* ManualAddVC.swift */; };
+		FA00755B20BB49FD0086857C /* RecipeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00755A20BB49FD0086857C /* RecipeVC.swift */; };
+		FA00755D20BB4A2F0086857C /* AddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00755C20BB4A2F0086857C /* AddVC.swift */; };
 		FA5CF35C20B9F286009880A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF35820B9F286009880A7 /* AppDelegate.swift */; };
 		FA5CF35D20B9F286009880A7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA5CF35920B9F286009880A7 /* Info.plist */; };
-		FA5CF35E20B9F286009880A7 /* MainTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF35A20B9F286009880A7 /* MainTVC.swift */; };
-		FA5CF35F20B9F286009880A7 /* PersonalTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF35B20B9F286009880A7 /* PersonalTVC.swift */; };
+		FA5CF35E20B9F286009880A7 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF35A20B9F286009880A7 /* MainVC.swift */; };
+		FA5CF35F20B9F286009880A7 /* PersonalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF35B20B9F286009880A7 /* PersonalVC.swift */; };
 		FA5CF36420B9F2D4009880A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5CF36020B9F2D4009880A7 /* LaunchScreen.storyboard */; };
 		FA5CF36520B9F2D4009880A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5CF36220B9F2D4009880A7 /* Main.storyboard */; };
 		FA5CF36720B9FA32009880A7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA5CF36620B9FA32009880A7 /* GoogleService-Info.plist */; };
@@ -28,11 +31,14 @@
 		896F7D066ED6DCAF97F73FBA /* Pods-Shoppr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoppr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shoppr/Pods-Shoppr.release.xcconfig"; sourceTree = "<group>"; };
 		8D13881110DD0803DDC5CFDC /* Pods_Shoppr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shoppr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA00755620BB44EC0086857C /* itemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = itemDetailView.swift; sourceTree = "<group>"; };
+		FA00755820BB49E30086857C /* ManualAddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualAddVC.swift; sourceTree = "<group>"; };
+		FA00755A20BB49FD0086857C /* RecipeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeVC.swift; sourceTree = "<group>"; };
+		FA00755C20BB4A2F0086857C /* AddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVC.swift; sourceTree = "<group>"; };
 		FA5CF35720B9F285009880A7 /* Shoppr-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shoppr-Bridging-Header.h"; sourceTree = "<group>"; };
 		FA5CF35820B9F286009880A7 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA5CF35920B9F286009880A7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FA5CF35A20B9F286009880A7 /* MainTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTVC.swift; sourceTree = "<group>"; };
-		FA5CF35B20B9F286009880A7 /* PersonalTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalTVC.swift; sourceTree = "<group>"; };
+		FA5CF35A20B9F286009880A7 /* MainVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		FA5CF35B20B9F286009880A7 /* PersonalVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalVC.swift; sourceTree = "<group>"; };
 		FA5CF36120B9F2D4009880A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA5CF36320B9F2D4009880A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FA5CF36620B9FA32009880A7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -96,6 +102,9 @@
 			children = (
 				FA5CF36020B9F2D4009880A7 /* LaunchScreen.storyboard */,
 				FA5CF36220B9F2D4009880A7 /* Main.storyboard */,
+				FA00755C20BB4A2F0086857C /* AddVC.swift */,
+				FA00755820BB49E30086857C /* ManualAddVC.swift */,
+				FA00755A20BB49FD0086857C /* RecipeVC.swift */,
 				FA00755620BB44EC0086857C /* itemDetailView.swift */,
 				FA5CF36C20BA2803009880A7 /* userJoin.swift */,
 				FA5CF37020BA2916009880A7 /* IndividualUser.swift */,
@@ -104,8 +113,8 @@
 				FA5CF36A20B9FC30009880A7 /* ItemCell.swift */,
 				FA5CF35920B9F286009880A7 /* Info.plist */,
 				FA5CF36620B9FA32009880A7 /* GoogleService-Info.plist */,
-				FA5CF35A20B9F286009880A7 /* MainTVC.swift */,
-				FA5CF35B20B9F286009880A7 /* PersonalTVC.swift */,
+				FA5CF35A20B9F286009880A7 /* MainVC.swift */,
+				FA5CF35B20B9F286009880A7 /* PersonalVC.swift */,
 				FADBAAC820B9E99D007181C2 /* Assets.xcassets */,
 				FA5CF35720B9F285009880A7 /* Shoppr-Bridging-Header.h */,
 			);
@@ -239,8 +248,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA5CF36920B9FACE009880A7 /* Item.swift in Sources */,
-				FA5CF35E20B9F286009880A7 /* MainTVC.swift in Sources */,
-				FA5CF35F20B9F286009880A7 /* PersonalTVC.swift in Sources */,
+				FA5CF35E20B9F286009880A7 /* MainVC.swift in Sources */,
+				FA00755B20BB49FD0086857C /* RecipeVC.swift in Sources */,
+				FA00755920BB49E30086857C /* ManualAddVC.swift in Sources */,
+				FA00755D20BB4A2F0086857C /* AddVC.swift in Sources */,
+				FA5CF35F20B9F286009880A7 /* PersonalVC.swift in Sources */,
 				FA5CF35C20B9F286009880A7 /* AppDelegate.swift in Sources */,
 				FA00755720BB44EC0086857C /* itemDetailView.swift in Sources */,
 				FA5CF36D20BA2803009880A7 /* userJoin.swift in Sources */,
