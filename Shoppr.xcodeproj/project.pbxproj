@@ -8,9 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		75BB527BCC5153105D2EE965 /* Pods_Shoppr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D13881110DD0803DDC5CFDC /* Pods_Shoppr.framework */; };
+<<<<<<< HEAD
 		CBC61BE920BA23C600BDA6C0 /* RecipeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC61BE820BA23C600BDA6C0 /* RecipeVC.swift */; };
 		CBC61BEB20BA282400BDA6C0 /* ManualAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC61BEA20BA282400BDA6C0 /* ManualAddVC.swift */; };
 		CBC61BED20BA311F00BDA6C0 /* AddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBC61BEC20BA311F00BDA6C0 /* AddVC.swift */; };
+=======
+>>>>>>> 191b1ee317528dea1d8d0248625436c0b1d57e5a
 		FA5CF35C20B9F286009880A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF35820B9F286009880A7 /* AppDelegate.swift */; };
 		FA5CF35D20B9F286009880A7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA5CF35920B9F286009880A7 /* Info.plist */; };
 		FA5CF35E20B9F286009880A7 /* MainTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF35A20B9F286009880A7 /* MainTVC.swift */; };
@@ -27,9 +30,12 @@
 		819A7AA6DAE2340428C5C73D /* Pods-Shoppr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoppr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Shoppr/Pods-Shoppr.debug.xcconfig"; sourceTree = "<group>"; };
 		896F7D066ED6DCAF97F73FBA /* Pods-Shoppr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoppr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shoppr/Pods-Shoppr.release.xcconfig"; sourceTree = "<group>"; };
 		8D13881110DD0803DDC5CFDC /* Pods_Shoppr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shoppr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+<<<<<<< HEAD
 		CBC61BE820BA23C600BDA6C0 /* RecipeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeVC.swift; sourceTree = "<group>"; };
 		CBC61BEA20BA282400BDA6C0 /* ManualAddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualAddVC.swift; sourceTree = "<group>"; };
 		CBC61BEC20BA311F00BDA6C0 /* AddVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVC.swift; sourceTree = "<group>"; };
+=======
+>>>>>>> 191b1ee317528dea1d8d0248625436c0b1d57e5a
 		FA5CF35720B9F285009880A7 /* Shoppr-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shoppr-Bridging-Header.h"; sourceTree = "<group>"; };
 		FA5CF35820B9F286009880A7 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA5CF35920B9F286009880A7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -96,9 +102,12 @@
 			children = (
 				FA5CF36020B9F2D4009880A7 /* LaunchScreen.storyboard */,
 				FA5CF36220B9F2D4009880A7 /* Main.storyboard */,
+<<<<<<< HEAD
 				CBC61BEC20BA311F00BDA6C0 /* AddVC.swift */,
 				CBC61BEA20BA282400BDA6C0 /* ManualAddVC.swift */,
 				CBC61BE820BA23C600BDA6C0 /* RecipeVC.swift */,
+=======
+>>>>>>> 191b1ee317528dea1d8d0248625436c0b1d57e5a
 				FA5CF35820B9F286009880A7 /* AppDelegate.swift */,
 				FA5CF36820B9FACE009880A7 /* Item.swift */,
 				FA5CF36A20B9FC30009880A7 /* ItemCell.swift */,
@@ -234,11 +243,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+<<<<<<< HEAD
 				CBC61BED20BA311F00BDA6C0 /* AddVC.swift in Sources */,
 				CBC61BE920BA23C600BDA6C0 /* RecipeVC.swift in Sources */,
 				FA5CF36920B9FACE009880A7 /* Item.swift in Sources */,
 				FA5CF35E20B9F286009880A7 /* MainTVC.swift in Sources */,
 				CBC61BEB20BA282400BDA6C0 /* ManualAddVC.swift in Sources */,
+=======
+				FA5CF36920B9FACE009880A7 /* Item.swift in Sources */,
+				FA5CF35E20B9F286009880A7 /* MainTVC.swift in Sources */,
+>>>>>>> 191b1ee317528dea1d8d0248625436c0b1d57e5a
 				FA5CF35F20B9F286009880A7 /* PersonalTVC.swift in Sources */,
 				FA5CF35C20B9F286009880A7 /* AppDelegate.swift in Sources */,
 				FA5CF36B20B9FC30009880A7 /* ItemCell.swift in Sources */,
