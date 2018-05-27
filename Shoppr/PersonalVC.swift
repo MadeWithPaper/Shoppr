@@ -14,8 +14,10 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     @IBOutlet weak var personalNaviBar: UINavigationBar!
     var listOfItems  = [Item]()
+    var itemSaved: Item?
     
     override func viewDidLoad() {
+
         super.viewDidLoad()
         
         
@@ -65,8 +67,20 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         return cell
     }
     
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "personalItemDetail", sender: self)
+    }
+    @IBAction func cancelUnwind(segue:UIStoryboardSegue) {
+        print("cancelUnwind")
+    }
+    
+    @IBAction func saveUnwind(segue:UIStoryboardSegue) {
+        print("saveUnwind")
+        if(itemSaved != nil) {
+            listOfItems.append(itemSaved!)
+            personalTV.reloadData()
+        }
     }
     
     /*

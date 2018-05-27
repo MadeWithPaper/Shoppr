@@ -52,10 +52,25 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        var saved: Item
         // TODO: Save/ Pass the data to the personal list
         
         if(segue.identifier == "saveUnwind") {
-            print("AHHHHHH")
+            print("I need to pass the data back")
+            
+            guard let amount = priceTextField.text else { return }
+            
+            // Now you can use amount anywhere but if it's nil, it will return.
+            let am = Double(amount) // for instance
+            
+            saved = Item(name: nameTextField.text!, count: countPicker.selectedRow(inComponent: 0) + 1, price: am!, LPL: "PlaceHolder", LPP: 0.0, category: "test", key: nameTextField.text!, owner: "Gaston")
+            
+            let destinationVC = segue.destination as? PersonalTVC
+            
+            print(saved)
+            
+            destinationVC?.itemSaved = saved
+            
         }
     }
     
