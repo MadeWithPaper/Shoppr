@@ -12,14 +12,14 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     @IBOutlet weak var personalTV: UITableView!
     
+    @IBOutlet weak var personalNaviBar: UINavigationBar!
     var listOfItems  = [Item]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for i in listOfItems {
-            print(i)
-        }
+        
+        personalNaviBar.topItem?.title = "\(String(describing: listOfItems.first!.owner))'s Inventoryß"
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -63,6 +63,10 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         cell.lastLocAndPriceLabel.text = "Last purchased at \(object.lastPurchaseLocation) for $\(object.lastPurchasePrice)"
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "personalItemDetail", sender: self)
     }
     
     /*
@@ -109,6 +113,17 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
      // Pass the selected object to the new view controller.
      }
      */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "personalItemDetail") {
+            if let indexPath = personalTV.indexPathForSelectedRow {
+                let object = listOfItems[(indexPath as NSIndexPath).row]
+                let destVC = segue.destination as! itemDetailView
+                destVC.item = object
+                print("going to item detail view from personal")
+            }
+        }
+    }
     
 }
 

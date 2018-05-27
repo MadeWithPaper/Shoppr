@@ -11,8 +11,8 @@ import UIKit
 class itemDetailView: UIViewController {
 
     @IBOutlet weak var itemNameLabel: UILabel!
-    @IBOutlet weak var lastLabel: UILabel!
     @IBOutlet weak var itemCostLabel: UILabel!
+    @IBOutlet weak var lastText: UITextView!
     
     var item : Item?
 
@@ -22,8 +22,8 @@ class itemDetailView: UIViewController {
         let cost = Double((item?.count)!) * (item?.price)!
         
         itemNameLabel.text = item?.name
-        lastLabel.text = "Last Purchased at \(String(describing: item?.lastPurchaseLocation)) for $\(String(describing: item?.lastPurchasePrice))"
-        itemCostLabel.text = "\(String(describing: item?.count)) X $\(String(describing: item?.price)) = \(cost)"
+        lastText.text = "Last Purchased at \(String(describing: item!.lastPurchaseLocation)) for $\(String(describing: item!.lastPurchasePrice))"
+        itemCostLabel.text = "Cost: \(String(describing: item!.count)) X $\(String(describing: item!.price)) = \(cost)"
         // Do any additional setup after loading the view.
     }
 
