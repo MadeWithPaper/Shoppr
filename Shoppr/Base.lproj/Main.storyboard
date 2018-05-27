@@ -75,6 +75,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Master List" id="ANf-ma-jSm">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="camera" id="tPu-fh-Nx2">
+                                            <connections>
+                                                <action selector="takePhoto" destination="NwV-Jp-5x0" id="OL9-8Y-Ofy"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Exit" id="he9-T1-zvY">
                                             <connections>
                                                 <segue destination="fHe-qQ-2Af" kind="unwind" unwindAction="unwindFromMasterWithSegue:" id="gQz-4b-Y4u"/>
@@ -143,7 +148,7 @@
                                             <outlet property="itemNameLabel" destination="s1E-XS-tJY" id="2S9-Zv-dbi"/>
                                             <outlet property="itemPriceLabel" destination="hsp-EP-htb" id="UsH-EV-7NB"/>
                                             <outlet property="lastLocAndPriceLabel" destination="D72-0y-BHm" id="Wx4-Xe-wyF"/>
-                                            <segue destination="1fs-F9-w15" kind="show" identifier="DetailViewSegue" id="Jnq-CF-R49"/>
+                                            <segue destination="1fs-F9-w15" kind="show" identifier="masterItemDetail" id="Jnq-CF-R49"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -176,20 +181,54 @@
             </objects>
             <point key="canvasLocation" x="584.79999999999995" y="-667.01649175412297"/>
         </scene>
-        <!--View Controller-->
+        <!--Item Detail View-->
         <scene sceneID="VWL-P4-Qx1">
             <objects>
-                <viewController id="1fs-F9-w15" sceneMemberID="viewController">
+                <viewController id="1fs-F9-w15" customClass="itemDetailView" customModule="Shoppr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="D4m-FY-L5I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0f-1G-Hdv">
+                                <rect key="frame" x="164.5" y="51" width="45" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wCl-z9-Xfa">
+                                <rect key="frame" x="35" y="107" width="324" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="count and price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="391-aD-h3F">
+                                <rect key="frame" x="35" y="179" width="119.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="391-aD-h3F" firstAttribute="top" secondItem="wCl-z9-Xfa" secondAttribute="bottom" constant="51" id="9YA-KB-rxu"/>
+                            <constraint firstItem="wCl-z9-Xfa" firstAttribute="top" secondItem="l0f-1G-Hdv" secondAttribute="bottom" constant="35" id="H2g-uG-Gjw"/>
+                            <constraint firstItem="l0f-1G-Hdv" firstAttribute="centerX" secondItem="D4m-FY-L5I" secondAttribute="centerX" id="ICJ-XY-RXR"/>
+                            <constraint firstItem="wCl-z9-Xfa" firstAttribute="leading" secondItem="391-aD-h3F" secondAttribute="leading" id="qfA-z6-ODZ"/>
+                            <constraint firstItem="l0f-1G-Hdv" firstAttribute="top" secondItem="nUf-It-ByD" secondAttribute="top" constant="31" id="r3U-Aa-hlv"/>
+                            <constraint firstItem="wCl-z9-Xfa" firstAttribute="leading" secondItem="nUf-It-ByD" secondAttribute="leading" constant="35" id="tG7-b4-4d8"/>
+                            <constraint firstItem="wCl-z9-Xfa" firstAttribute="trailing" secondItem="D4m-FY-L5I" secondAttribute="trailingMargin" id="vWB-Oh-Cvf"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="nUf-It-ByD"/>
                     </view>
+                    <connections>
+                        <outlet property="itemCostLabel" destination="391-aD-h3F" id="GkX-Al-rci"/>
+                        <outlet property="itemNameLabel" destination="l0f-1G-Hdv" id="fd0-xP-Sgp"/>
+                        <outlet property="lastLabel" destination="wCl-z9-Xfa" id="4DY-R2-BFY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aqf-XS-99U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="585" y="-1460"/>
+            <point key="canvasLocation" x="584.79999999999995" y="-1460.4197901049477"/>
         </scene>
         <!--PersonalTVC-->
         <scene sceneID="pXx-M8-W7m">
@@ -276,6 +315,7 @@
                                             <outlet property="itemNameLabel" destination="IGA-0c-b4g" id="nHQ-qb-5WT"/>
                                             <outlet property="itemPriceLabel" destination="NQp-sY-abw" id="VyX-FR-C6J"/>
                                             <outlet property="lastLocAndPriceLabel" destination="99r-U2-QTL" id="wKM-Fk-RE7"/>
+                                            <segue destination="1fs-F9-w15" kind="show" identifier="personalItemDetail" id="eT3-ks-Svy"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -373,4 +413,7 @@
             <point key="canvasLocation" x="2341.5999999999999" y="-667.01649175412297"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Jnq-CF-R49"/>
+    </inferredMetricsTieBreakers>
 </document>

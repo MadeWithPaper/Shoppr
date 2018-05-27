@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		75BB527BCC5153105D2EE965 /* Pods_Shoppr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D13881110DD0803DDC5CFDC /* Pods_Shoppr.framework */; };
+		FA00755720BB44EC0086857C /* itemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00755620BB44EC0086857C /* itemDetailView.swift */; };
 		FA5CF35C20B9F286009880A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF35820B9F286009880A7 /* AppDelegate.swift */; };
 		FA5CF35D20B9F286009880A7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA5CF35920B9F286009880A7 /* Info.plist */; };
 		FA5CF35E20B9F286009880A7 /* MainTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF35A20B9F286009880A7 /* MainTVC.swift */; };
@@ -26,6 +27,7 @@
 		819A7AA6DAE2340428C5C73D /* Pods-Shoppr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoppr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Shoppr/Pods-Shoppr.debug.xcconfig"; sourceTree = "<group>"; };
 		896F7D066ED6DCAF97F73FBA /* Pods-Shoppr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoppr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shoppr/Pods-Shoppr.release.xcconfig"; sourceTree = "<group>"; };
 		8D13881110DD0803DDC5CFDC /* Pods_Shoppr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shoppr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA00755620BB44EC0086857C /* itemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = itemDetailView.swift; sourceTree = "<group>"; };
 		FA5CF35720B9F285009880A7 /* Shoppr-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shoppr-Bridging-Header.h"; sourceTree = "<group>"; };
 		FA5CF35820B9F286009880A7 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA5CF35920B9F286009880A7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			children = (
 				FA5CF36020B9F2D4009880A7 /* LaunchScreen.storyboard */,
 				FA5CF36220B9F2D4009880A7 /* Main.storyboard */,
+				FA00755620BB44EC0086857C /* itemDetailView.swift */,
 				FA5CF36C20BA2803009880A7 /* userJoin.swift */,
 				FA5CF37020BA2916009880A7 /* IndividualUser.swift */,
 				FA5CF35820B9F286009880A7 /* AppDelegate.swift */,
@@ -190,14 +193,18 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Shoppr/Pods-Shoppr-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -235,6 +242,7 @@
 				FA5CF35E20B9F286009880A7 /* MainTVC.swift in Sources */,
 				FA5CF35F20B9F286009880A7 /* PersonalTVC.swift in Sources */,
 				FA5CF35C20B9F286009880A7 /* AppDelegate.swift in Sources */,
+				FA00755720BB44EC0086857C /* itemDetailView.swift in Sources */,
 				FA5CF36D20BA2803009880A7 /* userJoin.swift in Sources */,
 				FA5CF37120BA2916009880A7 /* IndividualUser.swift in Sources */,
 				FA5CF36B20B9FC30009880A7 /* ItemCell.swift in Sources */,

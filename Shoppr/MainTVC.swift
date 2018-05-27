@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseDatabase
+import GoogleMobileVision
 
 class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var masterListTV: UITableView!
@@ -18,7 +19,15 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     var masterListRef: DatabaseReference!
     var userName : String = ""
     var currUser : String = ""
+    let options = VisionCloudDetectorOptions()
+    var vision = Vision.vision()
     
+    /*
+    var googleAPIKey = "AIzaSyC8-JewdwPNlA-S8l90Ez0hDzfnWKdjT7U"
+    var googleURL: URL {
+        return URL(string: "https://vision.googleapis.com/v1/images:annotate?key=\(googleAPIKey)")!
+    }*/
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,10 +50,18 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         }
         })
         
+        //image scanning
+
+        // options.maxResults has no effect with this API
         // Defining a SwipeUp Gesture
-        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler(_:)))
+        /*let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler(_:)))
         swipeUp.direction = UISwipeGestureRecognizerDirection.up
         self.view.addGestureRecognizer(swipeUp)
+        */
+        
+        let camera = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(takePhoto))
+        navigationItem.leftBarButtonItem = camera
+        
         
         // Defining a SwipeLeft Gesture
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler(_:)))
@@ -69,6 +86,14 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
             print(userList.count)
             destVC.listOfItems = userList
             print("going to \(currUser)'s detail list view")
+        }
+        else if (segue.identifier == "masterItemDetail") {
+            if let indexPath = masterListTV.indexPathForSelectedRow {
+                let object = listOfItems[(indexPath as NSIndexPath).row]
+                let destVC = segue.destination as! itemDetailView
+                destVC.item = object
+                print("going to item detail view from master")
+            }
         }
     }
 
@@ -101,6 +126,28 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         present(picker, animated: true, completion:nil)
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let textDetector = vision.cloudTextDetector(options: options)
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            print("picked image")
+            let image = VisionImage(image: pickedImage)
+            textDetector.detect(in: image) { (cloudText, error) in
+                guard error == nil, let cloudText = cloudText else {
+                    // ...
+                    return
+                }
+                // Recognized and extracted text
+                let recognizedText = cloudText.text
+                print(recognizedText ?? "nothing is here")
+            }
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -131,7 +178,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Place Holder
+        performSegue(withIdentifier: "masterItemDetail", sender: self)
     }
     
     @IBAction func unwindFromDetail(segue:UIStoryboardSegue) {
