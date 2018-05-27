@@ -13,8 +13,10 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     @IBOutlet weak var personalTV: UITableView!
     
     var listOfItems  = [Item]()
+    var itemSaved: Item?
     
     override func viewDidLoad() {
+
         super.viewDidLoad()
         
         for i in listOfItems {
@@ -63,6 +65,18 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         cell.lastLocAndPriceLabel.text = "Last purchased at \(object.lastPurchaseLocation) for $\(object.lastPurchasePrice)"
         
         return cell
+    }
+    
+    @IBAction func cancelUnwind(segue:UIStoryboardSegue) {
+        print("cancelUnwind")
+    }
+    
+    @IBAction func saveUnwind(segue:UIStoryboardSegue) {
+        print("saveUnwind")
+        if(itemSaved != nil) {
+            listOfItems.append(itemSaved!)
+            personalTV.reloadData()
+        }
     }
     
     /*

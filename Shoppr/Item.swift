@@ -21,6 +21,10 @@ class Item : NSObject{
     var owner : String
     var ref : DatabaseReference?
     
+    override var description: String {
+        return String("Name: \(name)")
+    }
+    
     init(name: String, count: Int, price: Double, LPL: String, LPP: Double, category: String, key: String, owner: String) {
         self.name = name
         self.count = count
