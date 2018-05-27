@@ -18,9 +18,10 @@ class Item : NSObject{
     var lastPurchasePrice: Double
     var category: String
     var key: String
+    var owner : String
     var ref : DatabaseReference?
     
-    init(name: String, count: Int, price: Double, LPL: String, LPP: Double, category: String, key: String) {
+    init(name: String, count: Int, price: Double, LPL: String, LPP: Double, category: String, key: String, owner: String) {
         self.name = name
         self.count = count
         self.price = price
@@ -28,6 +29,7 @@ class Item : NSObject{
         self.lastPurchasePrice = LPP
         self.category = category
         self.key = key
+        self.owner = owner
         ref = nil
         
         super.init()
@@ -47,6 +49,7 @@ class Item : NSObject{
         lastPurchaseLocation = snapvalues["Last Purchased Location"] as! String
         lastPurchasePrice = snapvalues["Last Purchased Price"] as! Double
         category = snapvalues["Category"] as! String
+        owner = snapvalues["Owner"] as! String
         
         ref = snapshot.ref
         
@@ -64,6 +67,7 @@ class Item : NSObject{
         lastPurchaseLocation = snapvalues["Last Purchased Location"] as! String
         lastPurchasePrice = snapvalues["Last Purchased Price"] as! Double
         category = snapvalues["Category"] as! String
+        owner = snapvalues["Owner"] as! String
         
         ref = snapshot.ref
         
@@ -78,7 +82,8 @@ class Item : NSObject{
             "Price" : price,
             "Last Purchased Location" : lastPurchaseLocation,
             "Last Purchased Price" : lastPurchasePrice,
-            "Category" : category
+            "Category" : category,
+            "Owner" : owner
         ]
     }
 }

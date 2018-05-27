@@ -10,17 +10,16 @@ import UIKit
 
 class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate {
     
+    @IBOutlet weak var personalTV: UITableView!
+    
     var listOfItems  = [Item]()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        listOfItems.append(Item(name: "apples", count: 1, price: 1.00, LPL: "target", LPP: 0.98, category: "furit", key: "testing"))
-        
-       //let backButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(back))
-       // self.navigationItem.leftBarButtonItem = backButton
-        
+        for i in listOfItems {
+            print(i)
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -28,35 +27,40 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        personalTV.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @objc func back() {
-        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Table view data source
     
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return listOfItems.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60;
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "mainItemCell", for: indexPath) as! ItemCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "personalItemCell", for: indexPath) as! ItemCell
         
         let object = listOfItems[(indexPath as NSIndexPath).row]
         cell.itemNameLabel.text = object.name
         cell.itemCountLabel.text = String(object.count)
         cell.itemPriceLabel.text = String(object.price)
-        cell.lastLocAndPriceLabel.text = "Last purchased at \(object.lastPurchaseLocation) at \(object.lastPurchasePrice)"
+        cell.lastLocAndPriceLabel.text = "Last purchased at \(object.lastPurchaseLocation) for $\(object.lastPurchasePrice)"
         
         return cell
     }
