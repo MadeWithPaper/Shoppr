@@ -22,7 +22,6 @@
 		FA5CF36920B9FACE009880A7 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF36820B9FACE009880A7 /* Item.swift */; };
 		FA5CF36B20B9FC30009880A7 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF36A20B9FC30009880A7 /* ItemCell.swift */; };
 		FA5CF36D20BA2803009880A7 /* userJoin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF36C20BA2803009880A7 /* userJoin.swift */; };
-		FA5CF37120BA2916009880A7 /* IndividualUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF37020BA2916009880A7 /* IndividualUser.swift */; };
 		FADBAAC920B9E99D007181C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FADBAAC820B9E99D007181C2 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -45,7 +44,6 @@
 		FA5CF36820B9FACE009880A7 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		FA5CF36A20B9FC30009880A7 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		FA5CF36C20BA2803009880A7 /* userJoin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userJoin.swift; sourceTree = "<group>"; };
-		FA5CF37020BA2916009880A7 /* IndividualUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IndividualUser.swift; path = /Users/jhuang81/Desktop/Shoppr/Shoppr/IndividualUser.swift; sourceTree = "<absolute>"; };
 		FADBAABE20B9E99D007181C2 /* Shoppr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoppr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FADBAAC820B9E99D007181C2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,7 +105,6 @@
 				FA00755A20BB49FD0086857C /* RecipeVC.swift */,
 				FA00755620BB44EC0086857C /* itemDetailView.swift */,
 				FA5CF36C20BA2803009880A7 /* userJoin.swift */,
-				FA5CF37020BA2916009880A7 /* IndividualUser.swift */,
 				FA5CF35820B9F286009880A7 /* AppDelegate.swift */,
 				FA5CF36820B9FACE009880A7 /* Item.swift */,
 				FA5CF36A20B9FC30009880A7 /* ItemCell.swift */,
@@ -256,7 +253,6 @@
 				FA5CF35C20B9F286009880A7 /* AppDelegate.swift in Sources */,
 				FA00755720BB44EC0086857C /* itemDetailView.swift in Sources */,
 				FA5CF36D20BA2803009880A7 /* userJoin.swift in Sources */,
-				FA5CF37120BA2916009880A7 /* IndividualUser.swift in Sources */,
 				FA5CF36B20B9FC30009880A7 /* ItemCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

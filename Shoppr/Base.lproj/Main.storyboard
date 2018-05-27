@@ -433,6 +433,7 @@
                             <constraint firstItem="bqa-l7-Z5j" firstAttribute="top" secondItem="ZEt-Jg-Gs9" secondAttribute="topMargin" constant="55" id="5PA-2b-btJ"/>
                             <constraint firstItem="bqa-l7-Z5j" firstAttribute="leading" secondItem="ZEt-Jg-Gs9" secondAttribute="leading" constant="138" id="edu-gF-2zP"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="oSb-TU-zQb"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nL0-tn-DST" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -448,9 +449,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manual" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sVc-nQ-Sat">
-                                <rect key="frame" x="166" y="104" width="42" height="21"/>
+                                <rect key="frame" x="128" y="104" width="153" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="42" id="iYG-kk-dwT"/>
+                                    <constraint firstAttribute="width" constant="153" id="iYG-kk-dwT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -460,13 +461,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="sVc-nQ-Sat" firstAttribute="top" secondItem="DFr-aN-Cjr" secondAttribute="topMargin" constant="84" id="Uw5-Ij-Mbm"/>
-                            <constraint firstItem="sVc-nQ-Sat" firstAttribute="centerX" secondItem="DFr-aN-Cjr" secondAttribute="centerX" id="aYy-nh-dWu"/>
+                            <constraint firstItem="sVc-nQ-Sat" firstAttribute="centerX" secondItem="DFr-aN-Cjr" secondAttribute="centerX" constant="17" id="aYy-nh-dWu"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="NyC-Yd-0ta"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P3x-eW-37B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2943" y="70"/>
+            <point key="canvasLocation" x="2941.5999999999999" y="69.715142428785612"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
