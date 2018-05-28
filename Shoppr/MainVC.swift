@@ -21,12 +21,6 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     var currUser : String = ""
     let options = VisionCloudDetectorOptions()
     var vision = Vision.vision()
-    
-    /*
-    var googleAPIKey = "AIzaSyC8-JewdwPNlA-S8l90Ez0hDzfnWKdjT7U"
-    var googleURL: URL {
-        return URL(string: "https://vision.googleapis.com/v1/images:annotate?key=\(googleAPIKey)")!
-    }*/
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +32,9 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         
         //testing function
         //testingInit()
-        self.listOfItems.removeAll()
-        masterListRef?.queryOrdered(byChild: "Master List").observe(.value, with:{ snapshot in
+        //self.listOfItems.removeAll()
+        //self.userList.removeAll()
+        /*masterListRef?.queryOrdered(byChild: "Master List").observe(.value, with:{ snapshot in
         for item in snapshot.children {
             //print(item)
             self.listOfItems.append(Item(snapshot: item as! DataSnapshot))
@@ -48,7 +43,8 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
                 self.userList.append(Item(snapshot: item as! DataSnapshot))
             }
         }
-        })
+        })*/
+            fetchDate()
         
         //image scanning
 
@@ -80,6 +76,18 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         masterListTV.reloadData()
     }
     
+    func fetchDate() {
+        self.masterListRef.observe(.childAdded, with: { snapshot in
+            for item in snapshot.children {
+                //print(item)
+                self.listOfItems.append(Item(snapshot: item as! DataSnapshot))
+                let temp = Item(snapshot: item as! DataSnapshot)
+                if (temp.owner == self.currUser) {
+                    self.userList.append(Item(snapshot: item as! DataSnapshot))
+                }
+            }
+        })
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "PersonalListSegue") {
             let destVC = segue.destination as! PersonalTVC
