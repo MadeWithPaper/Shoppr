@@ -98,6 +98,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
             }
             destVC.listOfItems = userList
             destVC.masterListRef = masterListRef
+            destVC.owner = currUser
             print("going to \(currUser)'s detail list view")
         }
         else if (segue.identifier == "masterItemDetail") {
@@ -219,6 +220,8 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
                 "Owner" : itm.owner as String] as [String : Any]
             self.masterListRef.child(itm.name).setValue(item)
         }
+        
+        fetchData()
     }
     
    /* func testingInit() {
