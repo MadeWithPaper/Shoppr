@@ -27,7 +27,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         personalTV.backgroundColor = blueColor
         
-        personalNaviBar.topItem?.title = "\(String(describing: listOfItems.first!.owner))'s Inventory"
+        personalNaviBar.topItem?.title = "\(owner)'s Inventory"
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         //fetchData()

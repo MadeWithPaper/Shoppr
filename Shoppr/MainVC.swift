@@ -200,13 +200,25 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     @IBAction func unwindFromPersonalToMaster(segue:UIStoryboardSegue){
         let srcVC = segue.source as! PersonalTVC
         
+        var newItems = [Item]()
         for items in srcVC.listOfItems {
             if (!listOfItems.contains(items)) {
             listOfItems.append(items)
+            newItems.append(items)
             }
         }
         
-        
+        for itm in newItems {
+            let item = [
+                "Item Name" : itm.name as String,
+                "Count" : itm.count as Int,
+                "Price" : itm.price as Double,
+                "Last Purchased Location" : itm.lastPurchaseLocation as String,
+                "Last Purchased Price" : itm.lastPurchasePrice as Double,
+                "Category" : itm.category as String,
+                "Owner" : itm.owner as String] as [String : Any]
+            self.masterListRef.child(itm.name).setValue(item)
+        }
     }
     
    /* func testingInit() {

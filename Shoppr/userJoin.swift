@@ -53,7 +53,7 @@ class userJoin: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destVC = segue.destination as! MainTVC
-        destVC.userName = "Jacky"
+        destVC.userName = "Gaston"
         print("User: \(String(describing: userName.text)) joined, going to master view")
     }
     
