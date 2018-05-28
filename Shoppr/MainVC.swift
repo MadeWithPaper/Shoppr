@@ -19,8 +19,8 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     var masterListRef: DatabaseReference!
     var userName : String = ""
     var currUser : String = ""
-    let options = VisionCloudDetectorOptions()
-    var vision = Vision.vision()
+    lazy var vision = Vision.vision()
+    var textDetector: VisionTextDetector?
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -44,7 +44,8 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         
         fetchData()
         //image scanning
-
+        textDetector = vision.textDetector()
+        
         // options.maxResults has no effect with this API
         // Defining a SwipeUp Gesture
         /*let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler(_:)))
@@ -102,6 +103,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
             if let indexPath = masterListTV.indexPathForSelectedRow {
                 let object = listOfItems[(indexPath as NSIndexPath).row]
                 let destVC = segue.destination as! itemDetailView
+                destVC.parentVC = "MasterView"
                 destVC.item = object
                 destVC.master = true
                 print("going to item detail view from master")
@@ -136,21 +138,18 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let textDetector = vision.cloudTextDetector(options: options)
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             print("picked image")
             let image = VisionImage(image: pickedImage)
-            textDetector.detect(in: image) { (cloudText, error) in
-                guard error == nil, let cloudText = cloudText else {
-                    print("image fetch error")
+            textDetector?.detect(in: image) { (features, error) in
+                guard error == nil, let features = features, !features.isEmpty else {
+                    // Error. You should also check the console for error messages.
+                    // ...
                     return
                 }
+                
                 // Recognized and extracted text
-                let recognizedText = cloudText.text
-                print(recognizedText ?? "nothing is here")
-                for t in recognizedText! {
-                    print(t)
-                }
+                print("Detected text has: \(features.count) blocks")
             }
         }
         dismiss(animated: true, completion: nil)
@@ -193,8 +192,8 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         performSegue(withIdentifier: "masterItemDetail", sender: self)
     }
     
-    @IBAction func unwindFromDetail(segue:UIStoryboardSegue) {
-        print("returning back to master view form personal view")
+    @IBAction func unwindFromDetailToMaster(storyboard: UIStoryboardSegue){
+        
     }
     
    /* func testingInit() {

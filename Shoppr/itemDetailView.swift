@@ -13,9 +13,12 @@ class itemDetailView: UIViewController {
     @IBOutlet weak var itemNameLabel: UILabel!
     @IBOutlet weak var itemCostLabel: UILabel!
     @IBOutlet weak var lastText: UITextView!
+   
     
     var item : Item?
     var master : Bool = false
+    var parentVC : String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,5 +50,13 @@ class itemDetailView: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    @IBAction func unwindfromDetail(sender: UIBarButtonItem) {
+        if parentVC == "MasterView" {
+            self.performSegue(withIdentifier: "unwindFromDetailToMaster", sender: nil)
+        }
+        else if parentVC == "PersonalView" {
+            self.performSegue(withIdentifier: "unwindFromDetailToPersonal", sender: nil)
+        }
+    }
 
 }

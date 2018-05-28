@@ -110,6 +110,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         }
     }
     
+    
     func updateData() {
         for s in self.listOfItems
         {
@@ -132,9 +133,14 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 let destVC = segue.destination as! itemDetailView
                 destVC.item = object
                 destVC.master = false
+                destVC.parentVC = "PersonalView"
                 print("going to item detail view from personal")
             }
         }
+    }
+    
+    @IBAction func unwindFromDetailToPersonal(storyboard: UIStoryboardSegue){
+        
     }
     
 }

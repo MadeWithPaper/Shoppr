@@ -232,8 +232,7 @@
                                     <navigationItem title="Item Detail" id="Z0w-hi-Ueh">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="CsJ-GF-AHP">
                                             <connections>
-                                                <action selector="unwindFromDetailButton:" destination="1fs-F9-w15" id="ofj-Wp-NBg"/>
-                                                <segue destination="fwE-nV-Me9" kind="unwind" unwindAction="unwindFromDetailWithSegue:" id="alF-Zx-p84"/>
+                                                <action selector="unwindfromDetailWithSender:" destination="1fs-F9-w15" id="Lr1-He-KqE"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -261,12 +260,14 @@
                         <outlet property="itemCostLabel" destination="391-aD-h3F" id="GkX-Al-rci"/>
                         <outlet property="itemNameLabel" destination="l0f-1G-Hdv" id="fd0-xP-Sgp"/>
                         <outlet property="lastText" destination="ISs-zk-Lmy" id="Zub-ed-hAV"/>
+                        <segue destination="jg6-cQ-RvU" kind="unwind" identifier="unwindFromDetailToMaster" unwindAction="unwindFromDetailToMasterWithStoryboard:" id="Y8j-4w-4Fe"/>
+                        <segue destination="jg6-cQ-RvU" kind="unwind" identifier="unwindFromDetailToPersonal" unwindAction="unwindFromDetailToPersonalWithStoryboard:" id="2fY-v3-AOa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aqf-XS-99U" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="fwE-nV-Me9" userLabel="Exit" sceneMemberID="exit"/>
+                <exit id="jg6-cQ-RvU" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="584.79999999999995" y="-1460.4197901049477"/>
+            <point key="canvasLocation" x="1170" y="-1527"/>
         </scene>
         <!--PersonalTVC-->
         <scene sceneID="pXx-M8-W7m">
@@ -472,7 +473,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RtP-Cs-oOg">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RtP-Cs-oOg">
                                 <rect key="frame" x="60" y="174" width="80" height="30"/>
                                 <state key="normal" title="Search"/>
                                 <connections>
@@ -510,7 +511,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="QMy-eD-NWH" firstAttribute="leading" secondItem="RtP-Cs-oOg" secondAttribute="trailing" constant="67" id="6Iz-Vo-NLg"/>
+                            <constraint firstItem="QMy-eD-NWH" firstAttribute="leading" secondItem="RtP-Cs-oOg" secondAttribute="trailing" constant="47" id="6Iz-Vo-NLg"/>
                             <constraint firstItem="oSb-TU-zQb" firstAttribute="bottom" secondItem="yxQ-dH-c1z" secondAttribute="bottom" constant="89" id="7rO-Ox-rnS"/>
                             <constraint firstItem="yxQ-dH-c1z" firstAttribute="top" secondItem="YnG-15-KI0" secondAttribute="bottom" constant="8" symbolic="YES" id="COs-Tw-ddY"/>
                             <constraint firstItem="McI-yV-Txv" firstAttribute="top" secondItem="oSb-TU-zQb" secondAttribute="top" constant="64" id="GDL-MA-njy"/>
@@ -823,7 +824,7 @@
         <image name="recipePuppy.png" width="250" height="97"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eT3-ks-Svy"/>
+        <segue reference="Jnq-CF-R49"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
 </document>
