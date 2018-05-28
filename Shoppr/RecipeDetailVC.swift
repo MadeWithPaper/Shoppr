@@ -21,9 +21,12 @@ class RecipeDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("In viewDidLoad")
+        print(selected)
+        
         recipeNameLabel.text = selected?.title
         recipeImage.image = selected?.image
-        let newString = selected?.ingredients.replacingOccurrences(of: ",", with: "\n")
+        let newString = selected?.ingredients.replacingOccurrences(of: ", ", with: "\n")
         indredientsList.text = newString
         
         // Do any additional setup after loading the view.

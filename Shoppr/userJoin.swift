@@ -16,6 +16,10 @@ class userJoin: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
+        view.backgroundColor = blueColor
+
 
         // Do any additional setup after loading the view.
     }
