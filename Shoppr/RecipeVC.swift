@@ -15,14 +15,30 @@ class RecipeVC: UIViewController {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var backButton: UIButton!
     var recipes: [SRRecipe]?
     var query: String = ""
-    
+    let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
+    let blackColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = blueColor
         image.isHidden = false
         activityIndicator.isHidden = true
+        
+        
+        searchButton.layer.borderWidth = 2.0
+        searchButton.layer.borderColor = blackColor.cgColor
+        searchButton.layer.cornerRadius = 5.0
+        searchButton.clipsToBounds = true
+        
+        
+        backButton.layer.borderWidth = 2.0
+        backButton.layer.borderColor = blackColor.cgColor
+        backButton.layer.cornerRadius = 5.0
+        backButton.clipsToBounds = true
         
         // Do any additional setup after loading the view.
     }

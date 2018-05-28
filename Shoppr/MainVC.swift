@@ -15,7 +15,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     @IBOutlet weak var masterListTV: UITableView!
     
     var listOfItems  = [Item]()
-    var userList = [Item]()
+    //var userList = [Item]()
     var masterListRef: DatabaseReference!
     var userName : String = ""
     var currUser : String = ""
@@ -23,12 +23,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     var vision = Vision.vision()
 
     @IBOutlet weak var tableView: UITableView!
-    
-    /*
-    var googleAPIKey = "AIzaSyC8-JewdwPNlA-S8l90Ez0hDzfnWKdjT7U"
-    var googleURL: URL {
-        return URL(string: "https://vision.googleapis.com/v1/images:annotate?key=\(googleAPIKey)")!
-    }*/
+
     
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     let whileColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
@@ -46,20 +41,8 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         
         //testing function
         //testingInit()
-        //self.listOfItems.removeAll()
-        //self.userList.removeAll()
-        /*masterListRef?.queryOrdered(byChild: "Master List").observe(.value, with:{ snapshot in
-        for item in snapshot.children {
-            //print(item)
-            self.listOfItems.append(Item(snapshot: item as! DataSnapshot))
-            let temp = Item(snapshot: item as! DataSnapshot)
-            if (temp.owner == self.currUser) {
-                self.userList.append(Item(snapshot: item as! DataSnapshot))
-            }
-        }
-        })*/
-            fetchDate()
         
+        fetchData()
         //image scanning
 
         // options.maxResults has no effect with this API
@@ -77,12 +60,6 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler(_:)))
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
         self.view.addGestureRecognizer(swipeLeft)
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -94,22 +71,29 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         masterListTV.reloadData()
     }
     
-    func fetchDate() {
-        self.masterListRef.observe(.childAdded, with: { snapshot in
-            for item in snapshot.children {
-                //print(item)
-                self.listOfItems.append(Item(snapshot: item as! DataSnapshot))
-                let temp = Item(snapshot: item as! DataSnapshot)
-                if (temp.owner == self.currUser) {
-                    self.userList.append(Item(snapshot: item as! DataSnapshot))
+    //fetch for firebase data
+    func fetchData() {
+        masterListRef?.queryOrdered(byChild: "Master List").observe(.value, with:
+            { snapshot in
+                var newStands = [Item]()
+                
+                for item in snapshot.children {
+                    newStands.append(Item(snapshot: item as! DataSnapshot))
                 }
-            }
+                
+                self.listOfItems = newStands
+                self.masterListTV.reloadData()
         })
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "PersonalListSegue") {
             let destVC = segue.destination as! PersonalTVC
-            print(userList.count)
+            var userList = [Item]()
+            for i in listOfItems {
+                if i.owner == currUser {
+                    userList.append(i)
+                }
+            }
             destVC.listOfItems = userList
             destVC.masterListRef = masterListRef
             print("going to \(currUser)'s detail list view")
@@ -198,8 +182,8 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         
         let object = listOfItems[(indexPath as NSIndexPath).row]
         cell.itemNameLabel.text = object.name
-        cell.itemCountLabel.text = String(object.count)
-        cell.itemPriceLabel.text = String(object.price)
+        cell.itemCountLabel.text = " X\(object.count)"
+        cell.itemPriceLabel.text = "$\(object.price)"
         cell.lastLocAndPriceLabel.text = "Last purchased at \(object.lastPurchaseLocation) for $\(object.lastPurchasePrice)"
         
         return cell
@@ -213,7 +197,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         print("returning back to master view form personal view")
     }
     
-    func testingInit() {
+   /* func testingInit() {
         // Test item and one time init for testing
         listOfItems.append(Item(name: "apples", count: 1, price: 1.00, LPL: "target", LPP: 0.98, category: "furit", key: "apples", owner: "Jacky"))
         listOfItems.append(Item(name: "oranges", count: 2, price: 1.00, LPL: "safeway", LPP: 0.98, category: "furit", key: "oranges", owner: "Jacky"))
@@ -234,6 +218,6 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         }
         
         listOfItems.removeAll()
-    }
+    }*/
 }
 

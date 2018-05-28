@@ -11,6 +11,7 @@ import UIKit
 class userJoin: UIViewController {
     
     @IBOutlet weak var userName: UITextField!
+    @IBOutlet weak var staticJoinButton: UIButton!
     @IBAction func joinButton(_ sender: UIButton) {
        performSegue(withIdentifier: "userJoin", sender: self)
     }
@@ -18,8 +19,18 @@ class userJoin: UIViewController {
         super.viewDidLoad()
         
         let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
+        let blackColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
         view.backgroundColor = blueColor
-
+        
+        staticJoinButton.layer.borderWidth = 2.0
+        staticJoinButton.layer.borderColor = blackColor.cgColor
+        staticJoinButton.layer.cornerRadius = 5.0
+        staticJoinButton.clipsToBounds = true
+        
+        userName.layer.borderWidth = 2.0
+        userName.layer.borderColor = blackColor.cgColor
+        userName.layer.cornerRadius = 5.0
+        userName.clipsToBounds = true
 
         // Do any additional setup after loading the view.
     }
@@ -42,7 +53,7 @@ class userJoin: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destVC = segue.destination as! MainTVC
-        destVC.userName = "Gaston"
+        destVC.userName = "Jacky"
         print("User: \(String(describing: userName.text)) joined, going to master view")
     }
     

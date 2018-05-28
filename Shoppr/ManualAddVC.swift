@@ -16,9 +16,12 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var countPicker: UIPickerView!
     @IBOutlet weak var priceTextField: UITextField!
+    let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = blueColor
         
         self.countPicker.dataSource = self
         self.countPicker.delegate = self

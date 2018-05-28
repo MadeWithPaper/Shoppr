@@ -22,6 +22,7 @@
 		FA00755920BB49E30086857C /* ManualAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00755820BB49E30086857C /* ManualAddVC.swift */; };
 		FA00755B20BB49FD0086857C /* RecipeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00755A20BB49FD0086857C /* RecipeVC.swift */; };
 		FA00755D20BB4A2F0086857C /* AddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00755C20BB4A2F0086857C /* AddVC.swift */; };
+		FA50D4F620BBA2E200EF5D7A /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = FA50D4F520BBA2E200EF5D7A /* Logo.png */; };
 		FA5CF35C20B9F286009880A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF35820B9F286009880A7 /* AppDelegate.swift */; };
 		FA5CF35D20B9F286009880A7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA5CF35920B9F286009880A7 /* Info.plist */; };
 		FA5CF35E20B9F286009880A7 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CF35A20B9F286009880A7 /* MainVC.swift */; };
@@ -53,6 +54,7 @@
 		FA00755820BB49E30086857C /* ManualAddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualAddVC.swift; sourceTree = "<group>"; };
 		FA00755A20BB49FD0086857C /* RecipeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeVC.swift; sourceTree = "<group>"; };
 		FA00755C20BB4A2F0086857C /* AddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVC.swift; sourceTree = "<group>"; };
+		FA50D4F520BBA2E200EF5D7A /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logo.png; sourceTree = "<group>"; };
 		FA5CF35720B9F285009880A7 /* Shoppr-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Shoppr-Bridging-Header.h"; sourceTree = "<group>"; };
 		FA5CF35820B9F286009880A7 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA5CF35920B9F286009880A7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			children = (
 				CB6F3FDC20BB6A41006EEBB1 /* recipePuppy.png */,
 				CB6F3FEE20BB967B006EEBB1 /* 246x0w.jpg */,
+				FA50D4F520BBA2E200EF5D7A /* Logo.png */,
 				FA5CF36020B9F2D4009880A7 /* LaunchScreen.storyboard */,
 				FA5CF36220B9F2D4009880A7 /* Main.storyboard */,
 				CB6F3FEA20BB6DBB006EEBB1 /* RecipeCell.swift */,
@@ -214,6 +217,7 @@
 				FA5CF35D20B9F286009880A7 /* Info.plist in Resources */,
 				CB6F3FDD20BB6A41006EEBB1 /* recipePuppy.png in Resources */,
 				FA5CF36720B9FA32009880A7 /* GoogleService-Info.plist in Resources */,
+				FA50D4F620BBA2E200EF5D7A /* Logo.png in Resources */,
 				FADBAAC920B9E99D007181C2 /* Assets.xcassets in Resources */,
 				FA5CF36520B9F2D4009880A7 /* Main.storyboard in Resources */,
 				CB6F3FEF20BB967B006EEBB1 /* 246x0w.jpg in Resources */,
