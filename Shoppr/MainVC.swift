@@ -74,6 +74,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     //fetch for firebase data
     func fetchData() {
+        listOfItems.removeAll()
         masterListRef?.queryOrdered(byChild: "Master List").observe(.value, with:
             { snapshot in
                 var newStands = [Item]()
@@ -193,6 +194,18 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     }
     
     @IBAction func unwindFromDetailToMaster(storyboard: UIStoryboardSegue){
+        
+    }
+    
+    @IBAction func unwindFromPersonalToMaster(segue:UIStoryboardSegue){
+        let srcVC = segue.source as! PersonalTVC
+        
+        for items in srcVC.listOfItems {
+            if (!listOfItems.contains(items)) {
+            listOfItems.append(items)
+            }
+        }
+        
         
     }
     

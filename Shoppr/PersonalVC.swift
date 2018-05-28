@@ -18,7 +18,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var listOfItems  = [Item]()
     var itemSaved: Item?
     var masterListRef: DatabaseReference!
-    
+    var owner : String = ""
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     let whileColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     
@@ -30,10 +30,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         personalNaviBar.topItem?.title = "\(String(describing: listOfItems.first!.owner))'s Inventory"
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler(_:)))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.right
-        self.view.addGestureRecognizer(swipeRight)
+        //fetchData()
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
