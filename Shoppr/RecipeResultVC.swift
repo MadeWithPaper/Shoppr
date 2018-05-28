@@ -40,17 +40,16 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         return (recipes?.count)!
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        sel = indexPath.row
-        performSegue(withIdentifier: "detailRecipeSegue", sender: self)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "detailRecipeSegue") {
             let destinationVC = segue.destination as? RecipeDetailVC
-            
-            destinationVC?.selected = recipes?[sel]
+            let indexPath = tableView.indexPathForSelectedRow
+            destinationVC?.selected = recipes?[((indexPath as? NSIndexPath)?.row)!]
         }
+    }
+    
+    @IBAction func unwindToRecipes(segue:UIStoryboardSegue) {
+        print("unwindToRecipes")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

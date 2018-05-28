@@ -21,15 +21,21 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     var currUser : String = ""
     let options = VisionCloudDetectorOptions()
     var vision = Vision.vision()
+    @IBOutlet weak var tableView: UITableView!
     
     /*
     var googleAPIKey = "AIzaSyC8-JewdwPNlA-S8l90Ez0hDzfnWKdjT7U"
     var googleURL: URL {
         return URL(string: "https://vision.googleapis.com/v1/images:annotate?key=\(googleAPIKey)")!
     }*/
+    
+    let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
+    let whileColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.backgroundColor = blueColor
         
         currUser = userName
 
@@ -73,6 +79,10 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = blueColor
     }
     
     override func viewDidAppear(_ animated: Bool) {
