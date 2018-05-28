@@ -703,6 +703,7 @@
                         <outlet property="recipeImage" destination="gRB-VU-Ej4" id="8sb-sc-dIm"/>
                         <outlet property="recipeNameLabel" destination="az2-nR-bgB" id="npP-DN-fE4"/>
                         <outlet property="viewLinkButton" destination="Gbm-ng-uK8" id="2MG-ux-TnF"/>
+                        <segue destination="xg6-cw-aJP" kind="show" identifier="addIngredientsSegue" id="gkJ-iT-I5A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wIP-9E-7hC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -824,6 +825,7 @@
         <image name="recipePuppy.png" width="250" height="97"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="gkJ-iT-I5A"/>
         <segue reference="Jnq-CF-R49"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>

@@ -21,9 +21,6 @@ class RecipeDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("In viewDidLoad")
-        print(selected)
-        
         recipeNameLabel.text = selected?.title
         recipeImage.image = selected?.image
         let newString = selected?.ingredients.replacingOccurrences(of: ", ", with: "\n")
@@ -42,7 +39,29 @@ class RecipeDetailVC: UIViewController {
     }
     
     @IBAction func AddIngredientsButtonPress(_ sender: UIButton) {
-        //TODO: Add all ingredients to personal list!
+        
+        let alert = UIAlertController(title: "Add to Shopping List?", message: "Selecting yes will add all the ingredients to your personal shopping list", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {
+            action in
+            //TODO perform seguge and add stuff
+            self.performSegue(withIdentifier: "addIngredientsSegue", sender: self)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "No", style: .destructive, handler: nil))
+        
+        self.present(alert, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "addIngredientsSegue"){
+            let ing = indredientsList.text.components(separatedBy: "\n")
+            let destinationVC = segue.destination as? PersonalTVC
+            
+            for i in ing {
+                destinationVC?.listOfItems.append(Item(name: i, count: 1, price: 0, LPL: "N/A", LPP: 0, category: "N/A", key: i, owner: "Gaston"))
+            }
+        }
     }
     
     
