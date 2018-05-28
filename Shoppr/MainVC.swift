@@ -28,7 +28,14 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     let whileColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
 
-
+    
+    func getCurUser() -> String{
+        return currUser
+    }
+    @IBAction func personalListButtonPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "PersonalListSegue", sender: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,6 +72,13 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = blueColor
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if(editingStyle == UITableViewCellEditingStyle.delete) {
+            listOfItems.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -119,14 +133,14 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     }
     
     @IBAction func swipeHandler(_ gestureRecognizer : UISwipeGestureRecognizer) {
-        
-        switch gestureRecognizer.direction {
-        case UISwipeGestureRecognizerDirection.left:
-            print("Swipped Left")
-            performSegue(withIdentifier: "PersonalListSegue", sender: self)
-        default:
-            print("Default")
-        }
+//
+//        switch gestureRecognizer.direction {
+//        case UISwipeGestureRecognizerDirection.left:
+//            print("Swipped Left")
+//            performSegue(withIdentifier: "PersonalListSegue", sender: self)
+//        default:
+//            print("Default")
+//        }
     }
     
     @IBAction func takePhoto() {

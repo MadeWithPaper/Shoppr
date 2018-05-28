@@ -11,6 +11,7 @@ import UIKit
 class userJoin: UIViewController {
     
     @IBOutlet weak var userName: UITextField!
+    @IBOutlet weak var groupName: UITextField!
     @IBOutlet weak var staticJoinButton: UIButton!
     @IBAction func joinButton(_ sender: UIButton) {
        performSegue(withIdentifier: "userJoin", sender: self)
