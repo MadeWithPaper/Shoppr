@@ -38,7 +38,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         
         //testing function
         //testingInit()
-        
+        self.listOfItems.removeAll()
         masterListRef?.queryOrdered(byChild: "Master List").observe(.value, with:{ snapshot in
         for item in snapshot.children {
             //print(item)
@@ -85,6 +85,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
             let destVC = segue.destination as! PersonalTVC
             print(userList.count)
             destVC.listOfItems = userList
+            destVC.masterListRef = masterListRef
             print("going to \(currUser)'s detail list view")
         }
         else if (segue.identifier == "masterItemDetail") {
@@ -92,6 +93,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
                 let object = listOfItems[(indexPath as NSIndexPath).row]
                 let destVC = segue.destination as! itemDetailView
                 destVC.item = object
+                destVC.master = true
                 print("going to item detail view from master")
             }
         }
@@ -105,9 +107,6 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     @IBAction func swipeHandler(_ gestureRecognizer : UISwipeGestureRecognizer) {
         
         switch gestureRecognizer.direction {
-        case UISwipeGestureRecognizerDirection.up:
-            print("Swipped Up")
-            takePhoto()
         case UISwipeGestureRecognizerDirection.left:
             print("Swipped Left")
             performSegue(withIdentifier: "PersonalListSegue", sender: self)
@@ -133,12 +132,15 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
             let image = VisionImage(image: pickedImage)
             textDetector.detect(in: image) { (cloudText, error) in
                 guard error == nil, let cloudText = cloudText else {
-                    // ...
+                    print("image fetch error")
                     return
                 }
                 // Recognized and extracted text
                 let recognizedText = cloudText.text
                 print(recognizedText ?? "nothing is here")
+                for t in recognizedText! {
+                    print(t)
+                }
             }
         }
         dismiss(animated: true, completion: nil)

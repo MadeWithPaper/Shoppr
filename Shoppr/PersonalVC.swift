@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate {
     
@@ -15,15 +17,17 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     @IBOutlet weak var personalNaviBar: UINavigationBar!
     var listOfItems  = [Item]()
     var itemSaved: Item?
-    
+    var masterListRef: DatabaseReference!
     override func viewDidLoad() {
 
         super.viewDidLoad()
-        
-        
-        personalNaviBar.topItem?.title = "\(String(describing: listOfItems.first!.owner))'s Inventoryß"
+        personalNaviBar.topItem?.title = "\(String(describing: listOfItems.first!.owner))'s Inventory"
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler(_:)))
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(swipeRight)
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
@@ -32,6 +36,17 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         personalTV.reloadData()
+    }
+    
+    @IBAction func swipeHandler(_ gestureRecognizer : UISwipeGestureRecognizer) {
+        
+        switch gestureRecognizer.direction {
+        case UISwipeGestureRecognizerDirection.right:
+            print("Swipped Right")
+            //needto perform back
+        default:
+            print("Default")
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -71,6 +86,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "personalItemDetail", sender: self)
     }
+    
     @IBAction func cancelUnwind(segue:UIStoryboardSegue) {
         print("cancelUnwind")
     }
@@ -80,9 +96,24 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         if(itemSaved != nil) {
             listOfItems.append(itemSaved!)
             personalTV.reloadData()
+            updateData()
         }
     }
     
+    func updateData() {
+        for s in self.listOfItems
+        {
+            let item = [
+                "Item Name" : s.name as String,
+                "Count" : s.count as Int,
+                "Price" : s.price as Double,
+                "Last Purchased Location" : s.lastPurchaseLocation as String,
+                "Last Purchased Price" : s.lastPurchasePrice as Double,
+                "Category" : s.category as String,
+                "Owner" : s.owner as String] as [String : Any]
+            self.masterListRef.child(s.name).setValue(item)
+        }
+    }
     /*
      // Override to support conditional editing of the table view.
      override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -134,6 +165,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 let object = listOfItems[(indexPath as NSIndexPath).row]
                 let destVC = segue.destination as! itemDetailView
                 destVC.item = object
+                destVC.master = false
                 print("going to item detail view from personal")
             }
         }
