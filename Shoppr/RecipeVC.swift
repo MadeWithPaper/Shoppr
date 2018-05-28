@@ -10,9 +10,20 @@ import UIKit
 
 class RecipeVC: UIViewController {
 
+    @IBOutlet weak var searchField: UITextField!
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    var recipes: [SRRecipe]?
+    var query: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        image.isHidden = false
+        activityIndicator.isHidden = true
+        
         // Do any additional setup after loading the view.
     }
 
@@ -20,17 +31,34 @@ class RecipeVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+    @IBAction func searchPressed(_ sender: UIButton) {
         
-        // TODO: Save/ Pass the data to the personal list
+        query = self.searchField.text!
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
         
-        if(segue.identifier == "saveUnwind") {
-            print("AHHHHHH")
+        DispatchQueue.global(qos: .background).async {
+
+            
+            SRPuppyClient.sharedClient().fetchRecipesWithQuery(self.query, completionHandler: {
+                result, _ in
+                self.recipes = result
+            })
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3){
+                self.performSegue(withIdentifier: "recipeResultSegue", sender: self)
+            }
         }
     }
     
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "recipeResultSegue"){
+            let destinationVC = segue.destination as? RecipeResultVC
+            
+            destinationVC?.recipes = self.recipes
+        }
+    }
     /*
     // MARK: - Navigation
 

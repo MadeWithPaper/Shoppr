@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		75BB527BCC5153105D2EE965 /* Pods_Shoppr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D13881110DD0803DDC5CFDC /* Pods_Shoppr.framework */; };
+		CB6F3FDD20BB6A41006EEBB1 /* recipePuppy.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6F3FDC20BB6A41006EEBB1 /* recipePuppy.png */; };
+		CB6F3FE320BB6BA2006EEBB1 /* SRImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6F3FDE20BB6BA2006EEBB1 /* SRImageCache.swift */; };
+		CB6F3FE420BB6BA2006EEBB1 /* SRPuppyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6F3FDF20BB6BA2006EEBB1 /* SRPuppyParser.swift */; };
+		CB6F3FE520BB6BA2006EEBB1 /* SRRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6F3FE020BB6BA2006EEBB1 /* SRRecipe.swift */; };
+		CB6F3FE620BB6BA2006EEBB1 /* SRPuppyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6F3FE120BB6BA2006EEBB1 /* SRPuppyAPI.swift */; };
+		CB6F3FE720BB6BA2006EEBB1 /* SRPuppyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6F3FE220BB6BA2006EEBB1 /* SRPuppyClient.swift */; };
+		CB6F3FE920BB6D80006EEBB1 /* RecipeResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6F3FE820BB6D80006EEBB1 /* RecipeResultVC.swift */; };
+		CB6F3FEB20BB6DBB006EEBB1 /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6F3FEA20BB6DBB006EEBB1 /* RecipeCell.swift */; };
+		CB6F3FED20BB87E7006EEBB1 /* RecipeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6F3FEC20BB87E7006EEBB1 /* RecipeDetailVC.swift */; };
 		FA00755720BB44EC0086857C /* itemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00755620BB44EC0086857C /* itemDetailView.swift */; };
 		FA00755920BB49E30086857C /* ManualAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00755820BB49E30086857C /* ManualAddVC.swift */; };
 		FA00755B20BB49FD0086857C /* RecipeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00755A20BB49FD0086857C /* RecipeVC.swift */; };
@@ -29,6 +38,15 @@
 		819A7AA6DAE2340428C5C73D /* Pods-Shoppr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoppr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Shoppr/Pods-Shoppr.debug.xcconfig"; sourceTree = "<group>"; };
 		896F7D066ED6DCAF97F73FBA /* Pods-Shoppr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoppr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shoppr/Pods-Shoppr.release.xcconfig"; sourceTree = "<group>"; };
 		8D13881110DD0803DDC5CFDC /* Pods_Shoppr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shoppr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB6F3FDC20BB6A41006EEBB1 /* recipePuppy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recipePuppy.png; sourceTree = "<group>"; };
+		CB6F3FDE20BB6BA2006EEBB1 /* SRImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRImageCache.swift; sourceTree = "<group>"; };
+		CB6F3FDF20BB6BA2006EEBB1 /* SRPuppyParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRPuppyParser.swift; sourceTree = "<group>"; };
+		CB6F3FE020BB6BA2006EEBB1 /* SRRecipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRRecipe.swift; sourceTree = "<group>"; };
+		CB6F3FE120BB6BA2006EEBB1 /* SRPuppyAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRPuppyAPI.swift; sourceTree = "<group>"; };
+		CB6F3FE220BB6BA2006EEBB1 /* SRPuppyClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRPuppyClient.swift; sourceTree = "<group>"; };
+		CB6F3FE820BB6D80006EEBB1 /* RecipeResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeResultVC.swift; sourceTree = "<group>"; };
+		CB6F3FEA20BB6DBB006EEBB1 /* RecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
+		CB6F3FEC20BB87E7006EEBB1 /* RecipeDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailVC.swift; sourceTree = "<group>"; };
 		FA00755620BB44EC0086857C /* itemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = itemDetailView.swift; sourceTree = "<group>"; };
 		FA00755820BB49E30086857C /* ManualAddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualAddVC.swift; sourceTree = "<group>"; };
 		FA00755A20BB49FD0086857C /* RecipeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeVC.swift; sourceTree = "<group>"; };
@@ -98,11 +116,15 @@
 		FADBAAC020B9E99D007181C2 /* Shoppr */ = {
 			isa = PBXGroup;
 			children = (
+				CB6F3FDC20BB6A41006EEBB1 /* recipePuppy.png */,
 				FA5CF36020B9F2D4009880A7 /* LaunchScreen.storyboard */,
 				FA5CF36220B9F2D4009880A7 /* Main.storyboard */,
+				CB6F3FEA20BB6DBB006EEBB1 /* RecipeCell.swift */,
+				CB6F3FE820BB6D80006EEBB1 /* RecipeResultVC.swift */,
 				FA00755C20BB4A2F0086857C /* AddVC.swift */,
 				FA00755820BB49E30086857C /* ManualAddVC.swift */,
 				FA00755A20BB49FD0086857C /* RecipeVC.swift */,
+				CB6F3FEC20BB87E7006EEBB1 /* RecipeDetailVC.swift */,
 				FA00755620BB44EC0086857C /* itemDetailView.swift */,
 				FA5CF36C20BA2803009880A7 /* userJoin.swift */,
 				FA5CF35820B9F286009880A7 /* AppDelegate.swift */,
@@ -112,6 +134,11 @@
 				FA5CF36620B9FA32009880A7 /* GoogleService-Info.plist */,
 				FA5CF35A20B9F286009880A7 /* MainVC.swift */,
 				FA5CF35B20B9F286009880A7 /* PersonalVC.swift */,
+				CB6F3FDE20BB6BA2006EEBB1 /* SRImageCache.swift */,
+				CB6F3FE120BB6BA2006EEBB1 /* SRPuppyAPI.swift */,
+				CB6F3FE220BB6BA2006EEBB1 /* SRPuppyClient.swift */,
+				CB6F3FDF20BB6BA2006EEBB1 /* SRPuppyParser.swift */,
+				CB6F3FE020BB6BA2006EEBB1 /* SRRecipe.swift */,
 				FADBAAC820B9E99D007181C2 /* Assets.xcassets */,
 				FA5CF35720B9F285009880A7 /* Shoppr-Bridging-Header.h */,
 			);
@@ -182,6 +209,7 @@
 			files = (
 				FA5CF36420B9F2D4009880A7 /* LaunchScreen.storyboard in Resources */,
 				FA5CF35D20B9F286009880A7 /* Info.plist in Resources */,
+				CB6F3FDD20BB6A41006EEBB1 /* recipePuppy.png in Resources */,
 				FA5CF36720B9FA32009880A7 /* GoogleService-Info.plist in Resources */,
 				FADBAAC920B9E99D007181C2 /* Assets.xcassets in Resources */,
 				FA5CF36520B9F2D4009880A7 /* Main.storyboard in Resources */,
@@ -244,16 +272,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB6F3FE520BB6BA2006EEBB1 /* SRRecipe.swift in Sources */,
 				FA5CF36920B9FACE009880A7 /* Item.swift in Sources */,
 				FA5CF35E20B9F286009880A7 /* MainVC.swift in Sources */,
+				CB6F3FE720BB6BA2006EEBB1 /* SRPuppyClient.swift in Sources */,
+				CB6F3FEB20BB6DBB006EEBB1 /* RecipeCell.swift in Sources */,
+				CB6F3FE420BB6BA2006EEBB1 /* SRPuppyParser.swift in Sources */,
 				FA00755B20BB49FD0086857C /* RecipeVC.swift in Sources */,
 				FA00755920BB49E30086857C /* ManualAddVC.swift in Sources */,
+				CB6F3FE320BB6BA2006EEBB1 /* SRImageCache.swift in Sources */,
+				CB6F3FED20BB87E7006EEBB1 /* RecipeDetailVC.swift in Sources */,
 				FA00755D20BB4A2F0086857C /* AddVC.swift in Sources */,
 				FA5CF35F20B9F286009880A7 /* PersonalVC.swift in Sources */,
 				FA5CF35C20B9F286009880A7 /* AppDelegate.swift in Sources */,
+				CB6F3FE620BB6BA2006EEBB1 /* SRPuppyAPI.swift in Sources */,
 				FA00755720BB44EC0086857C /* itemDetailView.swift in Sources */,
 				FA5CF36D20BA2803009880A7 /* userJoin.swift in Sources */,
 				FA5CF36B20B9FC30009880A7 /* ItemCell.swift in Sources */,
+				CB6F3FE920BB6D80006EEBB1 /* RecipeResultVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
