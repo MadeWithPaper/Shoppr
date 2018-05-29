@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class RecipeVC: UIViewController {
 
@@ -20,9 +21,12 @@ class RecipeVC: UIViewController {
     var query: String = ""
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     let blackColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
-
+    var recipesRef: DatabaseReference!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        recipesRef = Database.database().reference().child("Recipe")
         
         self.view.backgroundColor = blueColor
         image.isHidden = false
@@ -47,7 +51,7 @@ class RecipeVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     @IBAction func searchPressed(_ sender: UIButton) {
         
         query = self.searchField.text!

@@ -13,7 +13,7 @@ class CurrentUser : NSObject{
     
     private var name: String
     private var group: String
-    private var inventory : [Item]
+    //private var inventory : [Item]
     private var cookBook : [SRRecipe]
     
     func getUser() -> String {
@@ -24,17 +24,33 @@ class CurrentUser : NSObject{
         return self.group
     }
     
-    func getInventory() -> [Item] {
-        return self.inventory
-    }
+    //func getInventory() -> [Item] {
+    //    return self.inventory
+   // }
     
     func getCookBook() -> [SRRecipe] {
         return self.cookBook
     }
-    init(name: String, group: String, inventory: [Item], cookBook: [SRRecipe]) {
+    
+    //func setInventory(newInventory: [Item]) {
+    //    self.inventory = newInventory
+    //}
+    
+    func setCookBook(newCookBook: [SRRecipe]) {
+        self.cookBook = newCookBook
+    }
+    
+    //func addItem(item: Item) {
+    //    self.inventory.append(item)
+    //}
+    
+    //func removeItem(index: Int) {
+    //    self.inventory.remove(at: index)
+    //}
+    init(name: String, group: String, /*inventory: [Item],*/ cookBook: [SRRecipe]) {
         self.name = name
         self.group = group
-        self.inventory = inventory
+        //self.inventory = inventory
         self.cookBook = cookBook
         
         super.init()

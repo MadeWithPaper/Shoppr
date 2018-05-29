@@ -17,6 +17,7 @@ class RecipeDetailVC: UIViewController {
     @IBOutlet weak var addIngredientsButton: UIButton!
     
     var selected: SRRecipe?
+    var curUser: CurrentUser?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +67,6 @@ class RecipeDetailVC: UIViewController {
         if(segue.identifier == "savedRecipesSegue") {
             
             // JACKKKKKY NEED TO FIREBASE THIS!!!!!!!!!!!
-            
             let destinationVC = segue.destination as? RecipeResultVC
             destinationVC?.rec = self.selected
         }

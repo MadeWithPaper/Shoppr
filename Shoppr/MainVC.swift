@@ -45,13 +45,6 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         //image scanning
         textDetector = vision.textDetector()
         
-        // options.maxResults has no effect with this API
-        // Defining a SwipeUp Gesture
-        /*let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler(_:)))
-        swipeUp.direction = UISwipeGestureRecognizerDirection.up
-        self.view.addGestureRecognizer(swipeUp)
-        */
-        
         let camera = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(takePhoto))
         navigationItem.leftBarButtonItem = camera
         
@@ -83,13 +76,13 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         listOfItems.removeAll()
         masterListRef?.queryOrdered(byChild: "Master List").observe(.value, with:
             { snapshot in
-                var newStands = [Item]()
+                var newList = [Item]()
                 
                 for item in snapshot.children {
-                    newStands.append(Item(snapshot: item as! DataSnapshot))
+                    newList.append(Item(snapshot: item as! DataSnapshot))
                 }
                 
-                self.listOfItems = newStands
+                self.listOfItems = newList
                 self.masterListTV.reloadData()
         })
     }
@@ -102,9 +95,9 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
                     userList.append(i)
                 }
             }
+            destVC.currUser = curUser
             destVC.listOfItems = userList
             destVC.masterListRef = masterListRef
-            destVC.owner = (curUser?.getUser())!
             print("going to \(String(describing: curUser?.getUser()))'s detail list view")
         }
         else if (segue.identifier == "masterItemDetail") {
@@ -206,6 +199,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     }
     @IBAction func unwindFromDetailToMasterSave(segue:UIStoryboardSegue) {
         let srcVC = segue.source as! itemDetailView
+        let oldName = (listOfItems[srcVC.indexOfItem!.row]).name
         let itemOwner = srcVC.itemOwnerTF.text
         let itemName = srcVC.itemNameTF.text
         let itemCount = srcVC.itemCountPV.selectedRow(inComponent: 0)
@@ -216,11 +210,15 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         
         listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(itemPrice)!, LPL: itemLL!, LPP: Double(itemLP)!, category: itemCate!, key: itemName!, owner: itemOwner!))
         
-        updateData()
+        updateData(item: listOfItems[srcVC.indexOfItem!.row], old: oldName)
     }
     
-    func updateData() {
-        
+    func updateData(item: Item, old: String) {
+        //TODO update data to firebase
+        //fetch or reload after update
+        masterListRef.database.reference().child((curUser?.getGroup())!).child(old).removeValue()
+        masterListRef.database.reference().child((curUser?.getGroup())!).child(item.name).setValue(item.toAnyObject())
+        masterListTV.reloadData()
     }
     @IBAction func unwindFromPersonalToMaster(segue:UIStoryboardSegue){
         let srcVC = segue.source as! PersonalTVC

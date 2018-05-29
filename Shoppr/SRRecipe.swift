@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 open class SRRecipe: NSObject, NSCoding {
     
@@ -17,6 +18,8 @@ open class SRRecipe: NSObject, NSCoding {
     open let url: URL!
     open let thumbnailUrl: URL?
     open var image : UIImage?
+    var owner : String
+    var ref : DatabaseReference?
     
     open var thumbnailImage: UIImage? {
         get {
@@ -44,6 +47,8 @@ open class SRRecipe: NSObject, NSCoding {
         self.url = url
         self.thumbnailUrl = thumbnailUrl
         self.image = nil
+        self.owner = ""
+        self.ref = nil
     }
     
     // MARK: NSCoding Protocol
@@ -61,7 +66,42 @@ open class SRRecipe: NSObject, NSCoding {
         ingredients = aDecoder.decodeObject(forKey: CodingKeys.Ingredients) as! String
         url = aDecoder.decodeObject(forKey: CodingKeys.Href) as! URL
         thumbnailUrl = aDecoder.decodeObject(forKey: CodingKeys.Thumbnail) as! URL?
+        owner = ""
     }
+    
+    init (title: String, ingredients: String, url: URL, thumbnailUrl: URL?, owner:String) {
+        self.title = title
+        self.ingredients = ingredients
+        self.url = url
+        self.thumbnailUrl = thumbnailUrl
+        self.owner = owner
+    }
+    
+    init(snapshot: DataSnapshot) {
+        
+        let snapvalues = snapshot.value as! [String : AnyObject]
+        
+        title = snapvalues["Recipe Title"] as! String
+        ingredients = snapvalues["Ingredients"] as! String
+        url = NSURL(snapvalues["URL"]?.absoluteString) as? URL
+        thumbnailUrl = snapvalues["Thumbnail URL"]?.absoluteURL as? URL
+        owner = snapvalues["Owner"] as! String
+        
+        ref = snapshot.ref
+        
+        super.init()
+    }
+    
+    func toAnyObject() -> Any {
+        return [
+            "Recipe Title" : title,
+            "Ingredients" : ingredients,
+            "URL" : url,
+            "Thumbnail URL" : thumbnailUrl!,
+            "Owner" : owner
+        ]
+    }
+    
     
     // MARK: - CustomStringConvertible Protocol
     override open var description: String {

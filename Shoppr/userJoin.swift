@@ -55,7 +55,7 @@ class userJoin: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destVC = segue.destination as! MainTVC
-        destVC.curUser = CurrentUser(name: userName.text!, group: groupName.text!, inventory: [Item](), cookBook: [SRRecipe]())
+        destVC.curUser = CurrentUser(name: "Gaston", group: "MASTER", cookBook: [SRRecipe]())
         print("User \(userName.text!) joined \(groupName.text!)")
     }
     

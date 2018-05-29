@@ -19,7 +19,8 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var savedReceipes = [SRRecipe?]()
     var itemSaved: Item?
     var masterListRef: DatabaseReference!
-    var owner : String = ""
+    //var owner : String = ""
+    var currUser : CurrentUser?
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     let whileColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     
@@ -27,14 +28,11 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         super.viewDidLoad()
         
         personalTV.backgroundColor = blueColor
+        //listOfItems = (currUser?.getInventory())!
+        //savedReceipes = (currUser?.getCookBook())!
+        personalNaviBar.topItem?.title = "Gaston's Inventory"
         
-        personalNaviBar.topItem?.title = "\(owner)'s Inventory"
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
         //fetchData()
-        
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -44,17 +42,6 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.backgroundColor = blueColor
-    }
-    
-    @IBAction func swipeHandler(_ gestureRecognizer : UISwipeGestureRecognizer) {
-        
-        switch gestureRecognizer.direction {
-        case UISwipeGestureRecognizerDirection.right:
-            print("Swipped Right")
-            //needto perform back
-        default:
-            print("Default")
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -83,13 +70,12 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         
         let object = listOfItems[(indexPath as NSIndexPath).row]
         cell.itemNameLabel.text = object.name
-        cell.itemCountLabel.text = String(object.count)
-        cell.itemPriceLabel.text = String(object.price)
-        cell.lastLocAndPriceLabel.text = "Last purchased at \(object.lastPurchaseLocation) for $\(object.lastPurchasePrice)"
+        cell.itemCountLabel.text = String(describing: object.count)
+        cell.itemPriceLabel.text = String(describing: object.price)
+        cell.lastLocAndPriceLabel.text = "Last purchased at \(String(describing: object.lastPurchaseLocation)) for $\(String(describing: object.lastPurchasePrice))"
         
         return cell
     }
-    
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "personalItemDetail", sender: self)
@@ -103,6 +89,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         print("saveUnwind")
         if(itemSaved != nil) {
             listOfItems.append(itemSaved!)
+            //listOfItems = (currUser?.getInventory())!
             personalTV.reloadData()
             updateData()
         }
@@ -114,6 +101,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if(editingStyle == UITableViewCellEditingStyle.delete) {
             listOfItems.remove(at: indexPath.row)
+            //urrUser?.setInventory(newInventory: listOfItems)
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         }
     }

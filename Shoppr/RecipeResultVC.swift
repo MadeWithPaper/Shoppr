@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate {
     
@@ -14,17 +15,20 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     var rec: SRRecipe?
     @IBOutlet weak var tableView: UITableView!
     var sel = 0
-    
+    var recipesRef: DatabaseReference!
+    var curUsr : CurrentUser?
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.reloadData()
-
+        recipesRef = Database.database().reference().child("Recipe")
         if(rec != nil) {
             recipes.append(rec!)
+            updateData()
         }
         
-        print(rec)
+        fetchData()
+        //print(rec)
         // Do any additional setup after loading the view.
     }
     
@@ -46,11 +50,45 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         return recipes.count
     }
     
+    func updateData() {
+        for r in self.recipes
+        {
+            let recipe = [
+                "Recipe Title" : r.title as String,
+                "Ingredients" : r.ingredients as String,
+                "URL" : r.url.absoluteString as String,
+                "Thumbnail URL" : r.thumbnailUrl?.absoluteString as! String,
+                "Owner" : "Gaston" as! String] as [String : Any]
+            self.recipesRef.child(r.title).setValue(recipe)
+        }
+    }
+    
+    func fetchData() {
+        recipes.removeAll()
+        recipesRef?.queryOrdered(byChild: "Recipe").observe(.value, with:
+            { snapshot in
+                var newRecipes = [SRRecipe]()
+                
+                for item in snapshot.children{
+                    let temp = SRRecipe(snapshot: item as! DataSnapshot)
+                    if temp.owner == "Gaston" {
+                        newRecipes.append(temp)
+                        print(temp.thumbnailUrl)
+                        print(temp.url)
+                    }
+                }
+                self.recipes = newRecipes
+                self.tableView.reloadData()
+        })
+        
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "detailRecipeSegue") {
             let destinationVC = segue.destination as? RecipeDetailVC
             let indexPath = tableView.indexPathForSelectedRow
             destinationVC?.selected = recipes[((indexPath as? NSIndexPath)?.row)!]
+            destinationVC?.curUser = self.curUsr
         }
     }
     
