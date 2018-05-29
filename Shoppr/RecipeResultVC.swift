@@ -10,7 +10,8 @@ import UIKit
 
 class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate {
     
-    var recipes: [SRRecipe]?
+    var recipes = [SRRecipe]()
+    var rec: SRRecipe?
     @IBOutlet weak var tableView: UITableView!
     var sel = 0
     
@@ -19,6 +20,11 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.tableView.reloadData()
 
+        if(rec != nil) {
+            recipes.append(rec!)
+        }
+        
+        print(rec)
         // Do any additional setup after loading the view.
     }
     
@@ -37,14 +43,14 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (recipes?.count)!
+        return recipes.count
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "detailRecipeSegue") {
             let destinationVC = segue.destination as? RecipeDetailVC
             let indexPath = tableView.indexPathForSelectedRow
-            destinationVC?.selected = recipes?[((indexPath as? NSIndexPath)?.row)!]
+            destinationVC?.selected = recipes[((indexPath as? NSIndexPath)?.row)!]
         }
     }
     
@@ -59,7 +65,7 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath) as! RecipeCell
         
-        var object = recipes![(indexPath as NSIndexPath).row]
+        var object = recipes[(indexPath as NSIndexPath).row]
         
         cell.recipeName.text = object.title
         

@@ -68,11 +68,16 @@ class RecipeVC: UIViewController {
         }
     }
     
+    
+    @IBAction func unwindToRecipeVC(segue: UIStoryboardSegue){
+        activityIndicator.isHidden = true
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "recipeResultSegue"){
             let destinationVC = segue.destination as? RecipeResultVC
             
-            destinationVC?.recipes = self.recipes
+            destinationVC?.recipes = self.recipes!
         }
     }
     /*

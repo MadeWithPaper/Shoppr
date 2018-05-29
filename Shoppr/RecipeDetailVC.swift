@@ -62,8 +62,19 @@ class RecipeDetailVC: UIViewController {
                 destinationVC?.listOfItems.append(Item(name: i, count: 1, price: 0, LPL: "N/A", LPP: 0, category: "N/A", key: i, owner: "Gaston"))
             }
         }
+        
+        if(segue.identifier == "savedRecipesSegue") {
+            
+            // JACKKKKKY NEED TO FIREBASE THIS!!!!!!!!!!!
+            
+            let destinationVC = segue.destination as? RecipeResultVC
+            destinationVC?.rec = self.selected
+        }
     }
     
+    @IBAction func saveRecipeButton(_ sender: UIButton) {
+        performSegue(withIdentifier: "savedRecipesSegue", sender: self)
+    }
     
     /*
     // MARK: - Navigation

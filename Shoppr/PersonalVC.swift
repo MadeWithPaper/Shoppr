@@ -16,6 +16,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     @IBOutlet weak var personalNaviBar: UINavigationBar!
     var listOfItems  = [Item]()
+    var savedReceipes = [SRRecipe?]()
     var itemSaved: Item?
     var masterListRef: DatabaseReference!
     var owner : String = ""
@@ -107,6 +108,15 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         }
     }
     
+    @IBAction func unwindFromSavedRecipesVC(segue:UIStoryboardSegue){
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if(editingStyle == UITableViewCellEditingStyle.delete) {
+            listOfItems.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        }
+    }
     
     func updateData() {
         for s in self.listOfItems
