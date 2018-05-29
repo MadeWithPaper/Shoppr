@@ -130,6 +130,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 let destVC = segue.destination as! itemDetailView
                 destVC.item = object
                 destVC.master = false
+                destVC.indexOfItem = indexPath
                 destVC.parentVC = "PersonalView"
                 print("going to item detail view from personal")
             }

@@ -8,30 +8,39 @@
 
 import UIKit
 
-class itemDetailView: UIViewController {
+class itemDetailView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
-    @IBOutlet weak var itemNameLabel: UILabel!
-    @IBOutlet weak var itemCostLabel: UILabel!
-    @IBOutlet weak var lastText: UITextView!
-   
+    @IBOutlet weak var itemNameTF: UITextField!
+    @IBOutlet weak var itemCountPV: UIPickerView!
+    @IBOutlet weak var itemPriceTF: UITextField!
+    @IBOutlet weak var itemLastLocTF: UITextField!
+    @IBOutlet weak var itemLastPriceTF: UITextField!
+    @IBOutlet weak var totalCost: UILabel!
+    @IBOutlet weak var itemOwnerTF: UITextField!
     
     var item : Item?
     var master : Bool = false
     var parentVC : String!
+    var indexOfItem : IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let cost = Double((item?.count)!) * (item?.price)!
         
+        itemOwnerTF.text = "\(String(describing: item!.owner))"
         if master {
-            itemNameLabel.text = "\(String(describing: item!.owner)) - \(String(describing: item!.name))"
+            itemOwnerTF.isEnabled = true
         }
         else {
-            itemNameLabel.text = item!.name
+            itemOwnerTF.isEnabled = false
         }
-        lastText.text = "Last Purchased at \(String(describing: item!.lastPurchaseLocation)) for $\(String(describing: item!.lastPurchasePrice))"
-        itemCostLabel.text = "Cost: \(String(describing: item!.count)) X $\(String(describing: item!.price)) = \(cost)"
+        itemNameTF.text = "\(String(describing: item!.name))"
+        itemLastLocTF.text = "\(String(describing: item!.lastPurchaseLocation))"
+        itemLastPriceTF.text = "\(item!.lastPurchasePrice)"
+        totalCost.text = "Total cost for this item: \(cost)"
+        itemPriceTF.text = "\(String(describing: item!.price))"
+        itemCountPV.selectRow(((item?.count)!-1), inComponent: 0, animated: true)
         // Do any additional setup after loading the view.
     }
 
@@ -40,16 +49,24 @@ class itemDetailView: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    //TODO dismiss keyboard as needed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
-    */
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1;
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 100;
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return String(row + 1)
+    }
+    
     @IBAction func unwindfromDetail(sender: UIBarButtonItem) {
         if parentVC == "MasterView" {
             self.performSegue(withIdentifier: "unwindFromDetailToMaster", sender: nil)

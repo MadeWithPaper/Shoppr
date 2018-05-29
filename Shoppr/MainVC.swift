@@ -108,6 +108,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
                 destVC.parentVC = "MasterView"
                 destVC.item = object
                 destVC.master = true
+                destVC.indexOfItem = indexPath
                 print("going to item detail view from master")
             }
         }
@@ -197,7 +198,24 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     @IBAction func unwindFromDetailToMaster(storyboard: UIStoryboardSegue){
         
     }
+    @IBAction func unwindFromDetailToMasterSave(segue:UIStoryboardSegue) {
+        let srcVC = segue.source as! itemDetailView
+        let itemOwner = srcVC.itemOwnerTF.text
+        let itemName = srcVC.itemNameTF.text
+        let itemCount = srcVC.itemCountPV.selectedRow(inComponent: 0)
+        let itemPrice = srcVC.itemLastPriceTF.text!
+        let itemLL = srcVC.itemLastLocTF.text
+        let itemLP = srcVC.itemLastPriceTF.text!
+        let itemCate = srcVC.item?.category
+        
+        listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(itemPrice)!, LPL: itemLL!, LPP: Double(itemLP)!, category: itemCate!, key: itemName!, owner: itemOwner!))
+        
+        updateData()
+    }
     
+    func updateData() {
+        
+    }
     @IBAction func unwindFromPersonalToMaster(segue:UIStoryboardSegue){
         let srcVC = segue.source as! PersonalTVC
         
