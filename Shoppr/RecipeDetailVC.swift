@@ -60,8 +60,10 @@ class RecipeDetailVC: UIViewController {
             let destinationVC = segue.destination as? PersonalTVC
             
             for i in ing {
-                destinationVC?.listOfItems.append(Item(name: i, count: 1, price: 0, LPL: "N/A", LPP: 0, category: "N/A", key: i, owner: "Gaston"))
+                destinationVC?.listOfItems.append(Item(name: i, count: 1, price: 0, LPL: "N/A", LPP: 0, category: "N/A", key: i, owner: CurrentUser.getUser().getName()))
             }
+            
+            destinationVC?.currUser = curUser
         }
         
         if(segue.identifier == "savedRecipesSegue") {

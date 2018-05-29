@@ -19,7 +19,6 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     var masterListRef: DatabaseReference!
     lazy var vision = Vision.vision()
     var textDetector: VisionTextDetector?
-    var curUser : CurrentUser?
     @IBOutlet weak var tableView: UITableView!
 
     
@@ -36,7 +35,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         tableView.backgroundColor = blueColor
 
         //Firebase database reference
-        masterListRef = Database.database().reference().child((curUser?.getGroup())!)
+        masterListRef = Database.database().reference().child(CurrentUser.getUser().getGroup())
         
         //testing function
         //testingInit()
@@ -91,14 +90,14 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
             let destVC = segue.destination as! PersonalTVC
             var userList = [Item]()
             for i in listOfItems {
-                if i.owner == curUser?.getUser() {
+                if i.owner == CurrentUser.getUser().getName() {
                     userList.append(i)
                 }
             }
-            destVC.currUser = curUser
+            //destVC.currUser = curUser
             destVC.listOfItems = userList
             destVC.masterListRef = masterListRef
-            print("going to \(String(describing: curUser?.getUser()))'s detail list view")
+            print("going to \(String(describing: CurrentUser.getUser().getName()))'s detail list view")
         }
         else if (segue.identifier == "masterItemDetail") {
             if let indexPath = masterListTV.indexPathForSelectedRow {
@@ -214,10 +213,8 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     }
     
     func updateData(item: Item, old: String) {
-        //TODO update data to firebase
-        //fetch or reload after update
-        masterListRef.database.reference().child((curUser?.getGroup())!).child(old).removeValue()
-        masterListRef.database.reference().child((curUser?.getGroup())!).child(item.name).setValue(item.toAnyObject())
+        masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(old).removeValue()
+        masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(item.name).setValue(item.toAnyObject())
         masterListTV.reloadData()
     }
     @IBAction func unwindFromPersonalToMaster(segue:UIStoryboardSegue){

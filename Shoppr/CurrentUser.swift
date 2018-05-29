@@ -15,15 +15,29 @@ class CurrentUser : NSObject{
     private var group: String
     //private var inventory : [Item]
     private var cookBook : [SRRecipe]
-    
-    func getUser() -> String {
-        return self.name
+    private static var sharedUser: CurrentUser = {
+        let currUser = CurrentUser(name: "Defeault", group: "None", cookBook: [SRRecipe]())
+        
+        return currUser
+    }()
+    class func getUser() -> CurrentUser {
+        return sharedUser
     }
     
+    func getName () -> String {
+        return self.name
+    }
     func getGroup() -> String {
         return self.group
     }
     
+    func setName(newName: String) {
+        CurrentUser.getUser().name = newName
+    }
+    
+    func setGroup(newGroup: String) {
+        CurrentUser.getUser().group = newGroup
+    }
     //func getInventory() -> [Item] {
     //    return self.inventory
    // }

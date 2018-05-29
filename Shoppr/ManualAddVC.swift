@@ -17,8 +17,10 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     @IBOutlet weak var countPicker: UIPickerView!
     @IBOutlet weak var priceTextField: UITextField!
     @IBOutlet weak var purchaseLocationTextField: UITextField!
-    
+    @IBOutlet weak var staticSaveButton : UIButton!
+    @IBOutlet weak var staticCancelButton: UIButton!
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
+    let blackColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,16 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         self.countPicker.delegate = self
         self.nameTextField.delegate = self
         self.priceTextField.delegate = self
+        
+        staticSaveButton.layer.borderWidth = 2.0
+        staticSaveButton.layer.borderColor = blackColor.cgColor
+        staticSaveButton.layer.cornerRadius = 5.0
+        staticSaveButton.clipsToBounds = true
+        
+        staticCancelButton.layer.borderWidth = 2.0
+        staticCancelButton.layer.borderColor = blackColor.cgColor
+        staticCancelButton.layer.cornerRadius = 5.0
+        staticCancelButton.clipsToBounds = true
         
         // Do any additional setup after loading the view.
     }

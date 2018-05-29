@@ -30,7 +30,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         personalTV.backgroundColor = blueColor
         //listOfItems = (currUser?.getInventory())!
         //savedReceipes = (currUser?.getCookBook())!
-        personalNaviBar.topItem?.title = "Gaston's Inventory"
+        personalNaviBar.topItem?.title = "\(CurrentUser.getUser().getName())'s Inventory"
         
         //fetchData()
     }

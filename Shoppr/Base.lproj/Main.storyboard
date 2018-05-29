@@ -1040,6 +1040,8 @@
                         <outlet property="nameTextField" destination="HuQ-OK-0fW" id="QgN-vf-8Bq"/>
                         <outlet property="priceTextField" destination="Sfk-73-yOh" id="RRR-Yg-hRa"/>
                         <outlet property="purchaseLocationTextField" destination="lJ4-hF-hQW" id="5Rn-Mk-joA"/>
+                        <outlet property="staticCancelButton" destination="tGs-Ex-QTV" id="Urw-e5-mfa"/>
+                        <outlet property="staticSaveButton" destination="U5U-Jx-Wrb" id="ILv-I6-otf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P3x-eW-37B" userLabel="First Responder" sceneMemberID="firstResponder"/>

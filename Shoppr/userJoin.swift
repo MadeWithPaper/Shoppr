@@ -24,6 +24,7 @@ class userJoin: UIViewController {
         let blackColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
         view.backgroundColor = blueColor
         
+        //static UI change
         staticJoinButton.layer.borderWidth = 2.0
         staticJoinButton.layer.borderColor = blackColor.cgColor
         staticJoinButton.layer.cornerRadius = 5.0
@@ -33,6 +34,12 @@ class userJoin: UIViewController {
         userName.layer.borderColor = blackColor.cgColor
         userName.layer.cornerRadius = 5.0
         userName.clipsToBounds = true
+        
+        
+        groupName.layer.borderWidth = 2.0
+        groupName.layer.borderColor = blackColor.cgColor
+        groupName.layer.cornerRadius = 5.0
+        groupName.clipsToBounds = true
 
         // Do any additional setup after loading the view.
     }
@@ -55,8 +62,8 @@ class userJoin: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destVC = segue.destination as! MainTVC
-        destVC.curUser = CurrentUser(name: "Gaston", group: "MASTER", cookBook: [SRRecipe]())
-        print("User \(userName.text!) joined \(groupName.text!)")
+        CurrentUser.getUser().setName(newName: userName.text!)
+        CurrentUser.getUser().setGroup(newGroup: groupName.text!)
     }
     
     @IBAction func unwindFromMaster(segue:UIStoryboardSegue) {

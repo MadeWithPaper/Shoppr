@@ -73,7 +73,7 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
                 for item in snapshot.children{
                     let temp = SRRecipe(snapshot: item as! DataSnapshot)
-                    if temp.owner == "Gaston" {
+                    if temp.owner == CurrentUser.getUser().getName() {
                         newRecipes.append(temp)
                     }
                 }
