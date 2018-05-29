@@ -39,7 +39,6 @@ class Item : NSObject{
         super.init()
     }
     
-    //3500 + 3500 + 7030 
     
     init(key: String,snapshot: DataSnapshot) {
         self.key = key
