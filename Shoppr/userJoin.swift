@@ -16,6 +16,7 @@ class userJoin: UIViewController {
     @IBAction func joinButton(_ sender: UIButton) {
        performSegue(withIdentifier: "userJoin", sender: self)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,8 +55,8 @@ class userJoin: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destVC = segue.destination as! MainTVC
-        destVC.userName = "Gaston"
-        print("User: \(String(describing: userName.text)) joined, going to master view")
+        destVC.curUser = CurrentUser(name: userName.text!, group: groupName.text!, inventory: [Item](), cookBook: [SRRecipe]())
+        print("User \(userName.text!) joined \(groupName.text!)")
     }
     
     @IBAction func unwindFromMaster(segue:UIStoryboardSegue) {

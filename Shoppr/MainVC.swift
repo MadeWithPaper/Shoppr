@@ -17,21 +17,15 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     var listOfItems  = [Item]()
     //var userList = [Item]()
     var masterListRef: DatabaseReference!
-    var userName : String = ""
-    var currUser : String = ""
     lazy var vision = Vision.vision()
     var textDetector: VisionTextDetector?
-
+    var curUser : CurrentUser?
     @IBOutlet weak var tableView: UITableView!
 
     
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     let whileColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
-
     
-    func getCurUser() -> String{
-        return currUser
-    }
     @IBAction func personalListButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "PersonalListSegue", sender: self)
     }
@@ -40,11 +34,9 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         super.viewDidLoad()
         
         tableView.backgroundColor = blueColor
-        
-        currUser = userName
 
         //Firebase database reference
-        masterListRef = Database.database().reference().child("Master List")
+        masterListRef = Database.database().reference().child((curUser?.getGroup())!)
         
         //testing function
         //testingInit()
@@ -106,14 +98,14 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
             let destVC = segue.destination as! PersonalTVC
             var userList = [Item]()
             for i in listOfItems {
-                if i.owner == currUser {
+                if i.owner == curUser?.getUser() {
                     userList.append(i)
                 }
             }
             destVC.listOfItems = userList
             destVC.masterListRef = masterListRef
-            destVC.owner = currUser
-            print("going to \(currUser)'s detail list view")
+            destVC.owner = (curUser?.getUser())!
+            print("going to \(String(describing: curUser?.getUser()))'s detail list view")
         }
         else if (segue.identifier == "masterItemDetail") {
             if let indexPath = masterListTV.indexPathForSelectedRow {

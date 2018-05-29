@@ -1,7 +1,7 @@
 //
 //  CurrentUser.swift
 //  Shoppr
-//  Singleton object, used to store the current user along with group that is active in the application
+//  semi - Singleton object, used to store the current user along with group that is active in the application
 
 //  Created by Jacky Huang on 5/28/18.
 //  Copyright © 2018 Jacky Huang. All rights reserved.
@@ -11,10 +11,10 @@ import Foundation
 
 class CurrentUser : NSObject{
     
-    var name: String
-    var group: String
-    var inventory : [Item]
-    var cookBook : [SRRecipe]
+    private var name: String
+    private var group: String
+    private var inventory : [Item]
+    private var cookBook : [SRRecipe]
     
     func getUser() -> String {
         return self.name
