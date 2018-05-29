@@ -82,6 +82,7 @@ class RecipeVC: UIViewController {
             let destinationVC = segue.destination as? RecipeResultVC
             
             destinationVC?.recipes = self.recipes!
+            destinationVC?.saved = false
         }
     }
     /*

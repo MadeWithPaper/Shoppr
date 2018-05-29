@@ -83,8 +83,10 @@ open class SRRecipe: NSObject, NSCoding {
         
         title = snapvalues["Recipe Title"] as! String
         ingredients = snapvalues["Ingredients"] as! String
-        url = NSURL(snapvalues["URL"]?.absoluteString) as? URL
-        thumbnailUrl = snapvalues["Thumbnail URL"]?.absoluteURL as? URL
+        let stringURL = NSURL(string: snapvalues["URL"] as! String)
+        self.url = stringURL as URL?
+        let stringThumbnailUrl = NSURL(string: snapvalues["Thumbnail URL"] as! String)
+        self.thumbnailUrl = stringThumbnailUrl as URL?
         owner = snapvalues["Owner"] as! String
         
         ref = snapshot.ref

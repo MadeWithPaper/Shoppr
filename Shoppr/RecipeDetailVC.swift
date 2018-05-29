@@ -69,6 +69,7 @@ class RecipeDetailVC: UIViewController {
             // JACKKKKKY NEED TO FIREBASE THIS!!!!!!!!!!!
             let destinationVC = segue.destination as? RecipeResultVC
             destinationVC?.rec = self.selected
+            destinationVC?.saved = true
         }
     }
     

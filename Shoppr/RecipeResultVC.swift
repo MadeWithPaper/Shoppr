@@ -17,6 +17,7 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     var sel = 0
     var recipesRef: DatabaseReference!
     var curUsr : CurrentUser?
+    var saved : Bool = true
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,8 +27,9 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             recipes.append(rec!)
             updateData()
         }
-        
-        fetchData()
+        if (saved) {
+            fetchData()
+        }
         //print(rec)
         // Do any additional setup after loading the view.
     }
@@ -58,7 +60,7 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                 "Ingredients" : r.ingredients as String,
                 "URL" : r.url.absoluteString as String,
                 "Thumbnail URL" : r.thumbnailUrl?.absoluteString as! String,
-                "Owner" : "Gaston" as! String] as [String : Any]
+                "Owner" : r.owner as String ] as [String : Any]
             self.recipesRef.child(r.title).setValue(recipe)
         }
     }
@@ -73,8 +75,6 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                     let temp = SRRecipe(snapshot: item as! DataSnapshot)
                     if temp.owner == "Gaston" {
                         newRecipes.append(temp)
-                        print(temp.thumbnailUrl)
-                        print(temp.url)
                     }
                 }
                 self.recipes = newRecipes
@@ -87,7 +87,7 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         if(segue.identifier == "detailRecipeSegue") {
             let destinationVC = segue.destination as? RecipeDetailVC
             let indexPath = tableView.indexPathForSelectedRow
-            destinationVC?.selected = recipes[((indexPath as? NSIndexPath)?.row)!]
+            destinationVC?.selected = recipes[((indexPath as NSIndexPath?)?.row)!]
             destinationVC?.curUser = self.curUsr
         }
     }
@@ -103,7 +103,7 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath) as! RecipeCell
         
-        var object = recipes[(indexPath as NSIndexPath).row]
+        let object = recipes[(indexPath as NSIndexPath).row]
         
         cell.recipeName.text = object.title
         
