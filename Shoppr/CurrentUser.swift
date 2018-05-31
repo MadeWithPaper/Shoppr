@@ -13,10 +13,10 @@ class CurrentUser : NSObject{
     
     private var name: String
     private var group: String
-    //private var inventory : [Item]
+    private var inventory : [Item]
     private var cookBook : [SRRecipe]
     private static var sharedUser: CurrentUser = {
-        let currUser = CurrentUser(name: "Defeault", group: "None", cookBook: [SRRecipe]())
+        let currUser = CurrentUser(name: "Defeault", group: "None", inventory : [Item](), cookBook: [SRRecipe]())
         
         return currUser
     }()
@@ -38,33 +38,34 @@ class CurrentUser : NSObject{
     func setGroup(newGroup: String) {
         CurrentUser.getUser().group = newGroup
     }
-    //func getInventory() -> [Item] {
-    //    return self.inventory
-   // }
+    
+    func getInventory() -> [Item] {
+       return self.inventory
+    }
     
     func getCookBook() -> [SRRecipe] {
         return self.cookBook
     }
     
-    //func setInventory(newInventory: [Item]) {
-    //    self.inventory = newInventory
-    //}
+    func setInventory(newInventory: [Item]) {
+        self.inventory = newInventory
+    }
     
     func setCookBook(newCookBook: [SRRecipe]) {
         self.cookBook = newCookBook
     }
     
-    //func addItem(item: Item) {
-    //    self.inventory.append(item)
-    //}
+    func addItem(item: Item) {
+        self.inventory.append(item)
+    }
     
     //func removeItem(index: Int) {
     //    self.inventory.remove(at: index)
     //}
-    init(name: String, group: String, /*inventory: [Item],*/ cookBook: [SRRecipe]) {
+    init(name: String, group: String, inventory: [Item], cookBook: [SRRecipe]) {
         self.name = name
         self.group = group
-        //self.inventory = inventory
+        self.inventory = inventory
         self.cookBook = cookBook
         
         super.init()

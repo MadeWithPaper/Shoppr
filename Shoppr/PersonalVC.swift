@@ -20,7 +20,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var itemSaved: Item?
     var masterListRef: DatabaseReference!
     //var owner : String = ""
-    var currUser : CurrentUser?
+    //var currUser : CurrentUser?
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     let whileColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     
@@ -28,10 +28,10 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         super.viewDidLoad()
         
         personalTV.backgroundColor = blueColor
-        //listOfItems = (currUser?.getInventory())!
-        //savedReceipes = (currUser?.getCookBook())!
         personalNaviBar.topItem?.title = "\(CurrentUser.getUser().getName())'s Inventory"
         
+        print("to personal")
+        print(listOfItems.count)
         //fetchData()
     }
     
@@ -89,7 +89,6 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         print("saveUnwind")
         if(itemSaved != nil) {
             listOfItems.append(itemSaved!)
-            //listOfItems = (currUser?.getInventory())!
             personalTV.reloadData()
             updateData()
         }
@@ -101,7 +100,6 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if(editingStyle == UITableViewCellEditingStyle.delete) {
             listOfItems.remove(at: indexPath.row)
-            //urrUser?.setInventory(newInventory: listOfItems)
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         }
     }

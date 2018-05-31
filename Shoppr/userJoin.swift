@@ -8,7 +8,7 @@
 
 import UIKit
 
-class userJoin: UIViewController {
+class userJoin: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var userName: UITextField!
     @IBOutlet weak var groupName: UITextField!
@@ -18,15 +18,14 @@ class userJoin: UIViewController {
             performSegue(withIdentifier: "userJoin", sender: self)
             print("not nil")
         }
-        else {
+        else
+        {
             let alert = UIAlertController(title: "Empty fields", message: "Please enter a Name and a Group", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "OK", style: .default) { (alert: UIAlertAction!) -> Void in
                 NSLog("User dismissed alert")
-            }
-            
-            alert.addAction(defaultAction)
-            
-            present(alert, animated: true, completion:nil)
+        }
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion:nil)
         }
     }
     
@@ -54,9 +53,14 @@ class userJoin: UIViewController {
         groupName.layer.cornerRadius = 5.0
         groupName.clipsToBounds = true
 
-        // Do any additional setup after loading the view.
+        //dismiss keyboard on tap outside of text field
+        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
-
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -77,10 +81,13 @@ class userJoin: UIViewController {
         //let destVC = segue.destination as! MainTVC
         CurrentUser.getUser().setName(newName: userName.text!)
         CurrentUser.getUser().setGroup(newGroup: groupName.text!)
+        print(CurrentUser.getUser().getName())
     }
     
     @IBAction func unwindFromMaster(segue:UIStoryboardSegue) {
         print("going from master list view to user join view")
+        self.userName.text = ""
+        self.groupName.text = ""
     }
 
 }

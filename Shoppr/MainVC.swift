@@ -47,7 +47,6 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         let camera = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(takePhoto))
         navigationItem.leftBarButtonItem = camera
         
-        
         // Defining a SwipeLeft Gesture
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler(_:)))
         swipeLeft.direction = UISwipeGestureRecognizerDirection.left
@@ -85,6 +84,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
                 self.masterListTV.reloadData()
         })
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "PersonalListSegue") {
             let destVC = segue.destination as! PersonalTVC
@@ -217,17 +217,24 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(item.name).setValue(item.toAnyObject())
         masterListTV.reloadData()
     }
+    
     @IBAction func unwindFromPersonalToMaster(segue:UIStoryboardSegue){
         let srcVC = segue.source as! PersonalTVC
         
         var newItems = [Item]()
         for items in srcVC.listOfItems {
             if (!listOfItems.contains(items)) {
-            listOfItems.append(items)
-            newItems.append(items)
+                listOfItems.append(items)
+                newItems.append(items)
+            }
+            else
+            {
+                print(listOfItems[listOfItems.index(of: items)!].count)
+                listOfItems[listOfItems.index(of: items)!].count += 1
+                print(listOfItems[listOfItems.index(of: items)!].count)
             }
         }
-        
+    
         for itm in newItems {
             let item = [
                 "Item Name" : itm.name as String,
