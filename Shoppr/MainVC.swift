@@ -18,7 +18,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     //var userList = [Item]()
     var masterListRef: DatabaseReference!
     lazy var vision = Vision.vision()
-    var textDetector: VisionTextDetector?
+    var textDetector : VisionTextDetector?
     @IBOutlet weak var tableView: UITableView!
 
     
@@ -139,9 +139,10 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            print("picked image")
             let image = VisionImage(image: pickedImage)
+            
             textDetector?.detect(in: image) { (features, error) in
                 guard error == nil, let features = features, !features.isEmpty else {
                     // Error. You should also check the console for error messages.
@@ -151,9 +152,31 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
                 
                 // Recognized and extracted text
                 print("Detected text has: \(features.count) blocks")
+                // ...
+                
+                
+                print("PARSING")
+                
+                for feature in features {
+                    let value = feature.text
+                    //let corners = feature.cornerPoints
+                    var i = 0
+                    
+                    for itm in self.listOfItems {
+                        
+                        if value.lowercased() == itm.name.lowercased() {
+                            print("\(value) removed")
+                            self.listOfItems.remove(at: i)
+                        }
+                        i = i+1
+                    }
+                    
+                    //print(value)
+                }
             }
         }
-        dismiss(animated: true, completion: nil)
+        
+        dismiss(animated:true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
