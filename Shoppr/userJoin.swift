@@ -14,7 +14,20 @@ class userJoin: UIViewController {
     @IBOutlet weak var groupName: UITextField!
     @IBOutlet weak var staticJoinButton: UIButton!
     @IBAction func joinButton(_ sender: UIButton) {
-       performSegue(withIdentifier: "userJoin", sender: self)
+        if (userName.text != "" || groupName.text != "") {
+            performSegue(withIdentifier: "userJoin", sender: self)
+            print("not nil")
+        }
+        else {
+            let alert = UIAlertController(title: "Empty fields", message: "Please enter a Name and a Group", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default) { (alert: UIAlertAction!) -> Void in
+                NSLog("User dismissed alert")
+            }
+            
+            alert.addAction(defaultAction)
+            
+            present(alert, animated: true, completion:nil)
+        }
     }
     
     override func viewDidLoad() {
@@ -61,7 +74,7 @@ class userJoin: UIViewController {
     */
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destVC = segue.destination as! MainTVC
+        //let destVC = segue.destination as! MainTVC
         CurrentUser.getUser().setName(newName: userName.text!)
         CurrentUser.getUser().setGroup(newGroup: groupName.text!)
     }
