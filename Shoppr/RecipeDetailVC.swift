@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class RecipeDetailVC: UIViewController {
     
@@ -22,6 +23,7 @@ class RecipeDetailVC: UIViewController {
     var itemList = [Item]()
     let blackColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
+    var masterListRef: DatabaseReference!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +50,9 @@ class RecipeDetailVC: UIViewController {
         saveButton.layer.cornerRadius = 5.0
         saveButton.clipsToBounds = true
         // Do any additional setup after loading the view.
+        
+        masterListRef = Database.database().reference().child(CurrentUser.getUser().getGroup())
+        fetchData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,6 +60,27 @@ class RecipeDetailVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func fetchData()
+    {
+        itemList.removeAll()
+        masterListRef?.queryOrdered(byChild: CurrentUser.getUser().getGroup()).observe(.value, with:
+            { snapshot in
+                var newList = [Item]()
+                
+                for item in snapshot.children {
+                    newList.append(Item(snapshot: item as! DataSnapshot))
+                }
+                
+                for itm in newList
+                {
+                    if (itm.owner == CurrentUser.getUser().getName())
+                    {
+                        self.itemList.append(itm)
+                    }
+                }
+                self.itemList = newList
+        })
+    }
     @IBAction func viewLinkPressed(_ sender: UIButton) {
         UIApplication.shared.open((selected?.url)!, options: [:], completionHandler: { (status) in })
     }
@@ -79,18 +105,12 @@ class RecipeDetailVC: UIViewController {
             let ing = indredientsList.text.components(separatedBy: "\n")
             let destinationVC = segue.destination as? PersonalTVC
             
-            print("in segue")
-            print(itemList.count)
-            for i in (destinationVC?.listOfItems)! {
-                print("checking list")
-                print(i.name)
-            }
             for i in ing {
                 let temp = Item(name: i, count: 1, price: 0, LPL: "N/A", LPP: 0, category: "N/A", key: i, owner: CurrentUser.getUser().getName())
-                if (destinationVC?.listOfItems.contains(temp))! {
+                if (itemList.contains(temp)) {
                     print("contains")
-                    destinationVC?.listOfItems[(destinationVC?.listOfItems.index(of: temp)!)!].count += 1
-                    print(destinationVC?.listOfItems[(destinationVC?.listOfItems.index(of: temp)!)!].count)
+                    itemList[(itemList.index(of: temp)!)].count += temp.count
+                    //print(destinationVC?.listOfItems[(destinationVC?.listOfItems.index(of: temp)!)!].count)
                 }
                 else
                 {
@@ -98,6 +118,7 @@ class RecipeDetailVC: UIViewController {
                     destinationVC?.listOfItems.append(temp)
                 }
             }
+            destinationVC?.listOfItems = itemList
         }
         else if(segue.identifier == "savedRecipesSegue") {
             let destinationVC = segue.destination as? RecipeResultVC

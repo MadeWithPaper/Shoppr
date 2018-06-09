@@ -76,7 +76,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     func fetchData() {
         listOfItems.removeAll()
         userItemList.removeAll()
-        masterListRef?.queryOrdered(byChild: "Master List").observe(.value, with:
+        masterListRef?.queryOrdered(byChild: CurrentUser.getUser().getGroup()).observe(.value, with:
             { snapshot in
                 var newList = [Item]()
                 
@@ -239,7 +239,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         let oldName = (listOfItems[srcVC.indexOfItem!.row]).name
         let itemOwner = srcVC.itemOwnerTF.text
         let itemName = srcVC.itemNameTF.text
-        let itemCount = srcVC.itemCountPV.selectedRow(inComponent: 0)
+        let itemCount = srcVC.itemCountPV.selectedRow(inComponent: 0)+1
         let itemPrice = srcVC.itemLastPriceTF.text!
         let itemLL = srcVC.itemLastLocTF.text
         let itemLP = srcVC.itemLastPriceTF.text!

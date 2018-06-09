@@ -12,10 +12,6 @@ import FirebaseDatabase
 
 class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate {
     
-    @IBAction func addItems(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "toAddVC", sender: Any?.self)
-    }
-    
     @IBOutlet weak var personalTV: UITableView!
     
     @IBOutlet weak var personalNaviBar: UINavigationBar!
@@ -152,11 +148,6 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 print("going to item detail view from personal")
             }
         }
-        else if (segue.identifier == "toAddVC")
-        {
-            let destVC = segue.destination as! AddVC
-            destVC.itemList = listOfItems
-        }
     }
     
     @IBAction func unwindFromDetailToPersonal(storyboard: UIStoryboardSegue){
@@ -168,20 +159,22 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         let oldName = (listOfItems[srcVC.indexOfItem!.row]).name
         let itemOwner = srcVC.itemOwnerTF.text
         let itemName = srcVC.itemNameTF.text
-        let itemCount = srcVC.itemCountPV.selectedRow(inComponent: 0)
+        let itemCount = srcVC.itemCountPV.selectedRow(inComponent: 0)+1
         let itemPrice = srcVC.itemLastPriceTF.text!
         let itemLL = srcVC.itemLastLocTF.text
         let itemLP = srcVC.itemLastPriceTF.text!
         let itemCate = srcVC.item?.category
         
         listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(itemPrice)!, LPL: itemLL!, LPP: Double(itemLP)!, category: itemCate!, key: itemName!, owner: itemOwner!))
+        
+        updateItem(item: listOfItems[srcVC.indexOfItem!.row], old: oldName)
     }
     
-    func updateData(item: Item, old: String) {
+    func updateItem(item: Item, old: String) {
         masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(old).removeValue()
         masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(item.name).setValue(item.toAnyObject())
         DispatchQueue.main.async(){
-            self.masterListTV.reloadData()
+            self.personalTV.reloadData()
         }
     }
 }
