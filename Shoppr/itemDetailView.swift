@@ -78,12 +78,21 @@ class itemDetailView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return String(row + 1)
     }
     
-    @IBAction func unwindfromDetail(sender: UIBarButtonItem) {
+    @IBAction func unwindfromDetailCancel(sender: UIBarButtonItem) {
         if parentVC == "MasterView" {
             self.performSegue(withIdentifier: "unwindFromDetailToMaster", sender: nil)
         }
         else if parentVC == "PersonalView" {
             self.performSegue(withIdentifier: "unwindFromDetailToPersonal", sender: nil)
+        }
+    }
+    
+    @IBAction func unwindFromDetailSave(_ sender: UIBarButtonItem) {
+        if parentVC == "MasterView" {
+            self.performSegue(withIdentifier: "unwindFromDetailToMasterSave", sender: nil)
+        }
+        else if parentVC == "PersonalView" {
+            self.performSegue(withIdentifier: "unwindFromDetailToPersonalSave", sender: nil)
         }
     }
     /*

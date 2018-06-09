@@ -19,7 +19,7 @@ class RecipeDetailVC: UIViewController {
     
     var selected: SRRecipe?
     var curUser: CurrentUser?
-    
+    var itemList = [Item]()
     let blackColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
 
@@ -78,8 +78,9 @@ class RecipeDetailVC: UIViewController {
         if(segue.identifier == "addIngredientsSegue"){
             let ing = indredientsList.text.components(separatedBy: "\n")
             let destinationVC = segue.destination as? PersonalTVC
+            
             print("in segue")
-            print(destinationVC?.listOfItems.count)
+            print(itemList.count)
             for i in (destinationVC?.listOfItems)! {
                 print("checking list")
                 print(i.name)

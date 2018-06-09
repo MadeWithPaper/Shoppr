@@ -12,6 +12,10 @@ import FirebaseDatabase
 
 class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate {
     
+    @IBAction func addItems(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "toAddVC", sender: Any?.self)
+    }
+    
     @IBOutlet weak var personalTV: UITableView!
     
     @IBOutlet weak var personalNaviBar: UINavigationBar!
@@ -19,8 +23,6 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     var savedReceipes = [SRRecipe?]()
     var itemSaved: Item?
     var masterListRef: DatabaseReference!
-    //var owner : String = ""
-    //var currUser : CurrentUser?
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     let whileColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     
@@ -30,8 +32,6 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         personalTV.backgroundColor = blueColor
         personalNaviBar.topItem?.title = "\(CurrentUser.getUser().getName())'s Inventory"
         
-        print("to personal")
-        print(listOfItems.count)
         //fetchData()
     }
     
@@ -91,6 +91,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             listOfItems.append(itemSaved!)
             personalTV.reloadData()
             updateData()
+            //CurrentUser.getUser().setInventory(newInventory: listOfItems)
         }
     }
     
@@ -99,6 +100,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if(editingStyle == UITableViewCellEditingStyle.delete) {
+            masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(listOfItems[indexPath.row].name).removeValue()
             listOfItems.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         }
@@ -117,7 +119,26 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 "Owner" : s.owner as String] as [String : Any]
             self.masterListRef.child(s.name).setValue(item)
         }
+        //CurrentUser.getUser().setInventory(newInventory: listOfItems)
     }
+    /*
+    func fetchData() {
+        listOfItems.removeAll()
+        masterListRef?.queryOrdered(byChild: CurrentUser.getUser().getGroup()).observe(.value, with:
+            { snapshot in
+                var newList = [Item]()
+                for item in snapshot.children {
+                    let newItem = Item(snapshot: item as! DataSnapshot)
+                    if (newItem.owner == CurrentUser.getUser().getName()) {
+                        newList.append(newItem)
+                    }
+                }
+                
+                self.listOfItems = newList
+                CurrentUser.getUser().setInventory(newInventory: newList)
+                self.personalTV.reloadData()
+        })
+    }*/
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "personalItemDetail") {
@@ -131,12 +152,38 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 print("going to item detail view from personal")
             }
         }
+        else if (segue.identifier == "toAddVC")
+        {
+            let destVC = segue.destination as! AddVC
+            destVC.itemList = listOfItems
+        }
     }
     
     @IBAction func unwindFromDetailToPersonal(storyboard: UIStoryboardSegue){
         
     }
     
+    @IBAction func unwindFromDetailToPersonalSave(storyboard: UIStoryboardSegue) {
+        let srcVC = storyboard.source as! itemDetailView
+        let oldName = (listOfItems[srcVC.indexOfItem!.row]).name
+        let itemOwner = srcVC.itemOwnerTF.text
+        let itemName = srcVC.itemNameTF.text
+        let itemCount = srcVC.itemCountPV.selectedRow(inComponent: 0)
+        let itemPrice = srcVC.itemLastPriceTF.text!
+        let itemLL = srcVC.itemLastLocTF.text
+        let itemLP = srcVC.itemLastPriceTF.text!
+        let itemCate = srcVC.item?.category
+        
+        listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(itemPrice)!, LPL: itemLL!, LPP: Double(itemLP)!, category: itemCate!, key: itemName!, owner: itemOwner!))
+    }
+    
+    func updateData(item: Item, old: String) {
+        masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(old).removeValue()
+        masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(item.name).setValue(item.toAnyObject())
+        DispatchQueue.main.async(){
+            self.masterListTV.reloadData()
+        }
+    }
 }
 
 

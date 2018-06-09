@@ -15,13 +15,12 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     @IBOutlet weak var masterListTV: UITableView!
     
     var listOfItems  = [Item]()
-    //var userList = [Item]()
+    var userItemList = [Item]()
     var masterListRef: DatabaseReference!
     lazy var vision = Vision.vision()
     var textDetector : VisionTextDetector?
     @IBOutlet weak var tableView: UITableView!
 
-    
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     let whileColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     
@@ -41,6 +40,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         //testingInit()
         
         fetchData()
+        
         //image scanning
         textDetector = vision.textDetector()
         
@@ -59,6 +59,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if(editingStyle == UITableViewCellEditingStyle.delete) {
+            masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(listOfItems[(indexPath.row)].name).removeValue()
             listOfItems.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         }
@@ -66,12 +67,15 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        masterListTV.reloadData()
+        DispatchQueue.main.async(){
+            self.masterListTV.reloadData()
+        }
     }
     
     //fetch for firebase data
     func fetchData() {
         listOfItems.removeAll()
+        userItemList.removeAll()
         masterListRef?.queryOrdered(byChild: "Master List").observe(.value, with:
             { snapshot in
                 var newList = [Item]()
@@ -80,23 +84,35 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
                     newList.append(Item(snapshot: item as! DataSnapshot))
                 }
                 
+                for itm in newList
+                {
+                    if (itm.owner == CurrentUser.getUser().getName())
+                    {
+                        self.userItemList.append(itm)
+                    }
+                }
                 self.listOfItems = newList
-                self.masterListTV.reloadData()
+            
+                DispatchQueue.main.async(){
+                     self.masterListTV.reloadData()
+                }
         })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "PersonalListSegue") {
             let destVC = segue.destination as! PersonalTVC
-            var userList = [Item]()
-            for i in listOfItems {
-                if i.owner == CurrentUser.getUser().getName() {
-                    userList.append(i)
+            destVC.masterListRef = masterListRef
+            destVC.listOfItems.removeAll()
+            userItemList.removeAll()
+            for itm in listOfItems
+            {
+                if (itm.owner == CurrentUser.getUser().getName())
+                {
+                    self.userItemList.append(itm)
                 }
             }
-            //destVC.currUser = curUser
-            destVC.listOfItems = userList
-            destVC.masterListRef = masterListRef
+            destVC.listOfItems = userItemList
             print("going to \(String(describing: CurrentUser.getUser().getName()))'s detail list view")
         }
         else if (segue.identifier == "masterItemDetail") {
@@ -188,8 +204,6 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Table view data source
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -219,8 +233,9 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     @IBAction func unwindFromDetailToMaster(storyboard: UIStoryboardSegue){
         
     }
-    @IBAction func unwindFromDetailToMasterSave(segue:UIStoryboardSegue) {
-        let srcVC = segue.source as! itemDetailView
+    
+    @IBAction func unwindFromDetailToMasterSave(storyboard: UIStoryboardSegue) {
+        let srcVC = storyboard.source as! itemDetailView
         let oldName = (listOfItems[srcVC.indexOfItem!.row]).name
         let itemOwner = srcVC.itemOwnerTF.text
         let itemName = srcVC.itemNameTF.text
@@ -238,38 +253,46 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     func updateData(item: Item, old: String) {
         masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(old).removeValue()
         masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(item.name).setValue(item.toAnyObject())
-        masterListTV.reloadData()
+        DispatchQueue.main.async(){
+            self.masterListTV.reloadData()
+        }
     }
     
     @IBAction func unwindFromPersonalToMaster(segue:UIStoryboardSegue){
+        var ind = 0
         let srcVC = segue.source as! PersonalTVC
-        
-        var newItems = [Item]()
-        for items in srcVC.listOfItems {
-            if (!listOfItems.contains(items)) {
-                listOfItems.append(items)
-                newItems.append(items)
+        /*for items in srcVC.listOfItems {
+            if (!self.listOfItems.contains(items)) {
+                self.listOfItems.append(items)
             }
-            else
-            {
-                print(listOfItems[listOfItems.index(of: items)!].count)
-                listOfItems[listOfItems.index(of: items)!].count += 1
-                print(listOfItems[listOfItems.index(of: items)!].count)
-            }
-        }
+            ind += 1
+        }*/
     
-        for itm in newItems {
-            let item = [
-                "Item Name" : itm.name as String,
-                "Count" : itm.count as Int,
-                "Price" : itm.price as Double,
-                "Last Purchased Location" : itm.lastPurchaseLocation as String,
-                "Last Purchased Price" : itm.lastPurchasePrice as Double,
-                "Category" : itm.category as String,
-                "Owner" : itm.owner as String] as [String : Any]
-            self.masterListRef.child(itm.name).setValue(item)
-        }
+        for itm in srcVC.listOfItems {
         
+            masterListRef.observeSingleEvent(of: .value, with: {(snapshot) in
+                //database contains this item, update values
+                if snapshot.hasChild(itm.name)
+                {
+                    print("contains item")
+                    self.masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(itm.name).setValue(itm.toAnyObject())
+                }
+                //database does not contain this item, adding to it
+                else
+                {
+                    print("adding new items")
+                    let item = [
+                        "Item Name" : itm.name as String,
+                        "Count" : itm.count as Int,
+                        "Price" : itm.price as Double,
+                        "Last Purchased Location" : itm.lastPurchaseLocation as String,
+                        "Last Purchased Price" : itm.lastPurchasePrice as Double,
+                        "Category" : itm.category as String,
+                        "Owner" : itm.owner as String] as [String : Any]
+                    self.masterListRef.child(itm.name).setValue(item)
+                }
+            })
+        }
         fetchData()
     }
     

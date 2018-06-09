@@ -14,13 +14,14 @@ class userJoin: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var groupName: UITextField!
     @IBOutlet weak var staticJoinButton: UIButton!
     @IBAction func joinButton(_ sender: UIButton) {
-        if (userName.text != "" || groupName.text != "") {
+        print("got here")
+        if (userName.text != "" && groupName.text != "" && groupName.text != "Recipe") {
             performSegue(withIdentifier: "userJoin", sender: self)
             print("not nil")
         }
         else
         {
-            let alert = UIAlertController(title: "Empty fields", message: "Please enter a Name and a Group", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Empty fields", message: "Please enter a Name and a Group, Note: Group name can not be Recipe", preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "OK", style: .default) { (alert: UIAlertAction!) -> Void in
                 NSLog("User dismissed alert")
         }
