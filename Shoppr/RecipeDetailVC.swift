@@ -104,7 +104,9 @@ class RecipeDetailVC: UIViewController {
             let destinationVC = segue.destination as? PersonalTVC
 
             for i in ing {
-                let temp = Item(name: i, count: 1, price: 0, /*LPL: "N/A",*/ LPP: 0, category: "N/A", key: i, owner: CurrentUser.getUser().getName(), store: "N/A")
+                let price = walmartAPICall(itemName: i)
+                sleep(3)
+                let temp = Item(name: i, count: 1, price: price, /*LPL: "N/A", LPP: 0,*/ category: "N/A", key: i, owner: CurrentUser.getUser().getName(), store: "N/A")
                 if (itemList.contains(temp)) {
                     print("contains")
                     itemList[(itemList.index(of: temp)!)].count += temp.count
@@ -139,7 +141,7 @@ class RecipeDetailVC: UIViewController {
                 "Count" : s.count as Int,
                 "Price" : s.price as Double,
                 "Last Purchased Location" : s.store as String,
-                "Last Purchased Price" : s.lastPurchasePrice as Double,
+                //"Last Purchased Price" : s.lastPurchasePrice as Double,
                 "Category" : s.category as String,
                 "Owner" : s.owner as String] as [String : Any]
             self.masterListRef.child(s.name).setValue(item)

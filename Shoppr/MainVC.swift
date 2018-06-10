@@ -23,7 +23,8 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     @IBOutlet weak var totalCostText: UITextField?
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     let whileColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
-    
+    let blackColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
+
     @IBAction func personalListButtonPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "PersonalListSegue", sender: self)
     }
@@ -146,7 +147,12 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         cell.itemNameLabel.text = object.name
         cell.itemCountLabel.text = " X\(object.count)"
         cell.itemPriceLabel.text = "$\(object.price)"
-        cell.lastLocAndPriceLabel.text = "Last purchased at \(object.store) for $\(object.lastPurchasePrice)"
+        cell.lastLocAndPriceLabel.text = "Store: \(object.store)"
+        
+        cell.layer.masksToBounds = true
+        cell.layer.borderWidth = 0.3
+        cell.layer.shadowOffset = CGSize(width: -1, height: 1)
+        cell.layer.borderColor = whileColor.cgColor
         
         return cell
     }
@@ -168,12 +174,12 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
             
             let value = feature.text
             print("VALUE: \(value)")
-            let corners = feature.cornerPoints
+            //let corners = feature.cornerPoints
             var i = 0
             
             for itm in self.listOfItems {
                 
-                if value.lowercased() == itm.name.lowercased() {
+                if  itm.name.contains(value.lowercased()){
                     masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(itm.name).removeValue()
                     print("\(value) removed")
                     self.listOfItems.remove(at: i)
@@ -196,7 +202,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         //let itemLP = srcVC.itemLastPriceTF.text!
         let itemCate = srcVC.item?.category
         let itemStore = srcVC.itemStoreTF.text!
-        listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(srcVC.itemPriceTF.text!)!, /*LPL: itemLL!,*/ LPP: Double(srcVC.itemLastPriceTF.text!)!, category: itemCate!, key: itemName!, owner: itemOwner!, store: itemStore))
+        listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(srcVC.itemPriceTF.text!)!, /*LPL: itemLL!, LPP: Double(srcVC.itemLastPriceTF.text!)!,*/ category: itemCate!, key: itemName!, owner: itemOwner!, store: itemStore))
         
         updateData(item: listOfItems[srcVC.indexOfItem!.row], old: oldName)
     }
@@ -237,7 +243,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
                         "Count" : itm.count as Int,
                         "Price" : itm.price as Double,
                         "Store" : itm.store as String,
-                        "Last Purchased Price" : itm.lastPurchasePrice as Double,
+                        //"Last Purchased Price" : itm.lastPurchasePrice as Double,
                         "Category" : itm.category as String,
                         "Owner" : itm.owner as String] as [String : Any]
                     self.masterListRef.child(itm.name).setValue(item)
