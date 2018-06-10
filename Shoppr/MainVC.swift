@@ -196,7 +196,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         //let itemLP = srcVC.itemLastPriceTF.text!
         let itemCate = srcVC.item?.category
         let itemStore = srcVC.itemStoreTF.text!
-        listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(srcVC.itemPriceTF.text!)!, /*LPL: itemLL!,*/ LPP: Double(srcVC.itemLastPriceTF.text!)!, category: itemCate!, key: itemName!, owner: itemOwner!, store: itemStore))
+        listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(srcVC.itemPriceTF.text!)!, /*LPL: itemLL!,*/ LPP: Double(srcVC.itemPriceTF.text!)!, category: itemCate!, key: itemName!, owner: itemOwner!, store: itemStore))
         
         updateData(item: listOfItems[srcVC.indexOfItem!.row], old: oldName)
     }

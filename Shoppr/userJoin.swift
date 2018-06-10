@@ -85,13 +85,13 @@ class userJoin: UIViewController, UITextFieldDelegate {
         return false
     }
     
-    func checkName(s: String) -> Bool{
+    static func checkName(s: String) -> Bool{
         return s.contains("$") || s.contains("[") || s.contains("]") || s.contains("#") || s.contains(".")
     }
     
     func signInCheck()
     {
-        if (userName.text != "" && groupName.text != "" && !checkName(s: groupName.text!)) {
+        if (userName.text != "" && groupName.text != "" && !userJoin.checkName(s: groupName.text!)) {
             
             print("Group: \(groupName.text)")
             

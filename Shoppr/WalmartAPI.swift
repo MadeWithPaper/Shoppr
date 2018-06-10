@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 func walmartAPICall(itemName: String) -> Double {
     //try to look up 50285046

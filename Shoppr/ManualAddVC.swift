@@ -20,6 +20,7 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     @IBOutlet weak var staticSaveButton : UIButton!
     @IBOutlet weak var staticCancelButton: UIButton!
     @IBOutlet weak var itemStoreTextField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     let blackColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
@@ -30,6 +31,9 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = true
+        
         masterListRef = Database.database().reference().child(CurrentUser.getUser().getGroup())
         fetchData()
         
@@ -165,23 +169,19 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
             var am = Double(amount) // for instance
             
             if(priceTextField.text?.isEmpty)! {
-                print("----------------------------------------------------------------------------------------------")
-                am = walmartAPICall(itemName: nameTextField.text!)
-                sleep(3)
+                    
+                am = walmartAPICall(itemName: self.nameTextField.text!)
             }
             
             // Now you can use amount anywhere but if it's nil, it will return.
            
             
             let destinationVC = segue.destination as? PersonalTVC
-            
-            print("BEFORE DSFJSLDFJSDKLJSDLFJSDLKFJSDLJFSKLDJFLSKJFLKDSJFSKLDFJSDLKFJSDKL ")
 
             saved = Item(name: nameTextField.text!, count: countPicker.selectedRow(inComponent: 0) + 1, price: am!, /*LPL: purchaseLocationTextField.text!,*/ LPP: 0.0, category: "test", key: nameTextField.text!, owner: CurrentUser.getUser().getName(), store: itemStoreTextField.text!)
             if (itemList.contains(saved)) {
                 print("contains")
                 itemList[(itemList.index(of: saved)!)].count += saved.count
-                //print(destinationVC?.listOfItems[(destinationVC?.listOfItems.index(of: temp)!)!].count)
             }
             else
             {
