@@ -46,9 +46,23 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         staticCancelButton.layer.cornerRadius = 5.0
         staticCancelButton.clipsToBounds = true
         
+        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+        nameTextField.delegate = self
+        nameTextField.tag = 0
+        priceTextField.delegate = self
+        priceTextField.tag = 1
+        purchaseLocationTextField.delegate = self
+        purchaseLocationTextField.tag = 2
+        
         // Do any additional setup after loading the view.
         masterListRef = Database.database().reference().child(CurrentUser.getUser().getGroup())
         fetchData()
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     func fetchData()
@@ -85,14 +99,53 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
       return String(row + 1)
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    //Move keyobard when edit starts
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField != nameTextField
+        {
+            moveTextField(textField, moveDistance: -200, up: true)
+        }
+    }
+    
+    // Finish Editing The Text Field
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField != nameTextField
+        {
+            moveTextField(textField, moveDistance: -200, up: false)
+        }
+    }
+    
+    // Hide the keyboard when the return key pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            // Not found, so remove keyboard.
+            textField.resignFirstResponder()
+            if textField == purchaseLocationTextField
+            {
+                dismissKeyboard()
+            }
+        }
+        // Do not add a line break
+        return false
+    }
+    
+    // Move the text field in a pretty animation!
+    func moveTextField(_ textField: UITextField, moveDistance: Int, up: Bool) {
+        let moveDuration = 0.3
+        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
+        
+        UIView.beginAnimations("animateTextField", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(moveDuration)
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
