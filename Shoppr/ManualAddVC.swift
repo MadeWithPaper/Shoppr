@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -21,10 +22,17 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     @IBOutlet weak var staticCancelButton: UIButton!
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     let blackColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
+    var itemList = [Item]()
+    var masterListRef: DatabaseReference!
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        masterListRef = Database.database().reference().child(CurrentUser.getUser().getGroup())
+        fetchData()
+        
+        print("inside manual add viewdidload \(CurrentUser.getUser().getName())")
         self.view.backgroundColor = blueColor
         
         self.countPicker.dataSource = self
@@ -42,7 +50,42 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         staticCancelButton.layer.cornerRadius = 5.0
         staticCancelButton.clipsToBounds = true
         
-        // Do any additional setup after loading the view.
+        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+        nameTextField.delegate = self
+        nameTextField.tag = 0
+        priceTextField.delegate = self
+        priceTextField.tag = 1
+        purchaseLocationTextField.delegate = self
+        purchaseLocationTextField.tag = 2
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    func fetchData()
+    {
+        itemList.removeAll()
+        masterListRef?.queryOrdered(byChild: CurrentUser.getUser().getGroup()).observe(.value, with:
+            { snapshot in
+                var newList = [Item]()
+                
+                for item in snapshot.children {
+                    newList.append(Item(snapshot: item as! DataSnapshot))
+                }
+                
+                for itm in newList
+                {
+                    print(itm.name)
+                    if (itm.owner == CurrentUser.getUser().getName())
+                    {
+                        self.itemList.append(itm)
+                    }
+                }
+                //self.itemList = newList
+        })
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -57,14 +100,53 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
       return String(row + 1)
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    //Move keyobard when edit starts
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField != nameTextField
+        {
+            moveTextField(textField, moveDistance: -200, up: true)
+        }
+    }
+    
+    // Finish Editing The Text Field
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField != nameTextField
+        {
+            moveTextField(textField, moveDistance: -200, up: false)
+        }
+    }
+    
+    // Hide the keyboard when the return key pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            // Not found, so remove keyboard.
+            textField.resignFirstResponder()
+            if textField == purchaseLocationTextField
+            {
+                dismissKeyboard()
+            }
+        }
+        // Do not add a line break
+        return false
+    }
+    
+    // Move the text field in a pretty animation!
+    func moveTextField(_ textField: UITextField, moveDistance: Int, up: Bool) {
+        let moveDuration = 0.3
+        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
+        
+        UIView.beginAnimations("animateTextField", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(moveDuration)
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -76,19 +158,37 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
             
             guard let amount = priceTextField.text else { return }
             
-            //let cur = 
+            var am = Double(amount) // for instance
+            
+            if(priceTextField.text?.isEmpty)! {
+                print("----------------------------------------------------------------------------------------------")
+                am = walmartAPICall(itemName: nameTextField.text!)
+                sleep(3)
+            }
             
             // Now you can use amount anywhere but if it's nil, it will return.
-            let am = Double(amount) // for instance
-            
-            saved = Item(name: nameTextField.text!, count: countPicker.selectedRow(inComponent: 0) + 1, price: am!, LPL: purchaseLocationTextField.text!, LPP: 0.0, category: "test", key: nameTextField.text!, owner: "Gaston")
+           
             
             let destinationVC = segue.destination as? PersonalTVC
             
-            print(saved)
+            print("BEFORE DSFJSLDFJSDKLJSDLFJSDLKFJSDLJFSKLDJFLSKJFLKDSJFSKLDFJSDLKFJSDKL ")
             
-            destinationVC?.itemSaved = saved
+            saved = Item(name: nameTextField.text!, count: countPicker.selectedRow(inComponent: 0) + 1, price: am!, LPL: purchaseLocationTextField.text!, LPP: 0.0, category: "test", key: nameTextField.text!, owner: CurrentUser.getUser().getName())
+            if (itemList.contains(saved)) {
+                print("contains")
+                itemList[(itemList.index(of: saved)!)].count += saved.count
+                //print(destinationVC?.listOfItems[(destinationVC?.listOfItems.index(of: temp)!)!].count)
+            }
+            else
+            {
+                print("adding")
+                itemList.append(saved)
+            }
             
+            destinationVC?.listOfItems = itemList
+            //destinationVC?.personalTV.reloadData()
         }
     }
 }
+
+//tomato 1 0.0 N/A

@@ -8,9 +8,9 @@
 		<true/>
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>YES</string>
+	<string>Text image parsing</string>
 	<key>NSCameraUsageDescription</key>
-	<string>YES</string>
+	<string>Text image parsing</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

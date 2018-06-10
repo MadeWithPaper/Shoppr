@@ -13,15 +13,14 @@ import GoogleMobileVision
 
 class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var masterListTV: UITableView!
-    
+    var parsed = [VisionText]()
     var listOfItems  = [Item]()
-    //var userList = [Item]()
+    var userItemList = [Item]()
     var masterListRef: DatabaseReference!
     lazy var vision = Vision.vision()
     var textDetector : VisionTextDetector?
     @IBOutlet weak var tableView: UITableView!
 
-    
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     let whileColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     
@@ -37,20 +36,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         //Firebase database reference
         masterListRef = Database.database().reference().child(CurrentUser.getUser().getGroup())
         
-        //testing function
-        //testingInit()
-        
         fetchData()
-        //image scanning
-        textDetector = vision.textDetector()
-        
-        let camera = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(takePhoto))
-        navigationItem.leftBarButtonItem = camera
-        
-        // Defining a SwipeLeft Gesture
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler(_:)))
-        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
-        self.view.addGestureRecognizer(swipeLeft)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -59,6 +45,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if(editingStyle == UITableViewCellEditingStyle.delete) {
+            masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(listOfItems[(indexPath.row)].name).removeValue()
             listOfItems.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         }
@@ -66,13 +53,16 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        masterListTV.reloadData()
+        DispatchQueue.main.async(){
+            self.masterListTV.reloadData()
+        }
     }
     
     //fetch for firebase data
     func fetchData() {
         listOfItems.removeAll()
-        masterListRef?.queryOrdered(byChild: "Master List").observe(.value, with:
+        userItemList.removeAll()
+        masterListRef?.queryOrdered(byChild: CurrentUser.getUser().getGroup()).observe(.value, with:
             { snapshot in
                 var newList = [Item]()
                 
@@ -80,23 +70,37 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
                     newList.append(Item(snapshot: item as! DataSnapshot))
                 }
                 
+                for itm in newList
+                {
+                    if (itm.owner == CurrentUser.getUser().getName())
+                    {
+                        print(CurrentUser.getUser().getName())
+                        print(itm.owner)
+                        self.userItemList.append(itm)
+                    }
+                }
                 self.listOfItems = newList
-                self.masterListTV.reloadData()
+            
+                DispatchQueue.main.async(){
+                     self.masterListTV.reloadData()
+                }
         })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "PersonalListSegue") {
             let destVC = segue.destination as! PersonalTVC
-            var userList = [Item]()
-            for i in listOfItems {
-                if i.owner == CurrentUser.getUser().getName() {
-                    userList.append(i)
+            destVC.masterListRef = masterListRef
+            destVC.listOfItems.removeAll()
+            userItemList.removeAll()
+            for itm in listOfItems
+            {
+                if (itm.owner == CurrentUser.getUser().getName())
+                {
+                    self.userItemList.append(itm)
                 }
             }
-            //destVC.currUser = curUser
-            destVC.listOfItems = userList
-            destVC.masterListRef = masterListRef
+            destVC.listOfItems = userItemList
             print("going to \(String(describing: CurrentUser.getUser().getName()))'s detail list view")
         }
         else if (segue.identifier == "masterItemDetail") {
@@ -117,78 +121,10 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         return 60;
     }
     
-    @IBAction func swipeHandler(_ gestureRecognizer : UISwipeGestureRecognizer) {
-//
-//        switch gestureRecognizer.direction {
-//        case UISwipeGestureRecognizerDirection.left:
-//            print("Swipped Left")
-//            performSegue(withIdentifier: "PersonalListSegue", sender: self)
-//        default:
-//            print("Default")
-//        }
-    }
-    
-    @IBAction func takePhoto() {
-        
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        // default to photo library if camera unavailable
-        picker.sourceType = UIImagePickerController.isSourceTypeAvailable(.camera) ? .camera : .photoLibrary
-        
-        present(picker, animated: true, completion:nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            let image = VisionImage(image: pickedImage)
-            
-            textDetector?.detect(in: image) { (features, error) in
-                guard error == nil, let features = features, !features.isEmpty else {
-                    // Error. You should also check the console for error messages.
-                    // ...
-                    return
-                }
-                
-                // Recognized and extracted text
-                print("Detected text has: \(features.count) blocks")
-                // ...
-                
-                
-                print("PARSING")
-                
-                for feature in features {
-                    let value = feature.text
-                    //let corners = feature.cornerPoints
-                    var i = 0
-                    
-                    for itm in self.listOfItems {
-                        
-                        if value.lowercased() == itm.name.lowercased() {
-                            print("\(value) removed")
-                            self.listOfItems.remove(at: i)
-                        }
-                        i = i+1
-                    }
-                    
-                    //print(value)
-                }
-            }
-        }
-        
-        dismiss(animated:true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    // MARK: - Table view data source
     
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -219,12 +155,39 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     @IBAction func unwindFromDetailToMaster(storyboard: UIStoryboardSegue){
         
     }
-    @IBAction func unwindFromDetailToMasterSave(segue:UIStoryboardSegue) {
-        let srcVC = segue.source as! itemDetailView
+    
+    @IBAction func unwindFromCameraToMaster(segue: UIStoryboardSegue){
+        // TODO
+        
+        print("IN UNWIND")
+        
+        for feature in self.parsed {
+            
+            let value = feature.text
+            print("VALUE: \(value)")
+            let corners = feature.cornerPoints
+            var i = 0
+            
+            for itm in self.listOfItems {
+                
+                if value.lowercased() == itm.name.lowercased() {
+                    masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(itm.name).removeValue()
+                    print("\(value) removed")
+                    self.listOfItems.remove(at: i)
+                }
+                i = i+1
+            }
+            
+            //print(value)
+        }
+    }
+    
+    @IBAction func unwindFromDetailToMasterSave(storyboard: UIStoryboardSegue) {
+        let srcVC = storyboard.source as! itemDetailView
         let oldName = (listOfItems[srcVC.indexOfItem!.row]).name
         let itemOwner = srcVC.itemOwnerTF.text
         let itemName = srcVC.itemNameTF.text
-        let itemCount = srcVC.itemCountPV.selectedRow(inComponent: 0)
+        let itemCount = srcVC.itemCountPV.selectedRow(inComponent: 0)+1
         let itemPrice = srcVC.itemLastPriceTF.text!
         let itemLL = srcVC.itemLastLocTF.text
         let itemLP = srcVC.itemLastPriceTF.text!
@@ -238,38 +201,46 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     func updateData(item: Item, old: String) {
         masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(old).removeValue()
         masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(item.name).setValue(item.toAnyObject())
-        masterListTV.reloadData()
+        DispatchQueue.main.async(){
+            self.masterListTV.reloadData()
+        }
     }
     
     @IBAction func unwindFromPersonalToMaster(segue:UIStoryboardSegue){
+        //var ind = 0
         let srcVC = segue.source as! PersonalTVC
-        
-        var newItems = [Item]()
-        for items in srcVC.listOfItems {
-            if (!listOfItems.contains(items)) {
-                listOfItems.append(items)
-                newItems.append(items)
+        /*for items in srcVC.listOfItems {
+            if (!self.listOfItems.contains(items)) {
+                self.listOfItems.append(items)
             }
-            else
-            {
-                print(listOfItems[listOfItems.index(of: items)!].count)
-                listOfItems[listOfItems.index(of: items)!].count += 1
-                print(listOfItems[listOfItems.index(of: items)!].count)
-            }
-        }
+            ind += 1
+        }*/
     
-        for itm in newItems {
-            let item = [
-                "Item Name" : itm.name as String,
-                "Count" : itm.count as Int,
-                "Price" : itm.price as Double,
-                "Last Purchased Location" : itm.lastPurchaseLocation as String,
-                "Last Purchased Price" : itm.lastPurchasePrice as Double,
-                "Category" : itm.category as String,
-                "Owner" : itm.owner as String] as [String : Any]
-            self.masterListRef.child(itm.name).setValue(item)
-        }
+        for itm in srcVC.listOfItems {
         
+            masterListRef.observeSingleEvent(of: .value, with: {(snapshot) in
+                //database contains this item, update values
+                if snapshot.hasChild(itm.name)
+                {
+                    print("contains item")
+                    self.masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(itm.name).setValue(itm.toAnyObject())
+                }
+                //database does not contain this item, adding to it
+                else
+                {
+                    print("adding new items")
+                    let item = [
+                        "Item Name" : itm.name as String,
+                        "Count" : itm.count as Int,
+                        "Price" : itm.price as Double,
+                        "Last Purchased Location" : itm.lastPurchaseLocation as String,
+                        "Last Purchased Price" : itm.lastPurchasePrice as Double,
+                        "Category" : itm.category as String,
+                        "Owner" : itm.owner as String] as [String : Any]
+                    self.masterListRef.child(itm.name).setValue(item)
+                }
+            })
+        }
         fetchData()
     }
     

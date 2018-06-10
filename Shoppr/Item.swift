@@ -89,6 +89,18 @@ class Item : NSObject{
             "Owner" : owner
         ]
     }
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        if let object = object as? Item
+        {
+            return name == object.name &&
+                    owner == object.owner
+        }
+        else
+        {
+            return false
+        }
+    }
 }
 
 

@@ -48,7 +48,16 @@ class itemDetailView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        //self.itemLastLocTF.delegate = self
+        itemOwnerTF.delegate = self
+        itemOwnerTF.tag = 0
+        itemNameTF.delegate = self
+        itemNameTF.tag = 1
+        itemPriceTF.delegate = self
+        itemPriceTF.tag = 2
+        itemLastLocTF.delegate = self
+        itemLastLocTF.tag = 3
+        itemLastPriceTF.delegate = self
+        itemLastPriceTF.tag = 4
     }
     
     @objc func dismissKeyboard() {
@@ -58,12 +67,6 @@ class itemDetailView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    //TODO dismiss keyboard as needed
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -78,7 +81,7 @@ class itemDetailView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return String(row + 1)
     }
     
-    @IBAction func unwindfromDetail(sender: UIBarButtonItem) {
+    @IBAction func unwindfromDetailCancel(sender: UIBarButtonItem) {
         if parentVC == "MasterView" {
             self.performSegue(withIdentifier: "unwindFromDetailToMaster", sender: nil)
         }
@@ -86,55 +89,58 @@ class itemDetailView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             self.performSegue(withIdentifier: "unwindFromDetailToPersonal", sender: nil)
         }
     }
-    /*
-    //trying to do scroll view so text fields are not covered by keyboard
-    func registerForKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    
+    @IBAction func unwindFromDetailSave(_ sender: UIBarButtonItem) {
+        if parentVC == "MasterView" {
+            self.performSegue(withIdentifier: "unwindFromDetailToMasterSave", sender: nil)
+        }
+        else if parentVC == "PersonalView" {
+            self.performSegue(withIdentifier: "unwindFromDetailToPersonalSave", sender: nil)
+        }
     }
     
-    func deregisterFromKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    //Move keyobard when edit starts
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField != itemNameTF && textField != itemOwnerTF
+        {
+            moveTextField(textField, moveDistance: -150, up: true)
+        }
     }
     
-    @objc func keyboardWasShown(notification: NSNotification) {
-        scrollView?.isScrollEnabled = true
-        var info = notification.userInfo!
-        if let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size {
-            let contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
-            
-            scrollView?.contentInset = contentInsets
-            scrollView?.scrollIndicatorInsets = contentInsets
-            
-            var aRect: CGRect = self.view.frame
-            aRect.size.height -= keyboardSize.height
-            if let activeField = self.activeField {
-                if !aRect.contains(activeField.frame.origin) {
-                    self.scrollView.scrollRectToVisible(activeField.frame, animated: true)
-                }
+    // Finish Editing The Text Field
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField != itemNameTF && textField != itemOwnerTF
+        {
+            moveTextField(textField, moveDistance: -150, up: false)
+        }
+    }
+    
+    // Hide the keyboard when the return key pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+        } else {
+            // Not found, so remove keyboard.
+            textField.resignFirstResponder()
+            if textField == itemLastPriceTF
+            {
+                dismissKeyboard()
             }
         }
+        // Do not add a line break
+        return false
     }
     
-    @objc func keyboardWillBeHidden(notification: NSNotification) {
-        var info = notification.userInfo!
-        if let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue.size {
-            let contentInsets: UIEdgeInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: -keyboardSize.height, right: 0.0)
-            scrollView?.contentInset = contentInsets
-            scrollView?.scrollIndicatorInsets = contentInsets
-        }
+    // Move the text field in a pretty animation!
+    func moveTextField(_ textField: UITextField, moveDistance: Int, up: Bool) {
+        let moveDuration = 0.3
+        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
         
-        view.endEditing(true)
-        scrollView?.isScrollEnabled = false
+        UIView.beginAnimations("animateTextField", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(moveDuration)
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
     }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField){
-        itemLastLocTF = textField
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField){
-        itemLastLocTF = nil
-    }*/
     
 }

@@ -13,7 +13,7 @@ class AddVC: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var recipeView: UIView!
     @IBOutlet weak var manualView: UIView!
-    
+    var itemList = [Item]()
     // The segmented controller data has changed
     @IBAction func updatedView(_ sender: UISegmentedControl) {
         
