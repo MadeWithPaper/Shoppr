@@ -18,6 +18,7 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     var recipesRef: DatabaseReference!
     var curUsr : CurrentUser?
     var saved : Bool = true
+    var fromPersonal : Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -122,6 +123,23 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
 
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        if fromPersonal {
+            return .delete
+        }
+        
+        return .none
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if(editingStyle == UITableViewCellEditingStyle.delete && fromPersonal) {
+            recipesRef.database.reference().child("Recipe").child(recipes[indexPath.row].title).removeValue()
+            //masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(listOfItems[(indexPath.row)].name).removeValue()
+            //listOfItems.remove(at: indexPath.row)
+            recipes.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+        }
+    }
     /*
     // MARK: - Navigation
 

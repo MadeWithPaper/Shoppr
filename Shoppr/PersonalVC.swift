@@ -154,6 +154,11 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 print("going to item detail view from personal")
             }
         }
+        else if (segue.identifier == "savedRecipesSegue")
+        {
+            let destVC = segue.destination as! RecipeResultVC
+            destVC.fromPersonal = true
+        }
     }
     
     @IBAction func unwindFromDetailToPersonal(storyboard: UIStoryboardSegue){

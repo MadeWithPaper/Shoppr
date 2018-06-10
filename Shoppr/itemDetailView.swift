@@ -14,7 +14,6 @@ class itemDetailView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var itemCountPV: UIPickerView!
     @IBOutlet weak var itemPriceTF: UITextField!
     @IBOutlet weak var itemStoreTF: UITextField!
-    @IBOutlet weak var itemLastPriceTF: UITextField!
     @IBOutlet weak var totalCost: UILabel!
     @IBOutlet weak var itemOwnerTF: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -40,7 +39,6 @@ class itemDetailView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         }
         itemNameTF.text = "\(String(describing: item!.name))"
         itemStoreTF.text = "\(String(describing: item!.store))"
-        itemLastPriceTF.text = "\(item!.lastPurchasePrice)"
         totalCost.text = "Total cost for this item: \(cost)"
         itemPriceTF.text = "\(String(describing: item!.price))"
         itemCountPV.selectRow(((item?.count)!-1), inComponent: 0, animated: true)
@@ -57,8 +55,6 @@ class itemDetailView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         itemPriceTF.tag = 2
         itemStoreTF.delegate = self
         itemStoreTF.tag = 3
-        itemLastPriceTF.delegate = self
-        itemLastPriceTF.tag = 4
     }
     
     @objc func dismissKeyboard() {
@@ -123,7 +119,7 @@ class itemDetailView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         } else {
             // Not found, so remove keyboard.
             textField.resignFirstResponder()
-            if textField == itemLastPriceTF
+            if textField == itemStoreTF
             {
                 dismissKeyboard()
             }
