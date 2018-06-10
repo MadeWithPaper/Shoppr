@@ -20,7 +20,7 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     @IBOutlet weak var staticSaveButton : UIButton!
     @IBOutlet weak var staticCancelButton: UIButton!
     @IBOutlet weak var itemStoreTextField: UITextField!
-
+    
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     let blackColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
     var itemList = [Item]()
@@ -29,7 +29,7 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         masterListRef = Database.database().reference().child(CurrentUser.getUser().getGroup())
         fetchData()
         
@@ -157,6 +157,7 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         var saved: Item
         
         if(segue.identifier == "saveUnwind") {
+            
             print("I need to pass the data back")
             
             guard let amount = priceTextField.text else { return }

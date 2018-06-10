@@ -85,15 +85,25 @@ class userJoin: UIViewController, UITextFieldDelegate {
         return false
     }
     
+    func checkName(s: String) -> Bool{
+        return s.contains("$") || s.contains("[") || s.contains("]") || s.contains("#") || s.contains(".")
+    }
+    
     func signInCheck()
     {
-        if (userName.text != "" && groupName.text != "" && groupName.text != "Recipe") {
+        if (userName.text != "" && groupName.text != "" && !checkName(s: groupName.text!)) {
+            
+            print("Group: \(groupName.text)")
+            
+            if(groupName.text == "Recipe") {
+                groupName.text = "_Recipe"
+            }
             performSegue(withIdentifier: "userJoin", sender: self)
             print("not nil")
         }
         else
         {
-            let alert = UIAlertController(title: "Empty fields", message: "Please enter a Name and a Group, Note: Group name can not be Recipe", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Empty fields", message: "Please enter a Name and a Group. Notes: Group Name cannot contain \'#\', \'$\', \'[\', \']\', or \'.\'",  preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "OK", style: .default) { (alert: UIAlertAction!) -> Void in
                 NSLog("User dismissed alert")
             }
