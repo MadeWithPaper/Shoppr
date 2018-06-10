@@ -44,7 +44,11 @@
 		819A7AA6DAE2340428C5C73D /* Pods-Shoppr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoppr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Shoppr/Pods-Shoppr.debug.xcconfig"; sourceTree = "<group>"; };
 		896F7D066ED6DCAF97F73FBA /* Pods-Shoppr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoppr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shoppr/Pods-Shoppr.release.xcconfig"; sourceTree = "<group>"; };
 		8D13881110DD0803DDC5CFDC /* Pods_Shoppr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shoppr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+<<<<<<< HEAD
 		CB635CAE20CCB35B00809445 /* WalmartItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalmartItem.swift; sourceTree = "<group>"; };
+=======
+		CB635CAE20CCB35B00809445 /* WalmartItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WalmartItem.swift; path = "../../Walmart API/Walmart API/WalmartItem.swift"; sourceTree = "<group>"; };
+>>>>>>> 904284a47adf183c6c201469b2c56f3e13bc8950
 		CB635CB020CCB46B00809445 /* ItemService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemService.swift; sourceTree = "<group>"; };
 		CB635CB220CCB4C200809445 /* WalmartAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalmartAPI.swift; sourceTree = "<group>"; };
 		CB6F3FDC20BB6A41006EEBB1 /* recipePuppy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recipePuppy.png; sourceTree = "<group>"; };

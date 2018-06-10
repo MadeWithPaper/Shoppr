@@ -78,7 +78,11 @@ class RecipeDetailVC: UIViewController {
                         self.itemList.append(itm)
                     }
                 }
+<<<<<<< HEAD
                 //self.itemList = newList
+=======
+                self.itemList = newList
+>>>>>>> 904284a47adf183c6c201469b2c56f3e13bc8950
         })
     }
     @IBAction func viewLinkPressed(_ sender: UIButton) {
@@ -103,7 +107,11 @@ class RecipeDetailVC: UIViewController {
         if(segue.identifier == "addIngredientsSegue"){
             let ing = indredientsList.text.components(separatedBy: "\n")
             let destinationVC = segue.destination as? PersonalTVC
+<<<<<<< HEAD
             print("got here to add")
+=======
+            
+>>>>>>> 904284a47adf183c6c201469b2c56f3e13bc8950
             for i in ing {
                 let temp = Item(name: i, count: 1, price: 0, LPL: "N/A", LPP: 0, category: "N/A", key: i, owner: CurrentUser.getUser().getName())
                 if (itemList.contains(temp)) {
@@ -118,8 +126,11 @@ class RecipeDetailVC: UIViewController {
                 }
             }
             destinationVC?.listOfItems = itemList
+<<<<<<< HEAD
             
             updateData()
+=======
+>>>>>>> 904284a47adf183c6c201469b2c56f3e13bc8950
         }
         else if(segue.identifier == "savedRecipesSegue") {
             let destinationVC = segue.destination as? RecipeResultVC

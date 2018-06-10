@@ -74,8 +74,6 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
                 {
                     if (itm.owner == CurrentUser.getUser().getName())
                     {
-                        print(CurrentUser.getUser().getName())
-                        print(itm.owner)
                         self.userItemList.append(itm)
                     }
                 }
@@ -207,7 +205,6 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     }
     
     @IBAction func unwindFromPersonalToMaster(segue:UIStoryboardSegue){
-        //var ind = 0
         let srcVC = segue.source as! PersonalTVC
         /*for items in srcVC.listOfItems {
             if (!self.listOfItems.contains(items)) {
