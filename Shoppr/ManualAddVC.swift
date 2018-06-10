@@ -17,7 +17,6 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var countPicker: UIPickerView!
     @IBOutlet weak var priceTextField: UITextField!
-    @IBOutlet weak var purchaseLocationTextField: UITextField!
     @IBOutlet weak var staticSaveButton : UIButton!
     @IBOutlet weak var staticCancelButton: UIButton!
     @IBOutlet weak var itemStoreTextField: UITextField!
@@ -52,6 +51,10 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         staticCancelButton.layer.cornerRadius = 5.0
         staticCancelButton.clipsToBounds = true
         
+        countPicker.layer.borderWidth = 1.0
+        countPicker.layer.borderColor = blackColor.cgColor
+        countPicker.layer.cornerRadius = 5.0
+        countPicker.clipsToBounds = true
         let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
@@ -61,8 +64,6 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         itemStoreTextField.tag = 1
         priceTextField.delegate = self
         priceTextField.tag = 2
-        purchaseLocationTextField.delegate = self
-        purchaseLocationTextField.tag = 3
     }
     
     @objc func dismissKeyboard() {
@@ -130,7 +131,7 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         } else {
             // Not found, so remove keyboard.
             textField.resignFirstResponder()
-            if textField == purchaseLocationTextField
+            if textField == priceTextField
             {
                 dismissKeyboard()
             }
