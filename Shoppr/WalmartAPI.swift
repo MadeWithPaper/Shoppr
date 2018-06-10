@@ -42,7 +42,7 @@ func walmartAPICall(itemName: String) -> Double {
     }
     task.resume()
     
-    sleep(2)
+    sleep(3)
     
     return (it?.salePrice)!
 

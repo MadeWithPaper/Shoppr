@@ -1150,8 +1150,8 @@
         <image name="recipePuppy.png" width="250" height="97"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pOI-sZ-lRa"/>
-        <segue reference="gkJ-iT-I5A"/>
+        <segue reference="EZF-4a-f5V"/>
+        <segue reference="XE8-6H-IDI"/>
         <segue reference="eT3-ks-Svy"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
