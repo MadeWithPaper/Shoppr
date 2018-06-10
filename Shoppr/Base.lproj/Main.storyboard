@@ -161,7 +161,6 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-<<<<<<< HEAD
                                                 <constraint firstItem="D72-0y-BHm" firstAttribute="leading" secondItem="xEH-co-8wP" secondAttribute="leadingMargin" constant="-3" id="5px-AD-srQ"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="hsp-EP-htb" secondAttribute="trailing" constant="-12" id="71A-f3-C3g"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="LNV-vK-3Zn" secondAttribute="trailing" constant="-1" id="987-I4-629"/>
@@ -173,22 +172,6 @@
                                                 <constraint firstItem="s1E-XS-tJY" firstAttribute="top" secondItem="xEH-co-8wP" secondAttribute="top" id="rVl-Wf-z4c"/>
                                                 <constraint firstItem="hsp-EP-htb" firstAttribute="centerY" secondItem="xEH-co-8wP" secondAttribute="centerY" id="u3K-6m-WLE"/>
                                                 <constraint firstItem="D72-0y-BHm" firstAttribute="top" secondItem="s1E-XS-tJY" secondAttribute="bottom" constant="17" id="xew-cC-12H"/>
-=======
-                                                <constraint firstItem="s1E-XS-tJY" firstAttribute="leading" secondItem="D72-0y-BHm" secondAttribute="leading" id="2KZ-F8-ksf"/>
-                                                <constraint firstItem="s1E-XS-tJY" firstAttribute="leading" secondItem="xEH-co-8wP" secondAttribute="leadingMargin" constant="-1" id="5C9-rr-bNl"/>
-                                                <constraint firstItem="s1E-XS-tJY" firstAttribute="leading" secondItem="xEH-co-8wP" secondAttribute="leadingMargin" constant="-1" id="NlB-6n-92N"/>
-                                                <constraint firstItem="s1E-XS-tJY" firstAttribute="baseline" secondItem="LNV-vK-3Zn" secondAttribute="baseline" id="PrY-im-PjO"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="LNV-vK-3Zn" secondAttribute="trailing" constant="-1" id="RWM-QX-zq6"/>
-                                                <constraint firstItem="D72-0y-BHm" firstAttribute="leading" secondItem="xEH-co-8wP" secondAttribute="leadingMargin" constant="-2" id="SVz-k0-huQ"/>
-                                                <constraint firstItem="D72-0y-BHm" firstAttribute="top" secondItem="s1E-XS-tJY" secondAttribute="bottom" constant="17" id="SgK-Au-zcS"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="D72-0y-BHm" secondAttribute="trailing" constant="17" id="acb-ub-hH3"/>
-                                                <constraint firstItem="s1E-XS-tJY" firstAttribute="top" secondItem="xEH-co-8wP" secondAttribute="top" id="cwC-7S-Aod"/>
-                                                <constraint firstItem="LNV-vK-3Zn" firstAttribute="leading" secondItem="s1E-XS-tJY" secondAttribute="trailing" constant="8" symbolic="YES" id="eqQ-kr-uug"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="D72-0y-BHm" secondAttribute="trailing" constant="16" id="jvg-Af-dlj"/>
-                                                <constraint firstItem="hsp-EP-htb" firstAttribute="centerY" secondItem="xEH-co-8wP" secondAttribute="centerY" id="mzw-gP-gv2"/>
-                                                <constraint firstItem="LNV-vK-3Zn" firstAttribute="leading" secondItem="hsp-EP-htb" secondAttribute="leading" id="q2f-nb-8cY"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="hsp-EP-htb" secondAttribute="trailing" constant="-12" id="w0a-bD-Sfs"/>
->>>>>>> 904284a47adf183c6c201469b2c56f3e13bc8950
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -556,11 +539,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="99r-U2-QTL">
-<<<<<<< HEAD
-                                                    <rect key="frame" x="15" y="38" width="27.5" height="21"/>
-=======
+
                                                     <rect key="frame" x="15" y="38" width="328" height="21"/>
->>>>>>> 904284a47adf183c6c201469b2c56f3e13bc8950
+
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -857,11 +838,9 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-<<<<<<< HEAD
-=======
+
                                                 <constraint firstAttribute="trailingMargin" secondItem="6qb-b8-gvf" secondAttribute="trailing" id="6el-iK-asg"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="6qb-b8-gvf" secondAttribute="trailing" constant="-1" id="Gmu-36-cGK"/>
->>>>>>> 904284a47adf183c6c201469b2c56f3e13bc8950
                                                 <constraint firstItem="h9E-3D-O2O" firstAttribute="top" secondItem="qIm-BD-L9t" secondAttribute="topMargin" constant="-32" id="I15-dk-lHV"/>
                                                 <constraint firstItem="h9E-3D-O2O" firstAttribute="centerY" secondItem="6qb-b8-gvf" secondAttribute="centerY" constant="-1" id="J0W-L5-WYx"/>
                                                 <constraint firstItem="h9E-3D-O2O" firstAttribute="leading" secondItem="qIm-BD-L9t" secondAttribute="leadingMargin" constant="-1" id="ThC-te-rq7"/>
@@ -1161,11 +1140,8 @@
         <image name="recipePuppy.png" width="250" height="97"/>
     </resources>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD
-        <segue reference="EZF-4a-f5V"/>
-=======
+
         <segue reference="pOI-sZ-lRa"/>
->>>>>>> 904284a47adf183c6c201469b2c56f3e13bc8950
         <segue reference="XE8-6H-IDI"/>
         <segue reference="Jnq-CF-R49"/>
     </inferredMetricsTieBreakers>
