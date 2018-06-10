@@ -122,6 +122,7 @@ class RecipeDetailVC: UIViewController {
         }
         else if(segue.identifier == "savedRecipesSegue") {
             let destinationVC = segue.destination as? RecipeResultVC
+            self.selected?.owner = (CurrentUser.getUser().getName())
             destinationVC?.rec = self.selected
             destinationVC?.saved = true
         }

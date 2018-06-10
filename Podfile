@@ -10,4 +10,5 @@ target 'Shoppr' do
   pod 'Firebase/Storage'
   pod 'Firebase/MLVision'
   pod 'Firebase/MLVisionTextModel'
+  pod 'WalmartOpenApi'
 end

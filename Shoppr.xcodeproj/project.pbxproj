@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		75BB527BCC5153105D2EE965 /* Pods_Shoppr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D13881110DD0803DDC5CFDC /* Pods_Shoppr.framework */; };
+		CB635CAF20CCB35C00809445 /* WalmartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB635CAE20CCB35B00809445 /* WalmartItem.swift */; };
+		CB635CB120CCB46B00809445 /* ItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB635CB020CCB46B00809445 /* ItemService.swift */; };
+		CB635CB320CCB4C200809445 /* WalmartAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB635CB220CCB4C200809445 /* WalmartAPI.swift */; };
 		CB6F3FDD20BB6A41006EEBB1 /* recipePuppy.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6F3FDC20BB6A41006EEBB1 /* recipePuppy.png */; };
 		CB6F3FE320BB6BA2006EEBB1 /* SRImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6F3FDE20BB6BA2006EEBB1 /* SRImageCache.swift */; };
 		CB6F3FE420BB6BA2006EEBB1 /* SRPuppyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6F3FDF20BB6BA2006EEBB1 /* SRPuppyParser.swift */; };
@@ -41,6 +44,9 @@
 		819A7AA6DAE2340428C5C73D /* Pods-Shoppr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoppr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Shoppr/Pods-Shoppr.debug.xcconfig"; sourceTree = "<group>"; };
 		896F7D066ED6DCAF97F73FBA /* Pods-Shoppr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shoppr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shoppr/Pods-Shoppr.release.xcconfig"; sourceTree = "<group>"; };
 		8D13881110DD0803DDC5CFDC /* Pods_Shoppr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shoppr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB635CAE20CCB35B00809445 /* WalmartItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WalmartItem.swift; path = "../../Walmart API/Walmart API/WalmartItem.swift"; sourceTree = "<group>"; };
+		CB635CB020CCB46B00809445 /* ItemService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemService.swift; sourceTree = "<group>"; };
+		CB635CB220CCB4C200809445 /* WalmartAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalmartAPI.swift; sourceTree = "<group>"; };
 		CB6F3FDC20BB6A41006EEBB1 /* recipePuppy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recipePuppy.png; sourceTree = "<group>"; };
 		CB6F3FDE20BB6BA2006EEBB1 /* SRImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRImageCache.swift; sourceTree = "<group>"; };
 		CB6F3FDF20BB6BA2006EEBB1 /* SRPuppyParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRPuppyParser.swift; sourceTree = "<group>"; };
@@ -139,6 +145,9 @@
 				FA5CF36C20BA2803009880A7 /* userJoin.swift */,
 				FA5CF35820B9F286009880A7 /* AppDelegate.swift */,
 				FA5CF36820B9FACE009880A7 /* Item.swift */,
+				CB635CB020CCB46B00809445 /* ItemService.swift */,
+				CB635CB220CCB4C200809445 /* WalmartAPI.swift */,
+				CB635CAE20CCB35B00809445 /* WalmartItem.swift */,
 				FA2BFBED20BCD47B00439752 /* CurrentUser.swift */,
 				FA5CF36A20B9FC30009880A7 /* ItemCell.swift */,
 				FA5CF35920B9F286009880A7 /* Info.plist */,
@@ -261,19 +270,27 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Shoppr/Pods-Shoppr-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleAPIClientForREST/GoogleAPIClientForREST.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/ISO8601/ISO8601.framework",
+				"${BUILT_PRODUCTS_DIR}/JSONModel/JSONModel.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${PODS_ROOT}/WalmartOpenApi/WalmartOpenApi.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleAPIClientForREST.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISO8601.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSONModel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WalmartOpenApi.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -308,10 +325,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB6F3FE520BB6BA2006EEBB1 /* SRRecipe.swift in Sources */,
+				CB635CB320CCB4C200809445 /* WalmartAPI.swift in Sources */,
 				FA5CF36920B9FACE009880A7 /* Item.swift in Sources */,
 				CB7BF7E820CCADA300C4D54F /* ImageVC.swift in Sources */,
 				FA5CF35E20B9F286009880A7 /* MainVC.swift in Sources */,
+				CB635CAF20CCB35C00809445 /* WalmartItem.swift in Sources */,
 				CB6F3FE720BB6BA2006EEBB1 /* SRPuppyClient.swift in Sources */,
+				CB635CB120CCB46B00809445 /* ItemService.swift in Sources */,
 				FA2BFBEE20BCD47B00439752 /* CurrentUser.swift in Sources */,
 				CB6F3FEB20BB6DBB006EEBB1 /* RecipeCell.swift in Sources */,
 				CB6F3FE420BB6BA2006EEBB1 /* SRPuppyParser.swift in Sources */,

@@ -157,12 +157,20 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
             
             guard let amount = priceTextField.text else { return }
             
-            //let cur = 
+            var am = Double(amount) // for instance
+            
+            if(priceTextField.text?.isEmpty)! {
+                print("----------------------------------------------------------------------------------------------")
+                am = walmartAPICall(itemName: nameTextField.text!)
+                sleep(3)
+            }
             
             // Now you can use amount anywhere but if it's nil, it will return.
-            let am = Double(amount) // for instance
+           
             
             let destinationVC = segue.destination as? PersonalTVC
+            
+            print("BEFORE DSFJSLDFJSDKLJSDLFJSDLKFJSDLJFSKLDJFLSKJFLKDSJFSKLDFJSDLKFJSDKL ")
             
             saved = Item(name: nameTextField.text!, count: countPicker.selectedRow(inComponent: 0) + 1, price: am!, LPL: purchaseLocationTextField.text!, LPP: 0.0, category: "test", key: nameTextField.text!, owner: CurrentUser.getUser().getName())
             if (itemList.contains(saved)) {
