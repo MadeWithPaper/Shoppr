@@ -74,7 +74,12 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         cell.itemCountLabel.text = String(describing: object.count)
         cell.itemPriceLabel.text = String(describing: object.price)
         cell.lastLocAndPriceLabel.text = "Store: \(object.store)"
-
+        
+        cell.layer.masksToBounds = true
+        cell.layer.borderWidth = 0.3
+        cell.layer.shadowOffset = CGSize(width: -1, height: 1)
+        cell.layer.borderColor = whileColor.cgColor
+        
         return cell
     }
 
