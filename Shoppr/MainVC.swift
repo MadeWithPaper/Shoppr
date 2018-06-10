@@ -20,7 +20,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     lazy var vision = Vision.vision()
     var textDetector : VisionTextDetector?
     @IBOutlet weak var tableView: UITableView!
-
+    @IBOutlet weak var totalCostText: UITextField?
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     let whileColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
     
@@ -37,6 +37,8 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         masterListRef = Database.database().reference().child(CurrentUser.getUser().getGroup())
         
         fetchData()
+        
+        calcTotalCost()
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -56,6 +58,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         DispatchQueue.main.async(){
             self.masterListTV.reloadData()
         }
+        calcTotalCost()
     }
     
     //fetch for firebase data
@@ -81,6 +84,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
             
                 DispatchQueue.main.async(){
                      self.masterListTV.reloadData()
+                    self.calcTotalCost()
                 }
         })
     }
@@ -201,6 +205,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(item.name).setValue(item.toAnyObject())
         DispatchQueue.main.async(){
             self.masterListTV.reloadData()
+            self.calcTotalCost()
         }
     }
     
@@ -241,6 +246,16 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         fetchData()
     }
     
+    func calcTotalCost()
+    {
+        var temp = 0.0
+        for item in listOfItems
+        {
+            temp += ((Double(item.count) * item.price))
+        }
+        
+        totalCostText?.text = String(temp)
+    }
    /* func testingInit() {
         // Test item and one time init for testing
         listOfItems.append(Item(name: "apples", count: 1, price: 1.00, LPL: "target", LPP: 0.98, category: "furit", key: "apples", owner: "Jacky"))
