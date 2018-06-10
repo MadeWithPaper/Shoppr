@@ -139,11 +139,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D72-0y-BHm">
-<<<<<<< HEAD
                                                     <rect key="frame" x="12" y="38" width="333" height="21"/>
-=======
-                                                    <rect key="frame" x="13" y="38" width="331" height="21"/>
->>>>>>> 904284a47adf183c6c201469b2c56f3e13bc8950
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
