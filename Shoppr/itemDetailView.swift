@@ -13,11 +13,12 @@ class itemDetailView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var itemNameTF: UITextField!
     @IBOutlet weak var itemCountPV: UIPickerView!
     @IBOutlet weak var itemPriceTF: UITextField!
-    @IBOutlet weak var itemLastLocTF: UITextField!
+    @IBOutlet weak var itemStoreTF: UITextField!
     @IBOutlet weak var itemLastPriceTF: UITextField!
     @IBOutlet weak var totalCost: UILabel!
     @IBOutlet weak var itemOwnerTF: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
+
     
     var item : Item?
     var master : Bool = false
@@ -38,7 +39,7 @@ class itemDetailView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             itemOwnerTF.isEnabled = false
         }
         itemNameTF.text = "\(String(describing: item!.name))"
-        itemLastLocTF.text = "\(String(describing: item!.lastPurchaseLocation))"
+        itemStoreTF.text = "\(String(describing: item!.store))"
         itemLastPriceTF.text = "\(item!.lastPurchasePrice)"
         totalCost.text = "Total cost for this item: \(cost)"
         itemPriceTF.text = "\(String(describing: item!.price))"
@@ -54,8 +55,8 @@ class itemDetailView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         itemNameTF.tag = 1
         itemPriceTF.delegate = self
         itemPriceTF.tag = 2
-        itemLastLocTF.delegate = self
-        itemLastLocTF.tag = 3
+        itemStoreTF.delegate = self
+        itemStoreTF.tag = 3
         itemLastPriceTF.delegate = self
         itemLastPriceTF.tag = 4
     }

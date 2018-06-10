@@ -71,7 +71,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         cell.itemNameLabel.text = object.name
         cell.itemCountLabel.text = String(describing: object.count)
         cell.itemPriceLabel.text = String(describing: object.price)
-        cell.lastLocAndPriceLabel.text = "Last purchased at \(String(describing: object.lastPurchaseLocation)) for $\(String(describing: object.lastPurchasePrice))"
+        cell.lastLocAndPriceLabel.text = "Last purchased at \(String(describing: object.store)) for $\(String(describing: object.lastPurchasePrice))"
         
         return cell
     }
@@ -112,7 +112,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 "Item Name" : s.name as String,
                 "Count" : s.count as Int,
                 "Price" : s.price as Double,
-                "Last Purchased Location" : s.lastPurchaseLocation as String,
+                "Store" : s.store as String,
                 "Last Purchased Price" : s.lastPurchasePrice as Double,
                 "Category" : s.category as String,
                 "Owner" : s.owner as String] as [String : Any]
@@ -165,12 +165,12 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         let itemName = srcVC.itemNameTF.text
         let itemCount = srcVC.itemCountPV.selectedRow(inComponent: 0)+1
        // let itemPrice = srcVC.itemLastPriceTF.text!
-        let itemLL = srcVC.itemLastLocTF.text
+        let itemLL = srcVC.itemStoreTF.text
        // let itemLP = srcVC.itemLastPriceTF.text!
         let itemCate = srcVC.item?.category
         
         //print(srcVC.itemPriceTF.text!)
-        listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(srcVC.itemPriceTF.text!)!, LPL: itemLL!, LPP: Double(srcVC.itemLastPriceTF.text!)!, category: itemCate!, key: itemName!, owner: itemOwner!))
+        listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(srcVC.itemPriceTF.text!)!, /*LPL: itemLL!,*/ LPP: Double(srcVC.itemLastPriceTF.text!)!, category: itemCate!, key: itemName!, owner: itemOwner!, store: "N/A"))
         
         updateItem(item: listOfItems[srcVC.indexOfItem!.row], old: oldName)
     }

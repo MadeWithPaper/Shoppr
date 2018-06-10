@@ -145,7 +145,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         cell.itemNameLabel.text = object.name
         cell.itemCountLabel.text = " X\(object.count)"
         cell.itemPriceLabel.text = "$\(object.price)"
-        cell.lastLocAndPriceLabel.text = "Last purchased at \(object.lastPurchaseLocation) for $\(object.lastPurchasePrice)"
+        cell.lastLocAndPriceLabel.text = "Last purchased at \(object.store) for $\(object.lastPurchasePrice)"
         
         return cell
     }
@@ -191,11 +191,11 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         let itemName = srcVC.itemNameTF.text
         let itemCount = srcVC.itemCountPV.selectedRow(inComponent: 0)+1
         let itemPrice = srcVC.itemLastPriceTF.text!
-        let itemLL = srcVC.itemLastLocTF.text
+        let itemLL = srcVC.itemStoreTF.text
         let itemLP = srcVC.itemLastPriceTF.text!
         let itemCate = srcVC.item?.category
-        
-        listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(itemPrice)!, LPL: itemLL!, LPP: Double(itemLP)!, category: itemCate!, key: itemName!, owner: itemOwner!))
+        let itemStore = srcVC.itemStoreTF.text!
+        listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(itemPrice)!, /*LPL: itemLL!,*/ LPP: Double(itemLP)!, category: itemCate!, key: itemName!, owner: itemOwner!, store: itemStore))
         
         updateData(item: listOfItems[srcVC.indexOfItem!.row], old: oldName)
     }
@@ -235,7 +235,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
                         "Item Name" : itm.name as String,
                         "Count" : itm.count as Int,
                         "Price" : itm.price as Double,
-                        "Last Purchased Location" : itm.lastPurchaseLocation as String,
+                        "Store" : itm.store as String,
                         "Last Purchased Price" : itm.lastPurchasePrice as Double,
                         "Category" : itm.category as String,
                         "Owner" : itm.owner as String] as [String : Any]

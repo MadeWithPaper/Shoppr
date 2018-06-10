@@ -14,26 +14,28 @@ class Item : NSObject{
     var name: String
     var count: Int
     var price: Double
-    var lastPurchaseLocation: String
+   // var lastPurchaseLocation: String
     var lastPurchasePrice: Double
     var category: String
     var key: String
     var owner : String
     var ref : DatabaseReference?
+    var store : String
     
     override var description: String {
         return String("Name: \(name)")
     }
     
-    init(name: String, count: Int, price: Double, LPL: String, LPP: Double, category: String, key: String, owner: String) {
+    init(name: String, count: Int, price: Double, /*LPL: String,*/ LPP: Double, category: String, key: String, owner: String, store: String) {
         self.name = name
         self.count = count
         self.price = price
-        self.lastPurchaseLocation = LPL
+        ///self.lastPurchaseLocation = LPL
         self.lastPurchasePrice = LPP
         self.category = category
         self.key = key
         self.owner = owner
+        self.store = store
         ref = nil
         
         super.init()
@@ -49,11 +51,11 @@ class Item : NSObject{
         name = snapvalues["Item Name"] as! String
         count = snapvalues["Count"] as! Int
         price = snapvalues["Price"] as! Double
-        lastPurchaseLocation = snapvalues["Last Purchased Location"] as! String
+        //lastPurchaseLocation = snapvalues["Last Purchased Location"] as! String
         lastPurchasePrice = snapvalues["Last Purchased Price"] as! Double
         category = snapvalues["Category"] as! String
         owner = snapvalues["Owner"] as! String
-        
+        store = snapvalues["Store"] as! String
         ref = snapshot.ref
         
         super.init()
@@ -67,11 +69,12 @@ class Item : NSObject{
         name = snapvalues["Item Name"] as! String
         count = snapvalues["Count"] as! Int
         price = snapvalues["Price"] as! Double
-        lastPurchaseLocation = snapvalues["Last Purchased Location"] as! String
+        //lastPurchaseLocation = snapvalues["Last Purchased Location"] as! String
         lastPurchasePrice = snapvalues["Last Purchased Price"] as! Double
         category = snapvalues["Category"] as! String
         owner = snapvalues["Owner"] as! String
-        
+        store = snapvalues["Store"] as! String
+
         ref = snapshot.ref
         
         super.init()
@@ -83,10 +86,11 @@ class Item : NSObject{
             "Item Name" : name,
             "Count" : count,
             "Price" : price,
-            "Last Purchased Location" : lastPurchaseLocation,
+            //"Last Purchased Location" : lastPurchaseLocation,
             "Last Purchased Price" : lastPurchasePrice,
             "Category" : category,
-            "Owner" : owner
+            "Owner" : owner,
+            "Store" : store
         ]
     }
     
@@ -94,7 +98,8 @@ class Item : NSObject{
         if let object = object as? Item
         {
             return name == object.name &&
-                    owner == object.owner
+                    owner == object.owner &&
+                    store == object.store
         }
         else
         {

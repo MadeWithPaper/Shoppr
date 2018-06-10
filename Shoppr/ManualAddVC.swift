@@ -20,6 +20,8 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     @IBOutlet weak var purchaseLocationTextField: UITextField!
     @IBOutlet weak var staticSaveButton : UIButton!
     @IBOutlet weak var staticCancelButton: UIButton!
+    @IBOutlet weak var itemStoreTextField: UITextField!
+
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     let blackColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
     var itemList = [Item]()
@@ -55,10 +57,12 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         
         nameTextField.delegate = self
         nameTextField.tag = 0
+        itemStoreTextField.delegate = self
+        itemStoreTextField.tag = 1
         priceTextField.delegate = self
-        priceTextField.tag = 1
+        priceTextField.tag = 2
         purchaseLocationTextField.delegate = self
-        purchaseLocationTextField.tag = 2
+        purchaseLocationTextField.tag = 3
     }
     
     @objc func dismissKeyboard() {
@@ -105,7 +109,7 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     
     //Move keyobard when edit starts
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField != nameTextField
+        if textField != nameTextField || textField != itemStoreTextField
         {
             moveTextField(textField, moveDistance: -200, up: true)
         }
@@ -113,7 +117,7 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     
     // Finish Editing The Text Field
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField != nameTextField
+        if textField != nameTextField || textField != itemStoreTextField
         {
             moveTextField(textField, moveDistance: -200, up: false)
         }
@@ -171,7 +175,7 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
             
             print("BEFORE DSFJSLDFJSDKLJSDLFJSDLKFJSDLJFSKLDJFLSKJFLKDSJFSKLDFJSDLKFJSDKL ")
 
-            saved = Item(name: nameTextField.text!, count: countPicker.selectedRow(inComponent: 0) + 1, price: am!, LPL: purchaseLocationTextField.text!, LPP: 0.0, category: "test", key: nameTextField.text!, owner: CurrentUser.getUser().getName())
+            saved = Item(name: nameTextField.text!, count: countPicker.selectedRow(inComponent: 0) + 1, price: am!, /*LPL: purchaseLocationTextField.text!,*/ LPP: 0.0, category: "test", key: nameTextField.text!, owner: CurrentUser.getUser().getName(), store: itemStoreTextField.text!)
             if (itemList.contains(saved)) {
                 print("contains")
                 itemList[(itemList.index(of: saved)!)].count += saved.count
