@@ -59,13 +59,6 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         priceTextField.tag = 1
         purchaseLocationTextField.delegate = self
         purchaseLocationTextField.tag = 2
-<<<<<<< HEAD
-=======
-        
-        // Do any additional setup after loading the view.
-        masterListRef = Database.database().reference().child(CurrentUser.getUser().getGroup())
-        fetchData()
->>>>>>> 904284a47adf183c6c201469b2c56f3e13bc8950
     }
     
     @objc func dismissKeyboard() {
@@ -85,20 +78,11 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
                 
                 for itm in newList
                 {
-<<<<<<< HEAD
-                    print(itm.name)
-=======
->>>>>>> 904284a47adf183c6c201469b2c56f3e13bc8950
                     if (itm.owner == CurrentUser.getUser().getName())
                     {
                         self.itemList.append(itm)
                     }
                 }
-<<<<<<< HEAD
-                //self.itemList = newList
-=======
-                self.itemList = newList
->>>>>>> 904284a47adf183c6c201469b2c56f3e13bc8950
         })
     }
     
@@ -186,8 +170,7 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
             let destinationVC = segue.destination as? PersonalTVC
             
             print("BEFORE DSFJSLDFJSDKLJSDLFJSDLKFJSDLJFSKLDJFLSKJFLKDSJFSKLDFJSDLKFJSDKL ")
-<<<<<<< HEAD
-            
+
             saved = Item(name: nameTextField.text!, count: countPicker.selectedRow(inComponent: 0) + 1, price: am!, LPL: purchaseLocationTextField.text!, LPP: 0.0, category: "test", key: nameTextField.text!, owner: CurrentUser.getUser().getName())
             if (itemList.contains(saved)) {
                 print("contains")
@@ -202,21 +185,7 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
             
             destinationVC?.listOfItems = itemList
             //destinationVC?.personalTV.reloadData()
-=======
-            
-            saved = Item(name: nameTextField.text!, count: countPicker.selectedRow(inComponent: 0) + 1, price: am!, LPL: purchaseLocationTextField.text!, LPP: 0.0, category: "test", key: nameTextField.text!, owner: CurrentUser.getUser().getName())
-            if (itemList.contains(saved)) {
-                print("contains")
-                itemList[(itemList.index(of: saved)!)].count += saved.count
-                //print(destinationVC?.listOfItems[(destinationVC?.listOfItems.index(of: temp)!)!].count)
-            }
-            else
-            {
-                print("adding")
-                destinationVC?.listOfItems.append(saved)
-            }
-            destinationVC?.listOfItems = itemList
->>>>>>> 904284a47adf183c6c201469b2c56f3e13bc8950
+
         }
     }
 }
