@@ -9,4 +9,5 @@ target 'Shoppr' do
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'Firebase/MLVision'
+  pod 'Firebase/MLVisionTextModel'
 end

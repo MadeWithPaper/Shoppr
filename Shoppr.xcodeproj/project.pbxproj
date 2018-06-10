@@ -18,6 +18,7 @@
 		CB6F3FEB20BB6DBB006EEBB1 /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6F3FEA20BB6DBB006EEBB1 /* RecipeCell.swift */; };
 		CB6F3FED20BB87E7006EEBB1 /* RecipeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6F3FEC20BB87E7006EEBB1 /* RecipeDetailVC.swift */; };
 		CB6F3FEF20BB967B006EEBB1 /* 246x0w.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CB6F3FEE20BB967B006EEBB1 /* 246x0w.jpg */; };
+		CB7BF7E820CCADA300C4D54F /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB7BF7E720CCADA300C4D54F /* ImageVC.swift */; };
 		FA00755720BB44EC0086857C /* itemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00755620BB44EC0086857C /* itemDetailView.swift */; };
 		FA00755920BB49E30086857C /* ManualAddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00755820BB49E30086857C /* ManualAddVC.swift */; };
 		FA00755B20BB49FD0086857C /* RecipeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00755A20BB49FD0086857C /* RecipeVC.swift */; };
@@ -50,6 +51,7 @@
 		CB6F3FEA20BB6DBB006EEBB1 /* RecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
 		CB6F3FEC20BB87E7006EEBB1 /* RecipeDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailVC.swift; sourceTree = "<group>"; };
 		CB6F3FEE20BB967B006EEBB1 /* 246x0w.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 246x0w.jpg; sourceTree = "<group>"; };
+		CB7BF7E720CCADA300C4D54F /* ImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
 		FA00755620BB44EC0086857C /* itemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = itemDetailView.swift; sourceTree = "<group>"; };
 		FA00755820BB49E30086857C /* ManualAddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManualAddVC.swift; sourceTree = "<group>"; };
 		FA00755A20BB49FD0086857C /* RecipeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeVC.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			children = (
 				CB6F3FDC20BB6A41006EEBB1 /* recipePuppy.png */,
 				CB6F3FEE20BB967B006EEBB1 /* 246x0w.jpg */,
+				CB7BF7E720CCADA300C4D54F /* ImageVC.swift */,
 				FA50D4F520BBA2E200EF5D7A /* Logo.png */,
 				FA5CF36020B9F2D4009880A7 /* LaunchScreen.storyboard */,
 				FA5CF36220B9F2D4009880A7 /* Main.storyboard */,
@@ -165,6 +168,7 @@
 				FADBAABB20B9E99D007181C2 /* Frameworks */,
 				FADBAABC20B9E99D007181C2 /* Resources */,
 				A8233C8925407E05A8649533 /* [CP] Embed Pods Frameworks */,
+				3653FA72F3C5F1770509F11A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -228,6 +232,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3653FA72F3C5F1770509F11A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Shoppr/Pods-Shoppr-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/GoogleMobileVision/GoogleMVTextDetectorResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMVTextDetectorResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Shoppr/Pods-Shoppr-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A8233C8925407E05A8649533 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -283,6 +305,7 @@
 			files = (
 				CB6F3FE520BB6BA2006EEBB1 /* SRRecipe.swift in Sources */,
 				FA5CF36920B9FACE009880A7 /* Item.swift in Sources */,
+				CB7BF7E820CCADA300C4D54F /* ImageVC.swift in Sources */,
 				FA5CF35E20B9F286009880A7 /* MainVC.swift in Sources */,
 				CB6F3FE720BB6BA2006EEBB1 /* SRPuppyClient.swift in Sources */,
 				FA2BFBEE20BCD47B00439752 /* CurrentUser.swift in Sources */,

@@ -199,6 +199,7 @@
                                         <barButtonItem key="leftBarButtonItem" systemItem="camera" id="tPu-fh-Nx2">
                                             <connections>
                                                 <action selector="takePhoto" destination="NwV-Jp-5x0" id="OL9-8Y-Ofy"/>
+                                                <segue destination="EyX-Xy-YU6" kind="show" identifier="imageSegue" id="iJR-v1-Aeh"/>
                                             </connections>
                                         </barButtonItem>
                                         <rightBarButtonItems>
@@ -239,6 +240,38 @@
                 <exit id="fHe-qQ-2Af" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="584.79999999999995" y="-667.01649175412297"/>
+        </scene>
+        <!--ImageVC-->
+        <scene sceneID="42D-n2-uMa">
+            <objects>
+                <viewController id="EyX-Xy-YU6" customClass="ImageVC" customModule="Shoppr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4cm-ef-hdp" customClass="Imag">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IyQ-T8-i3z">
+                                <rect key="frame" x="169" y="569" width="37" height="30"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="donePressed:" destination="EyX-Xy-YU6" eventType="touchUpInside" id="swR-tg-9NX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="IyQ-T8-i3z" firstAttribute="centerX" secondItem="4cm-ef-hdp" secondAttribute="centerX" id="T4n-42-2AK"/>
+                            <constraint firstItem="IyQ-T8-i3z" firstAttribute="top" secondItem="ULk-tM-P9j" secondAttribute="top" constant="549" id="TMB-dq-hIm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ULk-tM-P9j"/>
+                    </view>
+                    <connections>
+                        <segue destination="N6m-ez-DiX" kind="unwind" identifier="unwindFromCamera" unwindAction="unwindFromCameraToMasterWithSegue:" id="uSc-oP-CIu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bL6-BG-AfX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="N6m-ez-DiX" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="386" y="-1528"/>
         </scene>
         <!--Item Detail View-->
         <scene sceneID="VWL-P4-Qx1">
@@ -493,13 +526,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGA-0c-b4g">
-                                                    <rect key="frame" x="14" y="0.0" width="347" height="21"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQp-sY-abw">
-                                                    <rect key="frame" x="297" y="0.0" width="64" height="21"/>
+                                                    <rect key="frame" x="296" y="0.0" width="64" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="64" id="CUF-He-qQy"/>
                                                     </constraints>
@@ -508,13 +541,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="99r-U2-QTL">
-                                                    <rect key="frame" x="14" y="38" width="329" height="21"/>
+                                                    <rect key="frame" x="15" y="38" width="328" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="count" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbs-A3-66J">
-                                                    <rect key="frame" x="236" y="0.0" width="53" height="21"/>
+                                                    <rect key="frame" x="235" y="0.0" width="53" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="53" id="DGh-d4-uHj"/>
                                                     </constraints>
@@ -1098,10 +1131,9 @@
         <image name="recipePuppy.png" width="250" height="97"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DiB-aQ-nbT"/>
         <segue reference="pOI-sZ-lRa"/>
-        <segue reference="gkJ-iT-I5A"/>
-        <segue reference="eT3-ks-Svy"/>
+        <segue reference="XE8-6H-IDI"/>
+        <segue reference="Jnq-CF-R49"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
 </document>

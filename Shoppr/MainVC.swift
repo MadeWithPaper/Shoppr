@@ -13,7 +13,7 @@ import GoogleMobileVision
 
 class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var masterListTV: UITableView!
-    
+    var parsed = [VisionText]()
     var listOfItems  = [Item]()
     var userItemList = [Item]()
     var masterListRef: DatabaseReference!
@@ -36,21 +36,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         //Firebase database reference
         masterListRef = Database.database().reference().child(CurrentUser.getUser().getGroup())
         
-        //testing function
-        //testingInit()
-        
         fetchData()
-        
-        //image scanning
-        textDetector = vision.textDetector()
-        
-        let camera = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(takePhoto))
-        navigationItem.leftBarButtonItem = camera
-        
-        // Defining a SwipeLeft Gesture
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeHandler(_:)))
-        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
-        self.view.addGestureRecognizer(swipeLeft)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -133,72 +119,6 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         return 60;
     }
     
-    @IBAction func swipeHandler(_ gestureRecognizer : UISwipeGestureRecognizer) {
-//
-//        switch gestureRecognizer.direction {
-//        case UISwipeGestureRecognizerDirection.left:
-//            print("Swipped Left")
-//            performSegue(withIdentifier: "PersonalListSegue", sender: self)
-//        default:
-//            print("Default")
-//        }
-    }
-    
-    @IBAction func takePhoto() {
-        
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        // default to photo library if camera unavailable
-        picker.sourceType = UIImagePickerController.isSourceTypeAvailable(.camera) ? .camera : .photoLibrary
-        
-        present(picker, animated: true, completion:nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            let image = VisionImage(image: pickedImage)
-            
-            textDetector?.detect(in: image) { (features, error) in
-                guard error == nil, let features = features, !features.isEmpty else {
-                    // Error. You should also check the console for error messages.
-                    // ...
-                    return
-                }
-                
-                // Recognized and extracted text
-                print("Detected text has: \(features.count) blocks")
-                // ...
-                
-                
-                print("PARSING")
-                
-                for feature in features {
-                    let value = feature.text
-                    //let corners = feature.cornerPoints
-                    var i = 0
-                    
-                    for itm in self.listOfItems {
-                        
-                        if value.lowercased() == itm.name.lowercased() {
-                            print("\(value) removed")
-                            self.listOfItems.remove(at: i)
-                        }
-                        i = i+1
-                    }
-                    
-                    //print(value)
-                }
-            }
-        }
-        
-        dismiss(animated:true, completion: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -232,6 +152,32 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     @IBAction func unwindFromDetailToMaster(storyboard: UIStoryboardSegue){
         
+    }
+    
+    @IBAction func unwindFromCameraToMaster(segue: UIStoryboardSegue){
+        // TODO
+        
+        print("IN UNWIND")
+        
+        for feature in self.parsed {
+            
+            let value = feature.text
+            print("VALUE: \(value)")
+            let corners = feature.cornerPoints
+            var i = 0
+            
+            for itm in self.listOfItems {
+                
+                if value.lowercased() == itm.name.lowercased() {
+                    masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(itm.name).removeValue()
+                    print("\(value) removed")
+                    self.listOfItems.remove(at: i)
+                }
+                i = i+1
+            }
+            
+            //print(value)
+        }
     }
     
     @IBAction func unwindFromDetailToMasterSave(storyboard: UIStoryboardSegue) {
