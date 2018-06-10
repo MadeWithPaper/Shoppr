@@ -45,8 +45,14 @@ class RecipeVC: UIViewController {
         backButton.clipsToBounds = true
         
         // Do any additional setup after loading the view.
+        let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
 
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

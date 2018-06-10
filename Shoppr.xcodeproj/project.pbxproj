@@ -185,6 +185,10 @@
 		FADBAAB620B9E99D007181C2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					0,
+					1,
+				);
 				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Jacky Huang";
