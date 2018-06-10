@@ -109,7 +109,7 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     
     //Move keyobard when edit starts
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField != nameTextField || textField != itemStoreTextField
+        if textField != nameTextField && textField != itemStoreTextField
         {
             moveTextField(textField, moveDistance: -200, up: true)
         }
@@ -117,7 +117,7 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     
     // Finish Editing The Text Field
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField != nameTextField || textField != itemStoreTextField
+        if textField != nameTextField && textField != itemStoreTextField
         {
             moveTextField(textField, moveDistance: -200, up: false)
         }

@@ -547,13 +547,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGA-0c-b4g">
-                                                    <rect key="frame" x="13" y="0.0" width="348" height="21"/>
+                                                    <rect key="frame" x="13" y="0.0" width="347" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQp-sY-abw">
-                                                    <rect key="frame" x="297" y="0.0" width="64" height="21"/>
+                                                    <rect key="frame" x="296" y="0.0" width="64" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="64" id="CUF-He-qQy"/>
                                                     </constraints>
@@ -562,13 +562,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="99r-U2-QTL">
-                                                    <rect key="frame" x="13" y="38" width="331" height="21"/>
+                                                    <rect key="frame" x="13" y="38" width="330" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="count" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbs-A3-66J">
-                                                    <rect key="frame" x="236" y="0.0" width="53" height="21"/>
+                                                    <rect key="frame" x="235" y="0.0" width="53" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="53" id="DGh-d4-uHj"/>
                                                     </constraints>
@@ -678,7 +678,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5io-b0-Abv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="cNx-dz-YW9" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1469.5999999999999" y="-692.20389805097454"/>
+            <point key="canvasLocation" x="1468" y="-667"/>
         </scene>
         <!--AddVC-->
         <scene sceneID="nFh-Db-23o">

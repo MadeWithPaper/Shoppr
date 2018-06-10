@@ -26,6 +26,8 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        totalCostText?.isUserInteractionEnabled = false
+
         personalTV.backgroundColor = blueColor
         personalNaviBar.topItem?.title = "\(CurrentUser.getUser().getName())'s Inventory"
         
@@ -165,7 +167,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         let itemName = srcVC.itemNameTF.text
         let itemCount = srcVC.itemCountPV.selectedRow(inComponent: 0)+1
        // let itemPrice = srcVC.itemLastPriceTF.text!
-        let itemLL = srcVC.itemStoreTF.text
+        //let itemLL = srcVC.itemStoreTF.text
        // let itemLP = srcVC.itemLastPriceTF.text!
         let itemCate = srcVC.item?.category
         
@@ -192,7 +194,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
             temp += ((Double(item.count) * item.price))
         }
         
-        totalCostText?.text = String(temp)
+        totalCostText?.text = "Total Cost: $\(temp)"
     }
 }
 

@@ -10,7 +10,7 @@ import Foundation
 
 func walmartAPICall(itemName: String) -> Double {
     //try to look up 50285046
-    var apiKey = "csj9qk3nfx27xawrsswwd6tm"
+    let apiKey = "csj9qk3nfx27xawrsswwd6tm"
     var iem : WalmartItem?
     var it: WalmartItem.item?
 
