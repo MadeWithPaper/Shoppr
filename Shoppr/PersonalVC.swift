@@ -177,7 +177,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         let itemCate = srcVC.item?.category
         
         //print(srcVC.itemPriceTF.text!)
-        listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(srcVC.itemPriceTF.text!)!, /*LPL: itemLL!,LPP: Double(srcVC.itemLastPriceTF.text!)!,*/ category: itemCate!, key: itemName!, owner: itemOwner!, store: "N/A"))
+        listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(srcVC.itemPriceTF.text!)!, /*LPL: itemLL!, LPP: Double(srcVC.itemPriceTF.text!)!,*/ category: itemCate!, key: itemName!, owner: itemOwner!, store: "N/A"))
         
         updateItem(item: listOfItems[srcVC.indexOfItem!.row], old: oldName)
     }

@@ -66,6 +66,7 @@ class ImageVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
                 
                 // Recognized and extracted text
                 print("Detected text has: \(features.count) blocks")
+                
                 self.parsed = features
             }
         }
