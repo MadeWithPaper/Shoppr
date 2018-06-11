@@ -26,6 +26,8 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        masterListRef = Database.database().reference().child(CurrentUser.getUser().getGroup())
+
         totalCostText?.isUserInteractionEnabled = false
 
         personalTV.backgroundColor = blueColor

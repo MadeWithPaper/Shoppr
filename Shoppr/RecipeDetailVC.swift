@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseDatabase
 
-class RecipeDetailVC: UIViewController {
+class RecipeDetailVC: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var recipeNameLabel: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
@@ -17,16 +17,21 @@ class RecipeDetailVC: UIViewController {
     @IBOutlet weak var viewLinkButton: UIButton!
     @IBOutlet weak var addIngredientsButton: UIButton!
     @IBOutlet weak var saveButton: UIButton!
-    
+    @IBOutlet weak var scrollView: UIScrollView!
+
     var selected: SRRecipe?
     var curUser: CurrentUser?
     var itemList = [Item]()
     let blackColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
+
     var masterListRef: DatabaseReference!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        scrollView.backgroundColor = blueColor
+        indredientsList.backgroundColor = blueColor
         
         recipeNameLabel.text = selected?.title
         recipeImage.image = selected?.image

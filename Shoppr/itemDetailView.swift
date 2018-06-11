@@ -24,10 +24,12 @@ class itemDetailView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var parentVC : String!
     var indexOfItem : IndexPath?
     let MAX_NUM = 100
+    let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        scrollView.backgroundColor = blueColor
         let cost = Double((item?.count)!) * (item?.price)!
         
         itemOwnerTF.text = "\(String(describing: item!.owner))"

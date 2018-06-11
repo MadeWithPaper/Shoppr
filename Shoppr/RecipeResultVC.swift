@@ -19,9 +19,13 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     var curUsr : CurrentUser?
     var saved : Bool = true
     var fromPersonal : Bool = false
+    let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
+    let whileColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.backgroundColor = blueColor
+
         self.tableView.reloadData()
         recipesRef = Database.database().reference().child("Recipe")
         if(rec != nil) {
@@ -120,6 +124,13 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                 cell.imageView?.isHidden = false
             }
         }
+        
+        cell.layer.masksToBounds = true
+        cell.layer.borderWidth = 0.3
+        cell.layer.shadowOffset = CGSize(width: -1, height: 1)
+        cell.layer.borderColor = whileColor.cgColor
+        cell.backgroundColor = blueColor
+        
         return cell
     }
 

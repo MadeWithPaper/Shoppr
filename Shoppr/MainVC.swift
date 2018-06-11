@@ -94,7 +94,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "PersonalListSegue") {
             let destVC = segue.destination as! PersonalTVC
-            destVC.masterListRef = masterListRef
+            //destVC.masterListRef = masterListRef
             destVC.listOfItems.removeAll()
             userItemList.removeAll()
             for itm in listOfItems
@@ -204,7 +204,6 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         let itemStore = srcVC.itemStoreTF.text!
         listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(srcVC.itemPriceTF.text!)!, /*LPL: itemLL!, LPP: Double(srcVC.itemLastPriceTF.text!)!,*/ category: itemCate!, key: itemName!, owner: itemOwner!, store: itemStore))
 
-        
         updateData(item: listOfItems[srcVC.indexOfItem!.row], old: oldName)
     }
     
