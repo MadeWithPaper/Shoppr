@@ -73,7 +73,12 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         cell.itemNameLabel.text = object.name
         cell.itemCountLabel.text = String(describing: object.count)
         cell.itemPriceLabel.text = String(describing: object.price)
-        cell.lastLocAndPriceLabel.text = "Last purchased at \(String(describing: object.store)) for $\(String(describing: object.lastPurchasePrice))"
+        cell.lastLocAndPriceLabel.text = "Store: \(object.store)"
+        
+        cell.layer.masksToBounds = true
+        cell.layer.borderWidth = 0.3
+        cell.layer.shadowOffset = CGSize(width: -1, height: 1)
+        cell.layer.borderColor = whileColor.cgColor
         
         return cell
     }
@@ -115,7 +120,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
                 "Count" : s.count as Int,
                 "Price" : s.price as Double,
                 "Store" : s.store as String,
-                "Last Purchased Price" : s.lastPurchasePrice as Double,
+                //"Last Purchased Price" : s.lastPurchasePrice as Double,
                 "Category" : s.category as String,
                 "Owner" : s.owner as String] as [String : Any]
             self.masterListRef.child(s.name).setValue(item)
@@ -177,7 +182,7 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
         let itemCate = srcVC.item?.category
         
         //print(srcVC.itemPriceTF.text!)
-        listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(srcVC.itemPriceTF.text!)!, /*LPL: itemLL!,*/ LPP: Double(srcVC.itemPriceTF.text!)!, category: itemCate!, key: itemName!, owner: itemOwner!, store: "N/A"))
+        listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(srcVC.itemPriceTF.text!)!, /*LPL: itemLL!, LPP: Double(srcVC.itemPriceTF.text!)!,*/ category: itemCate!, key: itemName!, owner: itemOwner!, store: "N/A"))
         
         updateItem(item: listOfItems[srcVC.indexOfItem!.row], old: oldName)
     }

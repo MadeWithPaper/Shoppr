@@ -178,7 +178,7 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
             
             let destinationVC = segue.destination as? PersonalTVC
 
-            saved = Item(name: nameTextField.text!, count: countPicker.selectedRow(inComponent: 0) + 1, price: am!, /*LPL: purchaseLocationTextField.text!,*/ LPP: 0.0, category: "test", key: nameTextField.text!, owner: CurrentUser.getUser().getName(), store: itemStoreTextField.text!)
+            saved = Item(name: nameTextField.text!, count: countPicker.selectedRow(inComponent: 0) + 1, price: am!, /*LPL: purchaseLocationTextField.text!, LPP: 0.0,*/ category: "test", key: nameTextField.text!, owner: CurrentUser.getUser().getName(), store: itemStoreTextField.text!)
             if (itemList.contains(saved)) {
                 print("contains")
                 itemList[(itemList.index(of: saved)!)].count += saved.count

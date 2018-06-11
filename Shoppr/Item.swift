@@ -15,7 +15,7 @@ class Item : NSObject{
     var count: Int
     var price: Double
    // var lastPurchaseLocation: String
-    var lastPurchasePrice: Double
+   // var lastPurchasePrice: Double
     var category: String
     var key: String
     var owner : String
@@ -26,12 +26,12 @@ class Item : NSObject{
         return String("Name: \(name)")
     }
     
-    init(name: String, count: Int, price: Double, /*LPL: String,*/ LPP: Double, category: String, key: String, owner: String, store: String) {
+    init(name: String, count: Int, price: Double, /*LPL: String, LPP: Double,*/ category: String, key: String, owner: String, store: String) {
         self.name = name
         self.count = count
         self.price = price
         ///self.lastPurchaseLocation = LPL
-        self.lastPurchasePrice = LPP
+        //self.lastPurchasePrice = LPP
         self.category = category
         self.key = key
         self.owner = owner
@@ -52,7 +52,7 @@ class Item : NSObject{
         count = snapvalues["Count"] as! Int
         price = snapvalues["Price"] as! Double
         //lastPurchaseLocation = snapvalues["Last Purchased Location"] as! String
-        lastPurchasePrice = snapvalues["Last Purchased Price"] as! Double
+        //lastPurchasePrice = snapvalues["Last Purchased Price"] as! Double
         category = snapvalues["Category"] as! String
         owner = snapvalues["Owner"] as! String
         store = snapvalues["Store"] as! String
@@ -70,7 +70,7 @@ class Item : NSObject{
         count = snapvalues["Count"] as! Int
         price = snapvalues["Price"] as! Double
         //lastPurchaseLocation = snapvalues["Last Purchased Location"] as! String
-        lastPurchasePrice = snapvalues["Last Purchased Price"] as! Double
+        //lastPurchasePrice = snapvalues["Last Purchased Price"] as! Double
         category = snapvalues["Category"] as! String
         owner = snapvalues["Owner"] as! String
         store = snapvalues["Store"] as! String
@@ -87,7 +87,7 @@ class Item : NSObject{
             "Count" : count,
             "Price" : price,
             //"Last Purchased Location" : lastPurchaseLocation,
-            "Last Purchased Price" : lastPurchasePrice,
+            //"Last Purchased Price" : lastPurchasePrice,
             "Category" : category,
             "Owner" : owner,
             "Store" : store
