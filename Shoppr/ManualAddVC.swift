@@ -170,7 +170,7 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
             
             if(priceTextField.text?.isEmpty)! {
                     
-                am = walmartAPICall(itemName: self.nameTextField.text!, ai: activityIndicator)
+                am = walmartAPICall(itemName: self.nameTextField.text!)
             }
             
             // Now you can use amount anywhere but if it's nil, it will return.
