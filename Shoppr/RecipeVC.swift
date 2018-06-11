@@ -86,8 +86,12 @@ class RecipeVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "recipeResultSegue"){
             let destinationVC = segue.destination as? RecipeResultVC
+            if(self.recipes == nil) {
+                destinationVC?.recipes = [SRRecipe]()
+            } else {
+                destinationVC?.recipes = self.recipes!
+            }
             
-            destinationVC?.recipes = self.recipes!
             destinationVC?.saved = false
         }
     }

@@ -181,6 +181,7 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
             saved = Item(name: nameTextField.text!, count: countPicker.selectedRow(inComponent: 0) + 1, price: am!, /*LPL: purchaseLocationTextField.text!, LPP: 0.0,*/ category: "test", key: nameTextField.text!, owner: CurrentUser.getUser().getName(), store: itemStoreTextField.text!)
             if (itemList.contains(saved)) {
                 print("contains")
+                fetchData()
                 itemList[(itemList.index(of: saved)!)].count += saved.count
             }
             else
