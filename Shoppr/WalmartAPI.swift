@@ -14,6 +14,7 @@ func walmartAPICall(itemName: String, ai: UIActivityIndicatorView) -> Double {
     let apiKey = "csj9qk3nfx27xawrsswwd6tm"
     var iem : WalmartItem?
     var it: WalmartItem.item?
+    var empty = false
 
     let itm = itemName
     var baseURL = "http://api.walmartlabs.com/v1/search?apiKey=\(apiKey)&query="
@@ -32,13 +33,22 @@ func walmartAPICall(itemName: String, ai: UIActivityIndicatorView) -> Double {
         if let data = receivedData {
             do {
                 let decoder = JSONDecoder()
-                let itemService = try decoder.decode(WalmartItem.self, from: data)
-                for i in itemService.items {
-                    print(i)
-                    it = i
-                    break
+                
+                do {
+                    let itemService = try decoder.decode(WalmartItem.self, from: data)
+                    for i in itemService.items {
+                        print(i)
+                        it = i
+                        break
+                    }
                 }
+                // The item could not be found by the API call
+                catch {
+                    empty = true
+                }
+                
             } catch {
+                
                 print("Exception on Decode: \(error)")
             }
         }
@@ -47,6 +57,9 @@ func walmartAPICall(itemName: String, ai: UIActivityIndicatorView) -> Double {
     task.resume()
 
     while(it?.salePrice == nil) {
+        if(empty) {
+            return 0.0
+        }
         sleep(UInt32(0000.1))
     }
     
