@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-func walmartAPICall(itemName: String) -> Double {
+func walmartAPICall(itemName: String, ai: UIActivityIndicatorView) -> Double {
     //try to look up 50285046
     let apiKey = "csj9qk3nfx27xawrsswwd6tm"
     var iem : WalmartItem?
@@ -20,13 +20,11 @@ func walmartAPICall(itemName: String) -> Double {
     baseURL += itm
     baseURL += "&sort=price&order=asc"
     
+    ai.isHidden = false
+    
     let session = URLSession(configuration: URLSessionConfiguration.default)
     
     let request = URLRequest(url: URL(string: baseURL)!)
-    
-    let myHandler: () -> Void = {
-        return (it?.salePrice)
-    }
     
     let task: URLSessionDataTask = session.dataTask(with: request)
     { (receivedData, response, error) -> Void in
@@ -44,14 +42,16 @@ func walmartAPICall(itemName: String) -> Double {
                 print("Exception on Decode: \(error)")
             }
         }
-        
-        myHandler()
     }
     
     task.resume()
+
+    while(it?.salePrice == nil) {
+        sleep(UInt32(0000.1))
+    }
     
-//    sleep(3)
-//
+    ai.isHidden = true
+    
     return (it?.salePrice)!
 
 }
