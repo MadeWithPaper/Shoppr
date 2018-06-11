@@ -24,6 +24,10 @@ func walmartAPICall(itemName: String) -> Double {
     
     let request = URLRequest(url: URL(string: baseURL)!)
     
+    let myHandler: () -> Void = {
+        return (it?.salePrice)
+    }
+    
     let task: URLSessionDataTask = session.dataTask(with: request)
     { (receivedData, response, error) -> Void in
         
@@ -40,11 +44,14 @@ func walmartAPICall(itemName: String) -> Double {
                 print("Exception on Decode: \(error)")
             }
         }
+        
+        myHandler()
     }
+    
     task.resume()
     
-    sleep(3)
-    
+//    sleep(3)
+//
     return (it?.salePrice)!
 
 }
