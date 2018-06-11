@@ -95,15 +95,20 @@ class PersonalTVC: UIViewController, UITableViewDelegate, UITableViewDataSource,
     
     @IBAction func saveUnwind(segue:UIStoryboardSegue) {
         print("saveUnwind")
-        if(itemSaved != nil) {
+        /*if(itemSaved != nil) {
             listOfItems.append(itemSaved!)
             personalTV.reloadData()
             updateData()
             //CurrentUser.getUser().setInventory(newInventory: listOfItems)
-        }
+        }*/
+        personalTV.reloadData()
+        updateData()
     }
     
     @IBAction func unwindFromSavedRecipesVC(segue:UIStoryboardSegue){
+        print("addunwind")
+        personalTV.reloadData()
+        updateData()
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

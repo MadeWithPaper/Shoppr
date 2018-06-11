@@ -181,7 +181,7 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
             saved = Item(name: nameTextField.text!, count: countPicker.selectedRow(inComponent: 0) + 1, price: am!, /*LPL: purchaseLocationTextField.text!, LPP: 0.0,*/ category: "test", key: nameTextField.text!, owner: CurrentUser.getUser().getName(), store: itemStoreTextField.text!)
             if (itemList.contains(saved)) {
                 print("contains")
-                fetchData()
+                destinationVC?.personalTV.reloadData()
                 itemList[(itemList.index(of: saved)!)].count += saved.count
             }
             else
@@ -191,8 +191,24 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
             }
             
             destinationVC?.listOfItems = itemList
-            //destinationVC?.personalTV.reloadData()
+            updateData()
 
+        }
+    }
+    func updateData()
+    {
+        for s in self.itemList
+        {
+            let item = [
+                "Item Name" : s.name as String,
+                "Count" : s.count as Int,
+                "Price" : s.price as Double,
+                "Last Purchased Location" : s.store as String,
+                //"Last Purchased Price" : s.lastPurchasePrice as Double,
+                "Category" : s.category as String,
+                "Owner" : s.owner as String,
+                "Store": s.store as String] as [String : Any]
+            self.masterListRef.child(s.name).setValue(item)
         }
     }
 }

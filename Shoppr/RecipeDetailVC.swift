@@ -67,7 +67,6 @@ class RecipeDetailVC: UIViewController, UIScrollViewDelegate {
     
     func fetchData()
     {
-        itemList.removeAll()
         masterListRef?.queryOrdered(byChild: CurrentUser.getUser().getGroup()).observe(.value, with:
             { snapshot in
                 var newList = [Item]()
@@ -124,6 +123,7 @@ class RecipeDetailVC: UIViewController, UIScrollViewDelegate {
                 }
             }
             destinationVC?.listOfItems = itemList
+            updateData()
         }
         else if(segue.identifier == "savedRecipesSegue") {
             let destinationVC = segue.destination as? RecipeResultVC
@@ -148,7 +148,8 @@ class RecipeDetailVC: UIViewController, UIScrollViewDelegate {
                 "Last Purchased Location" : s.store as String,
                 //"Last Purchased Price" : s.lastPurchasePrice as Double,
                 "Category" : s.category as String,
-                "Owner" : s.owner as String] as [String : Any]
+                "Owner" : s.owner as String,
+                "Store": s.store as String] as [String : Any]
             self.masterListRef.child(s.name).setValue(item)
         }
     }

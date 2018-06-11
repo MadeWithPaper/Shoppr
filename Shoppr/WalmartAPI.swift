@@ -28,7 +28,6 @@ func walmartAPICall(itemName: String) -> Double {
     var url: URL?
     
     while(url == nil) {
-        print("FUCK")
         print("Base url: \(baseURL)")
         url = URL(string: baseURL)
     }
