@@ -44,7 +44,6 @@ class itemDetailView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         totalCost.text = "Total cost for this item: \(cost)"
         itemPriceTF.text = "\(String(describing: item!.price))"
         itemCountPV.selectRow(((item?.count)!-1), inComponent: 0, animated: true)
-        // Do any additional setup after loading the view.
         
         let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -65,7 +64,6 @@ class itemDetailView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -119,18 +117,16 @@ class itemDetailView: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
             nextField.becomeFirstResponder()
         } else {
-            // Not found, so remove keyboard.
             textField.resignFirstResponder()
             if textField == itemStoreTF
             {
                 dismissKeyboard()
             }
         }
-        // Do not add a line break
         return false
     }
     
-    // Move the text field in a pretty animation!
+    // Move the text field
     func moveTextField(_ textField: UITextField, moveDistance: Int, up: Bool) {
         let moveDuration = 0.3
         let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)

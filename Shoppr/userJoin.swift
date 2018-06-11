@@ -56,7 +56,6 @@ class userJoin: UIViewController, UITextFieldDelegate {
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     //Move keyobard when edit starts
@@ -74,14 +73,12 @@ class userJoin: UIViewController, UITextFieldDelegate {
         if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
             nextField.becomeFirstResponder()
         } else {
-            // Not found, so remove keyboard.
             textField.resignFirstResponder()
             if textField == groupName
             {
                 signInCheck()
             }
         }
-        // Do not add a line break
         return false
     }
     
@@ -92,14 +89,10 @@ class userJoin: UIViewController, UITextFieldDelegate {
     func signInCheck()
     {
         if (userName.text != "" && groupName.text != "" && !userJoin.checkName(s: groupName.text!)) {
-            
-            print("Group: \(groupName.text)")
-            
             if(groupName.text == "Recipe") {
                 groupName.text = "_Recipe"
             }
             performSegue(withIdentifier: "userJoin", sender: self)
-            print("not nil")
         }
         else
         {
@@ -111,7 +104,8 @@ class userJoin: UIViewController, UITextFieldDelegate {
             present(alert, animated: true, completion:nil)
         }
     }
-    // Move the text field in a pretty animation!
+    
+    // Move the text field
     func moveTextField(_ textField: UITextField, moveDistance: Int, up: Bool) {
         let moveDuration = 0.3
         let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
@@ -123,26 +117,13 @@ class userJoin: UIViewController, UITextFieldDelegate {
         UIView.commitAnimations()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //let destVC = segue.destination as! MainTVC
         CurrentUser.getUser().setName(newName: userName.text!)
         CurrentUser.getUser().setGroup(newGroup: groupName.text!)
         print(CurrentUser.getUser().getName())
     }
     
     @IBAction func unwindFromMaster(segue:UIStoryboardSegue) {
-        print("going from master list view to user join view")
         self.userName.text = ""
         self.groupName.text = ""
     }

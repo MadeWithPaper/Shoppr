@@ -37,7 +37,6 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         masterListRef = Database.database().reference().child(CurrentUser.getUser().getGroup())
         fetchData()
         
-        print("inside manual add viewdidload \(CurrentUser.getUser().getName())")
         self.view.backgroundColor = blueColor
         
         self.countPicker.dataSource = self
@@ -109,7 +108,6 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     //Move keyobard when edit starts
@@ -133,18 +131,16 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
             nextField.becomeFirstResponder()
         } else {
-            // Not found, so remove keyboard.
             textField.resignFirstResponder()
             if textField == priceTextField
             {
                 dismissKeyboard()
             }
         }
-        // Do not add a line break
         return false
     }
     
-    // Move the text field in a pretty animation!
+    // Move the text field
     func moveTextField(_ textField: UITextField, moveDistance: Int, up: Bool) {
         let moveDuration = 0.3
         let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
@@ -162,31 +158,24 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         
         if(segue.identifier == "saveUnwind") {
             
-            print("I need to pass the data back")
-            
             guard let amount = priceTextField.text else { return }
             
-            var am = Double(amount) // for instance
+            var am = Double(amount)
             
             if(priceTextField.text?.isEmpty)! {
                     
                 am = walmartAPICall(itemName: self.nameTextField.text!)
             }
             
-            // Now you can use amount anywhere but if it's nil, it will return.
-           
-            
             let destinationVC = segue.destination as? PersonalTVC
 
-            saved = Item(name: nameTextField.text!, count: countPicker.selectedRow(inComponent: 0) + 1, price: am!, /*LPL: purchaseLocationTextField.text!, LPP: 0.0,*/ category: "test", key: nameTextField.text!, owner: CurrentUser.getUser().getName(), store: itemStoreTextField.text!)
+            saved = Item(name: nameTextField.text!, count: countPicker.selectedRow(inComponent: 0) + 1, price: am!, category: "test", key: nameTextField.text!, owner: CurrentUser.getUser().getName(), store: itemStoreTextField.text!)
             if (itemList.contains(saved)) {
-                print("contains")
                 destinationVC?.personalTV.reloadData()
                 itemList[(itemList.index(of: saved)!)].count += saved.count
             }
             else
             {
-                print("adding")
                 itemList.append(saved)
             }
             
@@ -204,7 +193,6 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
                 "Count" : s.count as Int,
                 "Price" : s.price as Double,
                 "Last Purchased Location" : s.store as String,
-                //"Last Purchased Price" : s.lastPurchasePrice as Double,
                 "Category" : s.category as String,
                 "Owner" : s.owner as String,
                 "Store": s.store as String] as [String : Any]
@@ -212,5 +200,3 @@ class ManualAddVC: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, 
         }
     }
 }
-
-//tomato 1 0.0 N/A

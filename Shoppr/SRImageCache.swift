@@ -17,13 +17,9 @@ open class SRImageCache {
     
     fileprivate var inMemoryCache = NSCache<AnyObject, AnyObject>()
     
-    // MARK: - Clear Cache
-    
     open func clear() {
         inMemoryCache.removeAllObjects()
     }
-    
-    // MARK: - Retreiving Images
     
     open func imageWithIdentifier(_ identifier: String?) -> UIImage? {
         
@@ -45,8 +41,6 @@ open class SRImageCache {
         
         return nil
     }
-    
-    // MARK: - Saving Images
     
     open func storeImage(_ image: UIImage?, withIdentifier identifier: String) {
         
@@ -70,9 +64,7 @@ open class SRImageCache {
             try? data.write(to: URL(fileURLWithPath: path), options: [.atomic])
         }
     }
-    
-    // MARK: - Helper
-    
+        
     open func pathForIdentifier(_ identifier: String) -> String? {
         
         let documentsDirectoryURL: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!

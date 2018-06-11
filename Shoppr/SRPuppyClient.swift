@@ -39,16 +39,12 @@ open class SRPuppyClient {
     
     class func sharedClient() -> SRPuppyClient {
         
-        print("In sharedClient()")
-        
         struct Singleton {
             static let sharedClient = SRPuppyClient()
         }
         
         return Singleton.sharedClient
     }
-    
-    // MARK: Convenience Methods
     
     /**
      Utilizes a NSURLSessionDataTask to retrieve recipes using the Recipe Puppy API.
@@ -76,14 +72,11 @@ open class SRPuppyClient {
      */
     open func fetchRecipesWithIngredients(_ ingredients: [String]?, page: Int = 1, completionHandler: @escaping CompletionHandler) -> URLSessionDataTask? {
         
-        print("In fetchRecipesWithIngredients")
         
         return taskWithParameters(ingredients, query: nil, page: page) { result, error in
             if let error = error {
-                print("In error")
                 completionHandler(nil, error)
             } else {
-                print("In here")
                 completionHandler(result, error)
             }
         }
@@ -97,8 +90,6 @@ open class SRPuppyClient {
      */
     open func fetchRecipesWithQuery(_ query: String?, page: Int = 1, completionHandler: @escaping CompletionHandler) -> URLSessionDataTask? {
         
-        print("in fetchRecipesWithQuery")
-        
         return taskWithParameters(nil, query: query, page: page) { result, error in
             if let error = error {
                 completionHandler(nil, error)
@@ -107,8 +98,6 @@ open class SRPuppyClient {
             }
         }
     }
-    
-    // MARK: Task Methods
     
     /**
      Creates a NSURLSessionDataTask for a Recipe Puppy API request given a set of parameters.
@@ -120,42 +109,27 @@ open class SRPuppyClient {
      */
     open func taskWithParameters(_ ingredients: [String]?, query: String?, page: Int = 1, completionHandler: @escaping CompletionHandler) -> URLSessionDataTask? {
         
-        print("In taskWithParameters")
-        
         // Create the url request.
         if let url = SRPuppyAPI.getURLWithParameters(ingredients, query: query, page: page, onlyImages: onlyImages) {
             let request = URLRequest(url: url)
             
-            print("in create url request")
-            
             // Create the task.
             let task = session.dataTask(with: request, completionHandler: {data, response, downloadError in
                 
-                print("in task")
-                
                 // Parse the data if no errors were returned.
                 if let error = downloadError {
-                    print("in if let error")
                     completionHandler(nil, error as NSError)
                 } else if let data = data {
-                    print("if let data")
                     SRPuppyParser.parseJSON(data, completionHandler: completionHandler)
                 } else {
-                    print(" completionHandler(nil, nil)")
                     completionHandler(nil, nil)
                 }
             }) 
             task.resume()
             
-            print("before return task")
-            
-            print(task)
-            
             return task
         } else {
-            
-            print("In else")
-            
+                        
             return nil
         }
     }

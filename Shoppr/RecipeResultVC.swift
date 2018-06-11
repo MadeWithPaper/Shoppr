@@ -35,8 +35,6 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         if (saved) {
             fetchData()
         }
-        //print(rec)
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -44,13 +42,11 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -138,27 +134,14 @@ class RecipeResultVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         if fromPersonal {
             return .delete
         }
-        
         return .none
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if(editingStyle == UITableViewCellEditingStyle.delete && fromPersonal) {
             recipesRef.database.reference().child("Recipe").child(recipes[indexPath.row].title).removeValue()
-            //masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(listOfItems[(indexPath.row)].name).removeValue()
-            //listOfItems.remove(at: indexPath.row)
             recipes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -37,7 +37,6 @@ class ImageVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func photoLibrary(){
@@ -60,7 +59,6 @@ class ImageVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
             textDetector?.detect(in: image) { (features, error) in
                 guard error == nil, let features = features, !features.isEmpty else {
                     // Error. You should also check the console for error messages.
-                    // ...
                     return
                 }
                 
@@ -73,14 +71,4 @@ class ImageVC: UIViewController, UINavigationControllerDelegate, UIImagePickerCo
         
         dismiss(animated:true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

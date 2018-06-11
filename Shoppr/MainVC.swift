@@ -12,6 +12,7 @@ import FirebaseDatabase
 import GoogleMobileVision
 
 class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     @IBOutlet weak var masterListTV: UITableView!
     var parsed = [VisionText]()
     var listOfItems  = [Item]()
@@ -85,7 +86,7 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
                 self.listOfItems = newList
             
                 DispatchQueue.main.async(){
-                     self.masterListTV.reloadData()
+                    self.masterListTV.reloadData()
                     self.calcTotalCost()
                 }
         })
@@ -94,7 +95,6 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "PersonalListSegue") {
             let destVC = segue.destination as! PersonalTVC
-            //destVC.masterListRef = masterListRef
             destVC.listOfItems.removeAll()
             userItemList.removeAll()
             for itm in listOfItems
@@ -105,7 +105,6 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
                 }
             }
             destVC.listOfItems = userItemList
-            print("going to \(String(describing: CurrentUser.getUser().getName()))'s detail list view")
         }
         else if (segue.identifier == "masterItemDetail") {
             if let indexPath = masterListTV.indexPathForSelectedRow {
@@ -115,7 +114,6 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
                 destVC.item = object
                 destVC.master = true
                 destVC.indexOfItem = indexPath
-                print("going to item detail view from master")
             }
         }
     }
@@ -127,16 +125,13 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return listOfItems.count
     }
     
@@ -166,28 +161,19 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     }
     
     @IBAction func unwindFromCameraToMaster(segue: UIStoryboardSegue){
-        // TODO
-        
-        print("IN UNWIND")
-        
         for feature in self.parsed {
             
             let value = feature.text
-            print("VALUE: \(value)")
-            //let corners = feature.cornerPoints
             var i = 0
             
             for itm in self.listOfItems {
                 
                 if  itm.name.contains(value.lowercased()){
                     masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(itm.name).removeValue()
-                    print("\(value) removed")
                     self.listOfItems.remove(at: i)
                 }
                 i = i+1
             }
-            
-            //print(value)
         }
     }
     
@@ -197,12 +183,9 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         let itemOwner = srcVC.itemOwnerTF.text
         let itemName = srcVC.itemNameTF.text
         let itemCount = srcVC.itemCountPV.selectedRow(inComponent: 0)+1
-        //let itemPrice = srcVC.itemLastPriceTF.text!
-        //let itemLL = srcVC.itemStoreTF.text
-        //let itemLP = srcVC.itemLastPriceTF.text!
         let itemCate = srcVC.item?.category
         let itemStore = srcVC.itemStoreTF.text!
-        listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(srcVC.itemPriceTF.text!)!, /*LPL: itemLL!, LPP: Double(srcVC.itemLastPriceTF.text!)!,*/ category: itemCate!, key: itemName!, owner: itemOwner!, store: itemStore))
+        listOfItems[srcVC.indexOfItem!.row] = (Item(name: itemName!, count: Int(itemCount), price: Double(srcVC.itemPriceTF.text!)!, category: itemCate!, key: itemName!, owner: itemOwner!, store: itemStore))
 
         updateData(item: listOfItems[srcVC.indexOfItem!.row], old: oldName)
     }
@@ -218,12 +201,6 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
     
     @IBAction func unwindFromPersonalToMaster(segue:UIStoryboardSegue){
         let srcVC = segue.source as! PersonalTVC
-        /*for items in srcVC.listOfItems {
-            if (!self.listOfItems.contains(items)) {
-                self.listOfItems.append(items)
-            }
-            ind += 1
-        }*/
     
         for itm in srcVC.listOfItems {
         
@@ -231,19 +208,16 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
                 //database contains this item, update values
                 if snapshot.hasChild(itm.name)
                 {
-                    print("contains item")
                     self.masterListRef.database.reference().child(CurrentUser.getUser().getGroup()).child(itm.name).setValue(itm.toAnyObject())
                 }
                 //database does not contain this item, adding to it
                 else
                 {
-                    print("adding new items")
                     let item = [
                         "Item Name" : itm.name as String,
                         "Count" : itm.count as Int,
                         "Price" : itm.price as Double,
                         "Store" : itm.store as String,
-                        //"Last Purchased Price" : itm.lastPurchasePrice as Double,
                         "Category" : itm.category as String,
                         "Owner" : itm.owner as String] as [String : Any]
                     self.masterListRef.child(itm.name).setValue(item)
@@ -263,27 +237,5 @@ class MainTVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UII
         
         totalCostText?.text = "Total Cost: $\(temp)"
     }
-   /* func testingInit() {
-        // Test item and one time init for testing
-        listOfItems.append(Item(name: "apples", count: 1, price: 1.00, LPL: "target", LPP: 0.98, category: "furit", key: "apples", owner: "Jacky"))
-        listOfItems.append(Item(name: "oranges", count: 2, price: 1.00, LPL: "safeway", LPP: 0.98, category: "furit", key: "oranges", owner: "Jacky"))
-        listOfItems.append(Item(name: "pear", count: 2, price: 1.00, LPL: "safeway", LPP: 0.98, category: "furit", key: "oranges", owner: "Gaston"))
-        listOfItems.append(Item(name: "onion", count: 2, price: 1.00, LPL: "safeway", LPP: 0.98, category: "furit", key: "oranges", owner: "Gaston"))
-        
-        for s in self.listOfItems
-        {
-            let item = [
-                "Item Name" : s.name as String,
-                "Count" : s.count as Int,
-                "Price" : s.price as Double,
-                "Last Purchased Location" : s.lastPurchaseLocation as String,
-                "Last Purchased Price" : s.lastPurchasePrice as Double,
-                "Category" : s.category as String,
-                "Owner" : s.owner as String] as [String : Any]
-            self.masterListRef.child(s.name).setValue(item)
-        }
-        
-        listOfItems.removeAll()
-    }*/
 }
 

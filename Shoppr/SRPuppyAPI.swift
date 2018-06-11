@@ -9,10 +9,7 @@
 import Foundation
 
 open class SRPuppyAPI {
-    
-    // MARK: Properties
-    
-    /// Recipe Puppy API and optional parameters. See http://www.recipepuppy.com/about/api/
+        
     fileprivate struct API {
         static let BasePath: String = "http://www.recipepuppy.com/api/?"
         struct Keys {

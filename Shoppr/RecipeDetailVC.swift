@@ -38,8 +38,6 @@ class RecipeDetailVC: UIViewController, UIScrollViewDelegate {
         let newString = selected?.ingredients.replacingOccurrences(of: ", ", with: "\n")
         indredientsList.text = newString
         
-        //view.backgroundColor = blueColor
-        
         addIngredientsButton.layer.borderWidth = 1.0
         addIngredientsButton.layer.borderColor = blackColor.cgColor
         addIngredientsButton.layer.cornerRadius = 5.0
@@ -54,7 +52,6 @@ class RecipeDetailVC: UIViewController, UIScrollViewDelegate {
         saveButton.layer.borderColor = blackColor.cgColor
         saveButton.layer.cornerRadius = 5.0
         saveButton.clipsToBounds = true
-        // Do any additional setup after loading the view.
         
         masterListRef = Database.database().reference().child(CurrentUser.getUser().getGroup())
         fetchData()
@@ -62,7 +59,6 @@ class RecipeDetailVC: UIViewController, UIScrollViewDelegate {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func fetchData()
@@ -93,7 +89,6 @@ class RecipeDetailVC: UIViewController, UIScrollViewDelegate {
         
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {
             action in
-            //TODO perform seguge and add stuff
             self.performSegue(withIdentifier: "addIngredientsSegue", sender: self)
         }))
         
@@ -109,16 +104,12 @@ class RecipeDetailVC: UIViewController, UIScrollViewDelegate {
 
             for i in ing {
                 let price = walmartAPICall(itemName: i)
-                //sleep(3)
-                let temp = Item(name: i, count: 1, price: price, /*LPL: "N/A", LPP: 0,*/ category: "N/A", key: i, owner: CurrentUser.getUser().getName(), store: "N/A")
+                let temp = Item(name: i, count: 1, price: price, category: "N/A", key: i, owner: CurrentUser.getUser().getName(), store: "Walmart")
                 if (itemList.contains(temp)) {
-                    print("contains")
                     itemList[(itemList.index(of: temp)!)].count += temp.count
-                    //print(destinationVC?.listOfItems[(destinationVC?.listOfItems.index(of: temp)!)!].count)
                 }
                 else
                 {
-                    print("adding")
                     itemList.append(temp)
                 }
             }
@@ -146,21 +137,11 @@ class RecipeDetailVC: UIViewController, UIScrollViewDelegate {
                 "Count" : s.count as Int,
                 "Price" : s.price as Double,
                 "Last Purchased Location" : s.store as String,
-                //"Last Purchased Price" : s.lastPurchasePrice as Double,
                 "Category" : s.category as String,
                 "Owner" : s.owner as String,
                 "Store": s.store as String] as [String : Any]
             self.masterListRef.child(s.name).setValue(item)
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

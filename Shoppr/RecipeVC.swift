@@ -22,11 +22,12 @@ class RecipeVC: UIViewController {
     let blueColor = UIColor(red: 30/255.0, green: 204/255.0, blue: 241/255.0, alpha: 1.0)
     let blackColor = UIColor(red: 0/255.0, green: 0/255.0, blue: 0/255.0, alpha: 1.0)
     var recipesRef: DatabaseReference!
+    let recipeDatabase = "Recipe"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        recipesRef = Database.database().reference().child("Recipe")
+        recipesRef = Database.database().reference().child(recipeDatabase)
         
         self.view.backgroundColor = blueColor
         image.isHidden = false
@@ -44,7 +45,6 @@ class RecipeVC: UIViewController {
         backButton.layer.cornerRadius = 5.0
         backButton.clipsToBounds = true
         
-        // Do any additional setup after loading the view.
         let tap : UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
@@ -55,7 +55,6 @@ class RecipeVC: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func searchPressed(_ sender: UIButton) {
@@ -95,14 +94,4 @@ class RecipeVC: UIViewController {
             destinationVC?.saved = false
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

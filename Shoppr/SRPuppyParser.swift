@@ -26,13 +26,8 @@ open class SRPuppyParser {
         // Parse the data.
         let parsedResult: Any!
         do {
-//            print("in do")
-//            let string1 = String(data: data, encoding: String.Encoding.utf8) ?? "Data could not be printed"
-//            print(string1)
-//            print(data)
             parsedResult = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments)
         } catch let error as NSError {
-            print("in catch")
             parsedResult = nil
             parsingError = error
             print(error)
@@ -41,12 +36,8 @@ open class SRPuppyParser {
         
         // Handle the parsed data.
         if let error = parsingError {
-            print("in parseingError")
             completionHandler(nil, error)
         } else {
-            
-            print("in else")
-            
             // Typecase to JSON object.
             guard let puppyDictionary = parsedResult as? [String: AnyObject] else {
                 let error = NSError(domain: "Error in SRPuppyParser.parseJSON: Could not typecast parsed result into JSON object.", code: 701, userInfo: nil)

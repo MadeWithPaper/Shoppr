@@ -10,9 +10,7 @@ import Foundation
 import UIKit
 
 func walmartAPICall(itemName: String) -> Double {
-    //try to look up 50285046
     let apiKey = "csj9qk3nfx27xawrsswwd6tm"
-    //var iem : WalmartItem?
     var it: WalmartItem.item?
     var empty = false
 
@@ -28,7 +26,6 @@ func walmartAPICall(itemName: String) -> Double {
     var url: URL?
     
     while(url == nil) {
-        print("Base url: \(baseURL)")
         url = URL(string: baseURL)
     }
     
@@ -44,7 +41,6 @@ func walmartAPICall(itemName: String) -> Double {
                 do {
                     let itemService = try decoder.decode(WalmartItem.self, from: data)
                     for i in itemService.items {
-                        print(i)
                         it = i
                         break
                     }
@@ -55,7 +51,6 @@ func walmartAPICall(itemName: String) -> Double {
                 }
                 
             } catch {
-                
                 print("Exception on Decode: \(error)")
             }
         }
